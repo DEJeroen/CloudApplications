@@ -4,7 +4,7 @@
 
 ### Technologie
 In het huidige stadium van het project is het gebruik van een bepaalde technologie nog niet zeker. Hieronder staat een opsomming met beschrijving van waar een uiteindelijke keuze uit gemaakt zal moeten worden. 
-
+1.Tensorflow
 ### Uitkomst voor de maatschappij
 
 ### Stories/Actoren
