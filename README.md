@@ -14,6 +14,9 @@ Craftar is op basis van AWS diagrammen
 3.OpenCV/JavaCV
 OpenCV is een library voor het detecteren van objecten in realtime camera beelden. JavaCV is een java interface voor OpenCV dit zou waarschijnlijk wat performance verlies hebben maar wel positieve effecten hebben voor het programmeren en de leesbaarheid van de code.
 
+4.CloudSight
+Cloudsight is een cloud api die erg precies objecten in afbeeldingen kan herkennen, deze service is erg precies maar doet er ook veel langer over om bij de resultaten te komen.
+
 ### Uitkomst voor de maatschappij
 
 ### Stories/Actoren
