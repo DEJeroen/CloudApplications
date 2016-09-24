@@ -18,7 +18,7 @@ OpenCV is een library voor het detecteren van objecten in realtime camera beelde
 Cloudsight is een cloud api die erg precies objecten in afbeeldingen kan herkennen, deze service is erg precies maar doet er ook veel langer over om bij de resultaten te komen.
 
 #### Question Cloud
-De Question Cloud zal gebasseerd zal ervoor zorgen dat er vragen via de app gesteld kunnen worden
+De Question Cloud zal zal ervoor zorgen dat er vragen via de app gesteld kunnen worden
 
 #### Firebase
 
