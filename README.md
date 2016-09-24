@@ -1,7 +1,7 @@
 # Percipience is an application that can recognize certain symbols from an image
 ## CloudApplications
 ### Project Omschrijving
-
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
 ### Technologie
 In het huidige stadium van het project is het gebruik van een bepaalde technologie nog niet zeker. Waar de technologie zoiezo aan moet voldoen is het herkennen van objecten, hierbij zal er getest moeten worden hoe goed de technologie werkt onder bepaalde licht omstandigheden en andere oorzaken van ruis. Hieronder staat een opsomming met beschrijving van waar een uiteindelijke keuze uit gemaakt zal moeten worden. 
 
