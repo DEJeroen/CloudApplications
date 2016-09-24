@@ -9,6 +9,9 @@ Het project zal opgesplitst worden in twee onderscheidende onderdelen. Ten eerst
 Het doel van dit project is om leerkrachten en leerlingen te ondersteunen op IT-gebied. Leraren kunnen met deze app op een speelse manier quizjes afnemen bij de kinderen door ze een figuurtje op te laten steken. Dit figuurtje staat voor het antwoord wat de desbetreffende leerling geeft. Vervolgens kan de leraar de omgeving scannen met zijn smartphone of tablet om de figuurtjes die op gestoken worden.
 #### Methodologie project
 Het project zal uitgevoerd worden met de scrum methode. We maken een back-log met alle features die in dit project moeten. Vervolgens worden er per sprint features toegewezen die gemaakt moeten worden tijdens die sprint. Per week dat we samenkomen zullen we een stand-up houden om alles door te nemen. We houden ook wekelijks een bespreking met de klant, dhr. Peeters. Hier stellen we de voortgang van het project voor, wat er behaald is, wat er mis is gegaan en wat er deze week verder op de planning zal staan. Hierdoor zal er dus constant feedback beschikbaar zijn over waaraan gewerkt moet worden. 
+#### Verwachte problemen
+Toen we de projectkeuze hadden gemaakt zijn we direct onderzoek gaan doen naar bestaande technologieën die al reeds op de markt zijn. Wat blijkt na het testen van een aantal apps die gefocust zijn rond image recognition, dit werkt niet altijd 100%. De apps hebben het vaak fout als ze een plaatje proberen herkennen, echter gaat dit om apps die de precieze origine van een object van een plaatje proberen te achterhalen. Zoals een bloempot, stoel of auto. We hopen daarom dat figuren herkennen iets gemakkelijker zal verlopen. 
+
 
 ![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
 ### Technologie
