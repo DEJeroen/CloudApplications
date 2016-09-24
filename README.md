@@ -21,8 +21,9 @@ Cloudsight is een cloud api die erg precies objecten in afbeeldingen kan herkenn
 De Question Cloud zal zal ervoor zorgen dat er vragen via de app gesteld kunnen worden
 
 #### Firebase
-
+Firebase is een NoSQL database en zou hierdoor sneller, schaalbaarder en beter uitbreidbaar moeten zijn.
 #### MySQL
+MySQL is een SQL database en zou hierdoor betere data integriteit moeten hebben en betere support.
 
 ### Uitkomst voor de maatschappij
 
