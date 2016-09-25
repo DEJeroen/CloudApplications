@@ -46,7 +46,7 @@ Firebase is een NoSQL database en zou hierdoor sneller, schaalbaarder en beter u
 MySQL is een SQL database en zou hierdoor betere data integriteit moeten hebben en betere support.
 
 ### Uitkomst voor de maatschappij
-
+Deze app richt zich op het onderwijsvlak van de maatschappij. Met name het lager onderwijs. Het zal zich aanbieden als een simpel te besturen app met een even simpel online platform om resultaten te kunnen bekijken. Het biedt een mogelijkheid om technologie al vroeg in een jong persoons educatieve leven te integreren. Bovendien is het voor de leerkracht een goede manier om zijn lessen interactieves en levendiger te maken. Het zou voor hele kleine kinderen een goede manier zijn om figuren te leren herkennen en voor oudere kinderen kan het gebruikt worden voor ja/nee vragen en multiple choice vragen te toetsen.
 ### Stories/Actoren
 
 ### Mockups
