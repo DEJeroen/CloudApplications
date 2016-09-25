@@ -50,12 +50,8 @@ Deze app richt zich op het onderwijsvlak van de maatschappij. Met name het lager
 ### Stories/Actoren
 
 ### Mockups
-#### Home
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/HomeMockup.png)
-#### Scan
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/ScanMockup.png)
-#### History
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/HistoryMockup.png)
-https://github.com/DEJeroen/CloudApplications/tree/master/Mockups/AndroidApp
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/MockupCamera.png)
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/MockupSettings.png)
+
 ### Links
 https://github.com/DEJeroen/CloudApplications
