@@ -23,6 +23,8 @@ Mochten de verwachte resultaten sneller dan verwacht verlopen, kunnen we gaan de
 
 ### Technologie
 In het huidige stadium van het project is het gebruik van een bepaalde technologie nog niet zeker. Waar de technologie zoiezo aan moet voldoen is het herkennen van objecten, hierbij zal er getest moeten worden hoe goed de technologie werkt onder bepaalde licht omstandigheden en andere oorzaken van ruis. De diagram hieronder geeft een overzicht van de manier waar de gebruikte technologie thuishoort.
+
+
 ![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
 
 #### Image Recognition
