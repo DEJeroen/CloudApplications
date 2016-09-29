@@ -2,13 +2,31 @@
 
 # Table of Contents
 
-* [Project Omschrijving](#Project-Omschrijving)
-* [Technologie](#Technologie)
-* [Uitkomst voor de maatschappij](#Uitkomst-voor-de-maatschappij)
-* [Stories/Actoren](#Stories/Actoren)
-* [Mockups](#Mockups)
-* [Links](#Links)
-
+- [Percipience is an application that can recognize certain symbols from an image](#percipience-is-an-application-that-can-recognize-certain-symbols-from-an-image)
+  * [CloudApplications](#cloudapplications)
+    + [Project Omschrijving](#project-omschrijving)
+      - [Aanleiding en context](#aanleiding-en-context)
+      - [Probleemstelling](#probleemstelling)
+      - [Doel project](#doel-project)
+      - [Beschrijving](#beschrijving)
+      - [Taakverdeling](#taakverdeling)
+      - [Methodologie project](#methodologie-project)
+      - [Verwachte problemen](#verwachte-problemen)
+      - [Verwachte resultaten](#verwachte-resultaten)
+      - [Optionele features](#optionele-features)
+    + [Technologie](#technologie)
+      - [Image Recognition](#image-recognition)
+        * [Tensorflow](#tensorflow)
+        * [Craftar Cloud Service](#craftar-cloud-service)
+        * [OpenCV/JavaCV](#opencv-javacv)
+        * [CloudSight](#cloudsight)
+      - [Question Cloud](#question-cloud)
+      - [Firebase](#firebase)
+      - [MySQL](#mysql)
+    + [Uitkomst voor de maatschappij](#uitkomst-voor-de-maatschappij)
+    + [Stories/Actoren](#stories-actoren)
+    + [Mockups](#mockups)
+    + [Links](#links)
 
 
 ## CloudApplications
