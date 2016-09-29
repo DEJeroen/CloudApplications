@@ -2,7 +2,6 @@
 
 # Table of Contents
 
-- [Percipience is an application that can recognize certain symbols from an image](#percipience-is-an-application-that-can-recognize-certain-symbols-from-an-image)
   * [CloudApplications](#cloudapplications)
     + [Project Omschrijving](#project-omschrijving)
       - [Aanleiding en context](#aanleiding-en-context)
