@@ -3,7 +3,12 @@
 # Table of Contents
 
 * [Project Omschrijving](#Project-Omschrijving)
-* [Aanleiding en context](#Aanleiding-en-context)
+* [Technologie](#Technologie)
+* [Uitkomst voor de maatschappij](#Uitkomst-voor-de-maatschappij)
+* [Stories/Actoren](#Stories/Actoren)
+* [Mockups](#Mockups)
+* [Links](#Links)
+
 
 
 ## CloudApplications
