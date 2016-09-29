@@ -1,11 +1,15 @@
 # Percipience is an application that can recognize certain symbols from an image
 
+<<<<<<< HEAD
 # Table of Contents
 
 * [Team Members](#team-members)
 
 # <a name="Project Omschrijving"></a>Project Omschrijving
 
+=======
+[TOC]
+>>>>>>> 68ab19aa47b9ea356c843839347330fe74c479ba
 
 ## CloudApplications
 ### Project Omschrijving
