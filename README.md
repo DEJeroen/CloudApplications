@@ -14,7 +14,7 @@
       - [Optionele features](#optionele-features)
     + [Technologie](#technologie)
       - [Image Recognition](#image-recognition)
-        * [Tensorflow](#tensorflow)
+        * [Tensorflow/Watson](#tensorflow)
         * [Craftar Cloud Service](#craftar-cloud-service)
         * [OpenCV/JavaCV](#opencv-javacv)
         * [CloudSight](#cloudsight)
