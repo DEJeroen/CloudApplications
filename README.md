@@ -8,7 +8,6 @@
       - [Probleemstelling](#probleemstelling)
       - [Doel project](#doel-project)
       - [Beschrijving](#beschrijving)
-      - [Taakverdeling](#taakverdeling)
       - [Methodologie project](#methodologie-project)
       - [Verwachte problemen](#verwachte-problemen)
       - [Verwachte resultaten](#verwachte-resultaten)
@@ -42,8 +41,6 @@ Het project zal opgesplitst worden in twee onderscheidende onderdelen.
 Ten eerste heb je de applicatie zelf, deze zal native ontwikkeld worden voor Android telefoons. De applicatie zal verschillende figuren leren herkennen. Op moment van schrijven weten we nog niet concreet welke figuren, maar kanshebbers zijn: horizontale lijn, verticale lijn, cirkel, driehoek en vierkant. De app krijgt een simpele interface waarmee de gebruiker vlot kan beginnen scannen, de resultaten kan zien of kan doorsturen naar de server. Voordat de scan begint zal er ingesteld worden naar welke figuren de scan zal moeten zoeken. Daarnaast wordt er meegestuurd welk leerjaar, klas of les wordt meegestuurd om beter onderscheid te kunnen maken tussen de data.
 
 Het tweede deel van het project bestaat uit een web platform en databank waar de resultaten naartoe worden verstuurd en men de resultaten kan bekijken. De resultaten kunnen via ons web platform in een grafiek, pie-chart en dergelijke worden gezet voor visuele feedback over wat voor antwoorden er gekozen zijn. De interface zal hierbij tevens simpel zijn, de voorgaande resultaten kunnen per datum en tijd, leerjaar, klas of les worden bekeken. Een combinatie hiervan is tevens ook mogelijk.  
-#### Taakverdeling
-Respectievelijk zal Jeroen het grootste deel van de Android app op zich nemen en Boyd buigt zich over het web platform.
 #### Methodologie project
 Het project wordt uitgevoerd met behulp van de scrum en agile methode. We maken een back-log met alle features die in dit project moeten. Vervolgens worden er per sprint features toegewezen die gemaakt moeten worden tijdens die sprint. Per week dat we samenkomen zullen we een stand-up houden om alles door te nemen. We houden ook wekelijks een bespreking met de klant, dhr. Peeters. Hier stellen we de voortgang van het project voor, wat er behaald is, wat er mis is gegaan en wat er deze week verder op de planning zal staan. Hierdoor zal er dus constant feedback beschikbaar zijn over waaraan gewerkt moet worden. 
 
