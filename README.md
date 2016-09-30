@@ -14,7 +14,7 @@
       - [Optionele features](#optionele-features)
     + [Technologie](#technologie)
       - [Image Recognition](#image-recognition)
-        * [Tensorflow/Watson](#tensorflow)
+        * [Tensorflow](#tensorflow)
         * [Craftar Cloud Service](#craftar-cloud-service)
         * [OpenCV/JavaCV](#opencv-javacv)
         * [CloudSight](#cloudsight)
@@ -61,8 +61,8 @@ In het huidige stadium van het project is het gebruik van een bepaalde technolog
 #### Image Recognition
 Image Recognition zorgt ervoor dat de antwoorden herkent zullen worden vanuit informatie verkregen van de camera. Hieronder staat een opsomming met beschrijving van beeld herkenning waar een uiteindelijke keuze uit gemaakt zal moeten worden.
 
-##### Tensorflow/Watson
-Tensorflow en Watson is een opensource software bibliotheek voor deeplearning en neural networks die objecten scoort doormiddel van flow graphs. Dit systeem van dingen scoren is bruikbaar voor een hele hoop verschillende doeleinden waaronder beeldherkenning.
+##### Tensorflow
+Tensorflow is een opensource software bibliotheek voor deeplearning en neural networks die objecten scoort doormiddel van flow graphs. Dit systeem van dingen scoren is bruikbaar voor een hele hoop verschillende doeleinden waaronder beeldherkenning.
 ##### Craftar Cloud Service
 Craftar is op basis van AWS diagrammen
 ##### OpenCV/JavaCV
