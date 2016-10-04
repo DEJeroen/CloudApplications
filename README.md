@@ -112,5 +112,10 @@ As a student I need to know when to hold up my figure.
 ![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/camera.png)
 ![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/settings.png)
 
+
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Web/login.png)
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Web/resultaten.png)
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Web/vragenlijst.png)
+
 ### Links
 https://github.com/DEJeroen/CloudApplications
