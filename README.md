@@ -108,9 +108,9 @@ As a student I need to understand what my figure means.
 As a student I need to know when to hold up my figure.
 
 ### Mockups
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/login)
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/camera)
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/settings
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/login.png)
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/camera.png)
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/Android/settings.png)
 
 ### Links
 https://github.com/DEJeroen/CloudApplications
