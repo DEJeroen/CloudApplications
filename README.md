@@ -70,7 +70,7 @@ De logica van de webapplicatie wordt geschreven in Angular, dit laat ons onder a
 OpenCV is een library voor het detecteren van objecten in realtime camera beelden. JavaCV is een java interface voor OpenCV dit zou waarschijnlijk wat performance verlies hebben maar wel positieve effecten hebben voor het programmeren en de leesbaarheid van de code. 
 
 #### Firebase
-Firebase is een NoSQL database en zou hierdoor snel, schaalbaar en uitgebreidbaar zijn. De keus is gevallen op Firebase, mede omdat we hiermee reeds ervaring hebben en het gemakkelijk te integreren is met beide de Android en webapplicatie.
+Firebase is een NoSQL database en zou hierdoor snel, schaalbaar en uitbreidbaar zijn. De keus is gevallen op Firebase, omdat het gemakkelijk te integreren is met de Android en web applicatie.
 
 ### Uitkomst voor de maatschappij
 Deze app richt zich op het onderwijsvlak van de maatschappij. Met name het lager onderwijs. Het zal zich aanbieden als een simpel te besturen app met een even simpel online platform om resultaten te kunnen bekijken. Het biedt een mogelijkheid om technologie al vroeg in een jong persoons educatieve leven te integreren. Bovendien is het voor de leerkracht een goede manier om zijn lessen interactieves en levendiger te maken. Het zou voor hele kleine kinderen een goede manier zijn om figuren te leren herkennen en voor oudere kinderen kan het gebruikt worden voor ja/nee vragen en multiple choice vragen te toetsen.
