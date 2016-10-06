@@ -44,7 +44,8 @@ Ten eerste heb je de applicatie zelf, deze zal native ontwikkeld worden voor And
 
 Het tweede deel van het project bestaat uit een web platform en databank waar de resultaten naartoe worden verstuurd en men de resultaten kan bekijken. De resultaten kunnen via ons web platform in een grafiek, pie-chart en dergelijke worden gezet voor visuele feedback over wat voor antwoorden er gekozen zijn. De interface zal hierbij tevens simpel zijn, de voorgaande resultaten kunnen per datum en tijd, leerjaar, klas of les worden bekeken. Een combinatie hiervan is tevens ook mogelijk.  
 #### Methodologie project
-Het project wordt uitgevoerd met behulp van de scrum en agile methode. We maken een back-log met alle features die in dit project moeten. Vervolgens worden er per sprint features toegewezen die gemaakt moeten worden tijdens die sprint. Per week dat we samenkomen zullen we een stand-up houden om alles door te nemen. We houden ook wekelijks een bespreking met de klant, dhr. Peeters. Hier stellen we de voortgang van het project voor, wat er behaald is, wat er mis is gegaan en wat er deze week verder op de planning zal staan. Hierdoor zal er dus constant feedback beschikbaar zijn over waaraan gewerkt moet worden. Daarbij zullen er aan het eind van module 1 en module 2 demo’s en een presentatie worden gehouden over hoe het project ervoor staat.
+Het project wordt uitgevoerd met behulp van de scrum en agile methode. We maken een back-log met alle features die in dit project moeten. Vervolgens worden er per sprint features toegewezen die gemaakt moeten worden tijdens die sprint. Per week dat we samenkomen zullen we een stand-up houden om alles door te nemen. We houden ook wekelijks een bespreking met de klant, dhr. Peeters. Hier stellen we de voortgang van het project voor, wat er behaald is, wat er mis is gegaan en wat er deze week verder op de planning zal staan. Hierdoor zal er dus constant feedback beschikbaar zijn over waaraan gewerkt moet worden. Daarbij zullen er aan het eind van module 1 een presentatie worden gehouden en demo’s worden voorzien. Aan het eind van module 2 wordt het eindproduct gepresenteerd en de finale applicatie getoond. Hierbij is telkens ruimte voor vragen en constructieve kritiek van onze product owner en van onze leerkracht. 
+
 https://github.com/DEJeroen/CloudApplications#boards?repos=68715146
 #### Verwachte problemen
 Toen we de projectkeuze hadden gemaakt zijn we direct onderzoek gaan doen naar bestaande technologieën die al reeds op de markt zijn. Wat blijkt na het testen van een aantal apps die gefocust zijn rond image recognition, dit werkt niet altijd 100%. De apps hebben het vaak fout als ze een plaatje proberen herkennen, echter gaat dit om apps die de precieze origine van een object van een plaatje proberen te achterhalen. Zoals een bloempot, stoel of auto. We hopen daarom dat figuren herkennen iets gemakkelijker zal verlopen. 
@@ -59,25 +60,17 @@ In het huidige stadium van het project is het gebruik van een bepaalde technolog
 
 ![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
 
-#### Image Recognition
-Image Recognition zorgt ervoor dat de antwoorden herkent zullen worden vanuit informatie verkregen van de camera. Hieronder staat een opsomming met beschrijving van beeld herkenning waar een uiteindelijke keuze uit gemaakt zal moeten worden.
+##### Java & Androidstudio
+De Android app zal volledig in Java worden geschreven. Aangezien we met Androidstudio bekend zijn, valt onze keus op deze twee technologieën. De app zal eerst alleen beschikbaar zijn in Android, later mocht het een succesvol idee zijn, dan zullen we onze applicatie deployen naar andere besturingssystemen. 
 
-##### Tensorflow
-Tensorflow is een opensource software bibliotheek voor deeplearning en neural networks die objecten scoort doormiddel van flow graphs. Dit systeem van dingen scoren is bruikbaar voor een hele hoop verschillende doeleinden waaronder beeldherkenning.
-##### Craftar Cloud Service
-Craftar is op basis van AWS diagrammen
+#### Angular & Bootstrap
+De logica van de webapplicatie wordt geschreven in Angular, net als met Androidstudio heeft ons team het meeste ervaring met deze technologie. Bovendien is het een krachtige technologie waarmee je gemakkelijk de logica en de backend voorziet voor applicaties. De opmaak zal grotendeels worden voorzien door bootstrap, met deze technologie kan je vrij eenvoudig een aantrekkelijke webapp schrijven.
+
 ##### OpenCV/JavaCV
-OpenCV is een library voor het detecteren van objecten in realtime camera beelden. JavaCV is een java interface voor OpenCV dit zou waarschijnlijk wat performance verlies hebben maar wel positieve effecten hebben voor het programmeren en de leesbaarheid van de code.
-##### CloudSight
-Cloudsight is een cloud api die accuraat objecten in afbeeldingen kan herkennen, deze service is erg precies maar doet er ook veel langer over om bij de resultaten te komen.
-
-#### Question Cloud
-De Question Cloud zal zal ervoor zorgen dat er vragen via de app gesteld kunnen worden
-
+######*Jeroen vult hier verder de onderbouwing voor OpenCV nog in*
+OpenCV is een library voor het detecteren van objecten in realtime camera beelden. JavaCV is een java interface voor OpenCV dit zou waarschijnlijk wat performance verlies hebben maar wel positieve effecten hebben voor het programmeren en de leesbaarheid van de code. 
 #### Firebase
-Firebase is een NoSQL database en zou hierdoor sneller, schaalbarer en beter uitgebreid kan worden.
-#### MySQL
-MySQL is een SQL database en zou hierdoor betere data integriteit moeten hebben en betere support.
+Firebase is een NoSQL database en zou hierdoor sneller, schaalbarer en beter uitgebreid kan worden. De keus is gevallen op Firebase, mede omdat we hiermee reeds ervaring hebben en het gemakkelijk te integreren is met beide de Android en webapplicatie.
 
 ### Uitkomst voor de maatschappij
 Deze app richt zich op het onderwijsvlak van de maatschappij. Met name het lager onderwijs. Het zal zich aanbieden als een simpel te besturen app met een even simpel online platform om resultaten te kunnen bekijken. Het biedt een mogelijkheid om technologie al vroeg in een jong persoons educatieve leven te integreren. Bovendien is het voor de leerkracht een goede manier om zijn lessen interactieves en levendiger te maken. Het zou voor hele kleine kinderen een goede manier zijn om figuren te leren herkennen en voor oudere kinderen kan het gebruikt worden voor ja/nee vragen en multiple choice vragen te toetsen.
