@@ -60,20 +60,21 @@ In het huidige stadium van het project is het gebruik van een bepaalde technolog
 
 ![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
 
-##### Java & Androidstudio
-De Android app zal volledig in Java worden geschreven. Aangezien we met Androidstudio bekend zijn, valt onze keus op deze twee technologieën. De app zal eerst alleen beschikbaar zijn in Android, later mocht het een succesvol idee zijn, dan zullen we onze applicatie deployen naar andere besturingssystemen. 
+#### Android
+Android zal de basis worden van het herkenningsplatform, dit is het meest gebruikte besturingssysteem waardoor het het grootste publiek heeft en het legt relatief weinig limitaties op. 
 
 #### Angular & Bootstrap
-De logica van de webapplicatie wordt geschreven in Angular, net als met Androidstudio heeft ons team het meeste ervaring met deze technologie. Bovendien is het een krachtige technologie waarmee je gemakkelijk de logica en de backend voorziet voor applicaties. De opmaak zal grotendeels worden voorzien door bootstrap, met deze technologie kan je vrij eenvoudig een aantrekkelijke webapp schrijven.
+De logica van de webapplicatie wordt geschreven in Angular, dit laat ons onder andere toe om met weinig code veranderingen in de database direct op het scherm te laten zien. De opmaak zal grotendeels worden voorzien door bootstrap, dit zorgt dat we snel een omgeving kunnen ontwikkelen die er goed uitziet en functioneerd.
 
 ##### OpenCV/JavaCV
-######*Jeroen vult hier verder de onderbouwing voor OpenCV nog in*
 OpenCV is een library voor het detecteren van objecten in realtime camera beelden. JavaCV is een java interface voor OpenCV dit zou waarschijnlijk wat performance verlies hebben maar wel positieve effecten hebben voor het programmeren en de leesbaarheid van de code. 
+
 #### Firebase
-Firebase is een NoSQL database en zou hierdoor sneller, schaalbarer en beter uitgebreid kan worden. De keus is gevallen op Firebase, mede omdat we hiermee reeds ervaring hebben en het gemakkelijk te integreren is met beide de Android en webapplicatie.
+Firebase is een NoSQL database en zou hierdoor snel, schaalbaar en uitgebreidbaar zijn. De keus is gevallen op Firebase, mede omdat we hiermee reeds ervaring hebben en het gemakkelijk te integreren is met beide de Android en webapplicatie.
 
 ### Uitkomst voor de maatschappij
 Deze app richt zich op het onderwijsvlak van de maatschappij. Met name het lager onderwijs. Het zal zich aanbieden als een simpel te besturen app met een even simpel online platform om resultaten te kunnen bekijken. Het biedt een mogelijkheid om technologie al vroeg in een jong persoons educatieve leven te integreren. Bovendien is het voor de leerkracht een goede manier om zijn lessen interactieves en levendiger te maken. Het zou voor hele kleine kinderen een goede manier zijn om figuren te leren herkennen en voor oudere kinderen kan het gebruikt worden voor ja/nee vragen en multiple choice vragen te toetsen.
+
 ### Stories/Actoren
 As teacher I want a page where I can make graphs for past results.
 
