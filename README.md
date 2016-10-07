@@ -67,6 +67,10 @@ OpenCV is een library voor het detecteren van objecten in realtime camera beelde
 #### Firebase
 Firebase is een NoSQL database en zou hierdoor snel, schaalbaar en uitbreidbaar zijn. De keus is gevallen op Firebase, omdat het gemakkelijk te integreren is met de Android en web applicatie.
 
+Hieronder een plaatje die laat zien hoe de applicatie zal werken. De app (camera in het plaatje) scant de omgeving naar figuurtjes die de leerlingen (de stickfigures in het plaatje) omhooghouden. Na het scannen worden deze resultaten verstuurd naar de webapp en komen de resultaten op het scherm. 
+
+![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
+
 ### Uitkomst voor de maatschappij
 Deze app richt zich op het onderwijsvlak van de maatschappij. Met name het lager onderwijs. Het zal zich aanbieden als een simpel te besturen app met een even simpel online platform om resultaten te kunnen bekijken. Het biedt een mogelijkheid om technologie al vroeg in een jong persoons educatieve leven te integreren. Bovendien is het voor de leerkracht een goede manier om zijn lessen interactieves en levendiger te maken. Het zou voor hele kleine kinderen een goede manier zijn om figuren te leren herkennen en voor oudere kinderen kan het gebruikt worden voor ja/nee vragen en multiple choice vragen te toetsen.
 
