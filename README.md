@@ -50,11 +50,6 @@ Indien er gekozen wordt om met QR-codes te werken, is de verwachting dat we de Q
 
 Mochten de verwachte resultaten sneller dan verwacht verlopen, kunnen we gaan denken aan complexere figuren leren herkennen. Daarnaast kan er gedacht gaan worden om ook een leerling versie te maken, met voorgeprogrammeerde opdrachten zoals “Zoek of knutsel een object dat een cirkel is”. Op basis van snelheid en duidelijkheid van het object kunnen er bijvoorbeeld punten worden toegekend aan de leering. Op deze manier zal de applicatie breder inzetbaar zijn.
 ### Technologie
-In het huidige stadium van het project is het gebruik van een bepaalde technologie nog niet zeker. Waar de technologie zoiezo aan moet voldoen is het herkennen van objecten, hierbij zal er getest moeten worden hoe goed de technologie werkt onder bepaalde licht omstandigheden en andere oorzaken van ruis. De diagram hieronder geeft een overzicht van de manier waar de gebruikte technologie thuishoort.
-
-
-![alt tag](https://github.com/DEJeroen/CloudApplications/raw/master/Pictures/TechnologieDiagram.png)
-
 #### Android
 Android zal de basis worden van het herkenningsplatform, dit is het meest gebruikte besturingssysteem waardoor het het grootste publiek heeft en het legt relatief weinig limitaties op. 
 
