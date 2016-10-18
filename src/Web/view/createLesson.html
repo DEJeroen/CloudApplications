@@ -1,9 +1,14 @@
-<div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <a href="#createLesson">Maak een les aan</a>
-        </li>
-    </ul>
-</div>  
+<ul class="nav nav-pills navLesson">
+  <li role="presentation" class="active"><a href="#createLesson">Maak les</a></li>
+  <li role="presentation"><a href="#">Begin les</a></li>
+  <li role="presentation"><a href="#">Overzicht resultaten</a></li>
+</ul>
 
+<p  style="padding-top: 2em; font-size: 1.5em;">Op deze pagina kunt u de lessen voorbereiden. We zullen hierbij beginnen met de klas te kiezen, vervolgens het vak en daarna de vragen. Na afloop zult een overzicht krijgen met u ingevulde resultaten.</p>
+
+<form style="padding-top: 2em;">
+ <p style="font-size: 3em;">Kies eerst u klas...</p>
+  <input ng-model="groep" type="number" name="Groep" min="1" max="5">
+  <button ng-click="laatzien(groep);">Volgende</button>
+</form>
 

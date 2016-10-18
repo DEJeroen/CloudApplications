@@ -3,7 +3,7 @@ app.config(['$routeProvider',
   function ($routeProvider) {
         $routeProvider
             .when('/createLesson', {
-                title: 'CreateLesson',
+                title: 'createLesson',
                 templateUrl: 'view/createLesson.html',
                 controller: 'createLessonCtrl',
             })
@@ -13,8 +13,10 @@ app.config(['$routeProvider',
     }]);
 
 app.controller("createLessonCtrl", function($scope, $http){
-    
-console.log("hallo");
+   $scope.laatzien = function (groep){
+alert(groep);
+   };
+
 
 });
 
