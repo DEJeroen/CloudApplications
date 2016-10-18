@@ -3,8 +3,13 @@ app.config(['$routeProvider',
   function ($routeProvider) {
         $routeProvider
             .when('/createLesson', {
-                title: 'CreateLesson',
+                title: 'createLesson',
                 templateUrl: 'view/createLesson.html',
+                controller: 'createLessonCtrl',
+            })
+                        .when('/chooseSubject', {
+                title: 'chooseSubject',
+                templateUrl: 'view/chooseSubject.html',
                 controller: 'createLessonCtrl',
             })
                         .otherwise({
@@ -13,8 +18,14 @@ app.config(['$routeProvider',
     }]);
 
 app.controller("createLessonCtrl", function($scope, $http){
-    
-console.log("hallo");
+   $scope.laatzienGroep = function (groep){
+alert(groep);
+   };
+
+      $scope.laatzienVak = function (vak){
+alert(vak);
+   };
+
 
 });
 

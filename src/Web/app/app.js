@@ -4,12 +4,17 @@ app.config(['$routeProvider',
         $routeProvider
             .when('/createLesson', {
                 title: 'createLesson',
-                templateUrl: 'view/createLesson.html',
+                templateUrl: 'view/makingLessons/createLesson.html',
                 controller: 'createLessonCtrl',
             })
                         .when('/chooseSubject', {
                 title: 'chooseSubject',
-                templateUrl: 'view/chooseSubject.html',
+                templateUrl: 'view/makingLessons/chooseSubject.html',
+                controller: 'createLessonCtrl',
+            })
+                       .when('/chooseVragen', {
+                title: 'chooseVragen',
+                templateUrl: 'view/makingLessons/chooseVragen.html',
                 controller: 'createLessonCtrl',
             })
                         .otherwise({
@@ -24,6 +29,10 @@ alert(groep);
 
       $scope.laatzienVak = function (vak){
 alert(vak);
+   };
+
+         $scope.laatzienVragen = function (vraag1, vraag2, vraag3){
+alert(vraag1 +" "+  vraag2+" " + vraag3 + " zijn je gekozen vragen.");
    };
 
 
