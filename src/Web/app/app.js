@@ -7,14 +7,23 @@ app.config(['$routeProvider',
                 templateUrl: 'view/createLesson.html',
                 controller: 'createLessonCtrl',
             })
+                        .when('/chooseSubject', {
+                title: 'chooseSubject',
+                templateUrl: 'view/chooseSubject.html',
+                controller: 'createLessonCtrl',
+            })
                         .otherwise({
                 redirectTo: '/createLesson'
             });
     }]);
 
 app.controller("createLessonCtrl", function($scope, $http){
-   $scope.laatzien = function (groep){
+   $scope.laatzienGroep = function (groep){
 alert(groep);
+   };
+
+      $scope.laatzienVak = function (vak){
+alert(vak);
    };
 
 
