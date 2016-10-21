@@ -1,0 +1,15 @@
+<ul class="nav nav-pills navLesson">
+  <li role="presentation" class="active"><a href="#createLesson">Maak les</a></li>
+  <li role="presentation"><a href="#">Begin les</a></li>
+  <li role="presentation"><a href="#">Overzicht resultaten</a></li>
+</ul>
+
+<form style="padding-top: 2em;">
+ <p style="font-size: 3em;">Wijs nu u vragen toe</p>
+  <input class="btnKiesLes" ng-model="vraag1" type="text" name="vragen">
+  <input class="btnKiesLes" ng-model="vraag2" type="text" name="vragen">
+  <input class="btnKiesLes" ng-model="vraag3" type="text" name="vragen">
+    <button ng-click="nextPageQuestions(vraag1, vraag2, vraag3);" type="button" class="btn btn-success btnKiesLes">
+Volgende
+  </button>
+</form>

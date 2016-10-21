@@ -2,40 +2,47 @@ var app = angular.module("myapp",['ngRoute', 'ngAnimate']);
 app.config(['$routeProvider',
   function ($routeProvider) {
         $routeProvider
-            .when('/createLesson', {
-                title: 'createLesson',
-                templateUrl: 'view/makingLessons/createLesson.html',
-                controller: 'createLessonCtrl',
+            .when('/createLessonKlas', {
+                title: 'createLessonKlas',
+                templateUrl: 'view/makingLessons/createLessonKlas.html',
+                controller: 'createLessonKlasCtrl',
             })
-                        .when('/chooseSubject', {
-                title: 'chooseSubject',
-                templateUrl: 'view/makingLessons/chooseSubject.html',
-                controller: 'createLessonCtrl',
+                        .when('/createLessonSubject', {
+                title: 'createLessonSubject',
+                templateUrl: 'view/makingLessons/createLessonSubject.html',
+                controller: 'createLessonSubjectCtrl',
             })
-                       .when('/chooseVragen', {
-                title: 'chooseVragen',
-                templateUrl: 'view/makingLessons/chooseVragen.html',
-                controller: 'createLessonCtrl',
+                       .when('/createLessonQuestions', {
+                title: 'createLessonQuestions',
+                templateUrl: 'view/makingLessons/createLessonQuestions.html',
+                controller: 'createLessonQuestionsCtrl',
             })
                         .otherwise({
-                redirectTo: '/createLesson'
+                redirectTo: '/createLessonKlas'
             });
     }]);
 
-app.controller("createLessonCtrl", function($scope, $http){
-   $scope.laatzienGroep = function (groep){
-alert(groep);
-   };
+app.controller("createLessonKlasCtrl", function($scope, $http, $location){
 
-      $scope.laatzienVak = function (vak){
-alert(vak);
-   };
+   $scope.nextPageKlas = function($klas){
+		$location.path("/createLessonSubject");
+		console.log($klas);
+   }
+});
+app.controller("createLessonSubjectCtrl", function($scope, $http, $location){
 
-         $scope.laatzienVragen = function (vraag1, vraag2, vraag3){
-alert(vraag1 +" "+  vraag2+" " + vraag3 + " zijn je gekozen vragen.");
-   };
+   $scope.nextPageSubject = function($vak){
+		$location.path("/createLessonQuestions");
+		console.log($vak);
+   }
+});
 
+app.controller("createLessonQuestionsCtrl", function($scope, $http, $location){
 
+   $scope.nextPageQuestions= function($q1, $q2, $q3){
+		$location.path("/createLessonKlas");
+		console.log($q1, $q2, $q3);
+   }
 });
 
 
