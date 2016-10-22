@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "326312463927",
+    "firebase_url": "https://percipience-ace91.firebaseio.com",
+    "project_id": "percipience-ace91",
+    "storage_bucket": "percipience-ace91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326312463927:android:fa40e4ade13a5256",
+        "android_client_info": {
+          "package_name": "com.gmail.cloudappap.percipience"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326312463927-gl5256ua62nm2hbk0i5t9s8hv3akcbs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc6yYH4pTFANKMi6Gx9G6Iwwmt2BqIfJk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
