@@ -64,6 +64,46 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.q1 = summaryService.getQ1();
 	$scope.q2 = summaryService.getQ2();
 	$scope.q3 = summaryService.getQ3();
+    
+    
+    
+    $scope.data = [ {klas:$scope.klas},
+                    {vak:$scope.vak},
+                    {q1:$scope.q1},
+                    {q2:$scope.q2},
+                    {q3:$scope.q3}
+                  ];
+
+        $scope.submit=function(){ 
+            $http.post("http://localhost:3000/firebase/post", $scope.data )
+            .success(function(data){	
+              
+               console.log("posted successfully");
+                console.log($scope.data);
+
+            })
+            .error(function(data){
+                console.error("error in posting");
+                console.log($scope.data)
+            });
+	
+        
+        }
+
+    
+   /* $scope.submit=function(){
+		$http.get("http://localhost:3000/firebase")
+		.success(function(allejsondata){	
+			console.log(allejsondata);
+            })
+            .error(function(err){
+
+            });
+	
+        
+        }*/
+
+    
 	});
 
 //Service voor databinding, deze service word geïnjecteerd bij alle controllers.
@@ -117,6 +157,7 @@ app.service('summaryService', function() {
 
 });
 //Eind van controllers voor lessen maken
+
 
 app.controller("startLessonCtrl", function($scope, $http, $location){
 	$scope.startLes = function(){

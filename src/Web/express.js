@@ -50,25 +50,32 @@ app.get("/firebase",function(req,res, body){
     
 app.post('/firebase/post', function (req, res, body) {
     
+    var klas = req.body[0];
+    var vak = req.body[1];
+    var q1 = req.body[2];
+    var q2 = req.body[3];
+    var q3 = req.body[4];
+    
+    
+ 
+    
         var ref = db.ref("/");
         var usersRef = ref.child("ID3");
-    
-            usersRef.set({
-              alanisawesome: {
-                date_of_birth: "01/08/22014894",
-                full_name: req.body
-              },
-              gracehop: {
-                date_of_birth: "December 9, 1906",
-                full_name: "Grace Hopper"
-              }
-            });
+        var klasRef= usersRef.child("lessen");
+             klasRef.set({
+                 
+                                    Geschiedenis: {
+                                        "vraag 1": req.body[2],
+                                        "vraag 2": req.body[3],
+                                        "vraag 3": req.body[4]
 
-    console.log(req.body);
-    console.log(res);
-    console.log(req);
-    console.log(body);
+                                        }
+                                                
+                        
+                });
     
+    
+
     res.send(201);       
     
   
@@ -76,7 +83,7 @@ app.post('/firebase/post', function (req, res, body) {
 
 
 
-app.post('/firebase/post/user', function (req, res, body) {
+/*app.post('/firebase/post/user', function (req, res, body) {
     
        var ref = db.ref("/");
        var usersRef = ref.child("testvragen");
@@ -115,7 +122,7 @@ app.post('/firebase/post/user', function (req, res, body) {
 });
 
 
-
+*/
 
 
 app.put('/firebase/put', function (req, res, body) {
