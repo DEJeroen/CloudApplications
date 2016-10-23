@@ -1,6 +1,8 @@
 body{
 	padding-top: 51px;
 	  font-family: "Open Sans";
+    background-image: url("../css/images/bg.jpg");
+    background-repeat: no-repeat;
 }
 
 /* ng-cloak */
@@ -263,4 +265,8 @@ margin-top: -4.5px;
 .btnKiesLes{
   width:175px;
    height: 60px;
+}
+
+.summaryLes{
+  font-weight: bold;
 }

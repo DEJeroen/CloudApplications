@@ -2,6 +2,13 @@ var express = require("express");
 var bodyparser = require("body-parser");
 var request = require("request");
 var firebase = require("firebase");
+
+  var config = {
+    apiKey: " AIzaSyC6i50thhMC2xEMQSCe8Te8hfPGC2uvyDQ",
+    authDomain: "percipience-ace91.firebaseapp.com",
+    databaseURL: "percipience-ace91.firebaseio.com/"
+  };
+  firebase.initializeApp(config);
 var app = express();
 app.use(bodyparser.json());
 

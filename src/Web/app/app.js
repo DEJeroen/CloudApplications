@@ -1,4 +1,5 @@
 var app = angular.module("myapp",['ngRoute', 'ngAnimate']);
+
 app.config(['$routeProvider',
   function ($routeProvider) {
         $routeProvider
@@ -21,6 +22,11 @@ app.config(['$routeProvider',
                 title: 'createLessonSummary',
                 templateUrl: 'view/makingLessons/createLessonSummary.html',
                 controller: 'createLessonSummary',
+            })
+              .when('/startLesson', {
+                title: 'startLesson',
+                templateUrl: 'view/startLessons/startLesson.html',
+                controller: 'startLessonCtrl',
             })
                         .otherwise({
                 redirectTo: '/createLessonKlas'
@@ -112,3 +118,9 @@ app.service('summaryService', function() {
 });
 //Eind van controllers voor lessen maken
 
+app.controller("startLessonCtrl", function($scope, $http, $location){
+	$scope.startLes = function(){
+		console.log("LOL");
+	}
+
+	});
