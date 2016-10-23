@@ -2,13 +2,6 @@ var express = require("express");
 var bodyparser = require("body-parser");
 var request = require("request");
 var firebase = require("firebase");
-
-  var config = {
-    apiKey: " AIzaSyC6i50thhMC2xEMQSCe8Te8hfPGC2uvyDQ",
-    authDomain: "percipience-ace91.firebaseapp.com",
-    databaseURL: "percipience-ace91.firebaseio.com/"
-  };
-  firebase.initializeApp(config);
 var app = express();
 app.use(bodyparser.json());
 
@@ -37,23 +30,12 @@ app.get("/", function(req,res){
 });
 
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //----->>// REST API //<---------//
 
 
 // Get request for  all data
-app.get("/firebase",function(req,res, body){
-    
-        var ref = db.ref("/");
-        ref.once("value", function(snapshot) {
-        res.json(snapshot.val());
-        });
-    
-});
-
-
 app.post('/firebase/post', function (req, res, body) {
     
         var ref = db.ref("/");
@@ -61,14 +43,59 @@ app.post('/firebase/post', function (req, res, body) {
     
             usersRef.set({
               alanisawesome: {
-                date_of_birth: req.body.Birthday,
-                full_name: req.body.Name
+                date_of_birth: "01/08/22014894",
+                full_name: req.body
               },
               gracehop: {
                 date_of_birth: "December 9, 1906",
                 full_name: "Grace Hopper"
               }
             });
+
+    console.log(req.body);
+    console.log(res);
+    console.log(req);
+    console.log(body);
+    
+    res.send(201);       
+    
+  
+});
+
+
+
+app.post('/firebase/post/user', function (req, res, body) {
+    
+       var ref = db.ref("/");
+       var usersRef = ref.child("testvragen");
+    
+            usersRef.set({
+                        "Lessen": {
+                          "Geschiedenis": {
+                            "vraag 1": {
+                              "Antwoorden": "15:00",
+                              "Vraag": "hoe laat is het ?",
+                              "kindja": 5,
+                              "kindnee": 4
+                            },
+                            "vraag 2": {
+                              "Antwoord": "donderdag",
+                              "Vraag": "welke dag is het vandaag ? "
+                            }
+                          },
+                          "GeselecteerdeLes": "Geschiedenis"
+                        },
+                        "UserInfo": {
+                          "Birthday": "01-08-1992",
+                          "E-mail": "Mohamed_2140_1@hotmail.com",
+                          "Gsm": "+32486510922",
+                          "Name": "Mohamed El Aissati"
+                        }
+                      
+                });
+    
+    console.log(req);
+    console.log(body);
 
     res.send(201);       
     
