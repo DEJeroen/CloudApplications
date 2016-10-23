@@ -36,6 +36,18 @@ app.get("/", function(req,res){
 
 
 // Get request for  all data
+app.get("/firebase",function(req,res, body){
+    
+        var ref = db.ref("/");
+        ref.once("value", function(snapshot) {
+        res.json(snapshot.val());
+        });
+  
+});
+    
+    
+    
+    
 app.post('/firebase/post', function (req, res, body) {
     
         var ref = db.ref("/");
