@@ -4,7 +4,7 @@
   <a href="#createLesson">Maak les</a>
 
   </li>
-  <li role="presentation"><a href="#">Begin les</a></li>
+  <li role="presentation"><a href="#startLesson">Begin les</a></li>
   <li role="presentation"><a href="#">Overzicht resultaten</a></li>
 </ul>
 
@@ -14,13 +14,7 @@
 <p style="font-size: 1em;">{{klas}}</p>
 <h4 class="summaryLes">Gekozen vak:</h4>
 <p style="font-size: 1em;">{{vak}}</p>
-<h4 class="summaryLes">Vraag 1:</h4>
-<p style="font-size: 1em;">{{q1}}</p>
-<h4 class="summaryLes">Vraag 2:</h4>
-<p style="font-size: 1em;">{{q2}}</p>
-<h4 class="summaryLes">Vraag 3:</h4>
-<p style="font-size: 1em;">{{q3}}</p>
+<h4 class="summaryLes">Vraag {{x}}:</h4>
 </form>
 
-<!-- LET OP! Button doet nog niets-->
-<button type="button" class="btn btn-success btnKiesLes">Verzenden</button>
+<button ng-click="submit()" type="button" class="btn btn-success btnKiesLes">Verzenden</button>

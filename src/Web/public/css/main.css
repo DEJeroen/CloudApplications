@@ -267,6 +267,20 @@ margin-top: -4.5px;
    height: 60px;
 }
 
+.btnKiesPlus{
+  width:30px;
+   height: 35px;
+}
+
+.btnStartLes{
+  width:350px;
+   height: 100px;
+text-align: center;
+   margin-top: 3em;
+   margin-left: auto;
+   margin-right: auto;
+}
+
 .summaryLes{
   font-weight: bold;
 }

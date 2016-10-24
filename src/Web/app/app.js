@@ -43,6 +43,7 @@ app.controller("createLessonKlasCtrl", function($scope, $http, $location, summar
    }
 });
 app.controller("createLessonSubjectCtrl", function($scope, $http, $location, summaryService){
+	$scope.klas = summaryService.getKlas();
    $scope.nextPageSubject = function($vak){
    	summaryService.addVak($vak);
 		$location.path("/createLessonQuestions");
@@ -50,10 +51,9 @@ app.controller("createLessonSubjectCtrl", function($scope, $http, $location, sum
 });
 
 app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, summaryService){
-   $scope.nextPageQuestions= function($q1, $q2, $q3){
-   	summaryService.addQ1($q1);
-   	summaryService.addQ2($q2);
-   	summaryService.addQ3($q3);
+	   		$scope.klas = summaryService.getKlas();
+	$scope.vak = summaryService.getVak();
+   $scope.nextPageQuestions= function(){
 		$location.path("/createLessonSummary");
    }
 });
@@ -61,17 +61,11 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
 app.controller("createLessonSummary", function($scope, $http, $location, summaryService){
 	$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
-	$scope.q1 = summaryService.getQ1();
-	$scope.q2 = summaryService.getQ2();
-	$scope.q3 = summaryService.getQ3();
     
     
     
     $scope.data = [ {klas:$scope.klas},
-                    {vak:$scope.vak},
-                    {q1:$scope.q1},
-                    {q2:$scope.q2},
-                    {q3:$scope.q3}
+                    {vak:$scope.vak}
                   ];
 
         $scope.submit=function(){ 
@@ -110,20 +104,11 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 app.service('summaryService', function() {
   var klas;
   var vak;
-  var q1;
-  var q2;
-  var q3;
 
   var addKlas = function(newObj) {
       klas = newObj;  };
   var addVak = function(newObj) {
       vak = newObj;  };
-  var addQ1 = function(newObj) {
-      q1 = newObj;  };
-  var addQ2 = function(newObj) {
-      q2 = newObj;  };
-  var addQ3 = function(newObj) {
-      q3 = newObj;  };
 
   var getKlas = function(){
       return klas;
@@ -131,27 +116,12 @@ app.service('summaryService', function() {
     var getVak = function(){
       return vak;
   };
-    var getQ1 = function(){
-      return q1;
-  };
-    var getQ2 = function(){
-      return q2;
-  };
-    var getQ3 = function(){
-      return q3;
-  };
 
   return {
     addKlas: addKlas,
     addVak: addVak,
-    addQ1: addQ1,
-    addQ2: addQ2,
-    addQ3: addQ3,
     getKlas: getKlas,
     getVak: getVak,
-    getQ1: getQ1,
-    getQ2: getQ2,
-    getQ3: getQ3
 
   };
 

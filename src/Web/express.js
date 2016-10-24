@@ -53,8 +53,6 @@ app.post('/firebase/post', function (req, res, body) {
     var klas = req.body[0];
     var vak = req.body[1];
     var q1 = req.body[2];
-    var q2 = req.body[3];
-    var q3 = req.body[4];
     
     
  
@@ -65,9 +63,6 @@ app.post('/firebase/post', function (req, res, body) {
              klasRef.set({
                  
                                     Geschiedenis: {
-                                        "vraag 1": req.body[2],
-                                        "vraag 2": req.body[3],
-                                        "vraag 3": req.body[4]
 
                                         }
                                                 

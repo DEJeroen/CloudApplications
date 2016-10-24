@@ -1,0 +1,21 @@
+{
+  "name": "Web",
+  "version": "1.0.0",
+  "description": "* [CloudApplications](#cloudapplications)\r     + [Project Omschrijving](#project-omschrijving)\r       - [Aanleiding en context](#aanleiding-en-context)\r       - [Probleemstelling](#probleemstelling)\r       - [Doel project](#doel-project)\r       - [Beschrijving](#beschrijving)\r       - [Methodologie project](#methodologie-project)\r       - [Verwachte problemen](#verwachte-problemen)\r       - [Verwachte resultaten](#verwachte-resultaten)\r       - [Optionele features](#optionele-features)\r     + [Technologie](#technologie)\r       - [Android](#Android)\r       - [Angular & Bootstrap](#Angular & Bootstrap)\r       - [OpenCV/JavaCV](#OpenCV/JavaCV)\r       - [Firebase](#firebase)\r     + [Uitkomst voor de maatschappij](#uitkomst-voor-de-maatschappij)\r     + [Stories/Actoren](#stories-actoren)\r     + [Mockups](#mockups)\r     + [Links](#links)",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "firebase": "^3.5.1",
+    "firebase-tools": "^3.0.8",
+    "nodemon": "^1.11.0",
+    "request": "^2.75.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

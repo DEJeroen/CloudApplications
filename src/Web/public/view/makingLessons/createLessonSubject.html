@@ -1,11 +1,13 @@
 <ul class="nav nav-pills navLesson">
   <li role="presentation" class="active"><a href="#createLesson">Maak les</a></li>
-  <li role="presentation"><a href="#">Begin les</a></li>
+  <li role="presentation"><a href="#startLesson">Begin les</a></li>
   <li role="presentation"><a href="#">Overzicht resultaten</a></li>
 </ul>
 
 <form style="padding-top: 2em;">
  <p style="font-size: 3em;">Kies nu u vak...</p>
+  <h4 class="summaryLes">Gekozen klas:</h4>
+<p style="font-size: 1em;">{{klas}}</p>
   <input class="btnKiesLes" ng-model="vak" type="text" name="vak" />
   <button ng-click="nextPageSubject(vak);" type="button" class="btn btn-success btnKiesLes">Volgende</button>
 </form>
