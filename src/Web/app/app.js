@@ -92,24 +92,38 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
 app.controller("createLessonSummary", function($scope, $http, $location, summaryService){
 	$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
-	$scope.vragen= summaryService.getQuestions();
+	$scope.vraagAntwoord= summaryService.getQuestions();
+	$scope.vraag =[];
+	$scope.antwoord =[];
+	$scope.vraagnr = [];
 
-       
-    $scope.data = [ {klas:$scope.klas},
+	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
+	for(var i =0; i< $scope.vraagAntwoord.length; i++)
+	{
+$scope.vraag[i] = $scope.vraagAntwoord[i].question;
+$scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
+$scope.vraagnr[i] = $scope.vraagAntwoord[i].id;
+
+    
+
+                  $scope.data.push($scope.vraagnr[i], $scope.vraag[i], $scope.antwoord[i]);
+
+              }
+
 
         $scope.submit=function(){ 
             $http.post("http://localhost:3000/firebase/post", $scope.data )
             .success(function(data){	
               
                console.log("posted successfully");
-                console.log($scope.data);
+                //console.log($scope.data);
 
             })
             .error(function(data){
                 console.error("error in posting");
-                console.log($scope.data)
+                //console.log($scope.data)
             });
 	
         

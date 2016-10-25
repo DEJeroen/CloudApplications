@@ -2,6 +2,7 @@ var express = require("express");
 var bodyparser = require("body-parser");
 var request = require("request");
 var firebase = require("firebase");
+var util = require("util");
 var app = express();
 app.use(bodyparser.json());
 
@@ -49,11 +50,25 @@ app.get("/firebase",function(req,res, body){
     
     
 app.post('/firebase/post', function (req, res, body) {
-    
+
+    /*
+    Test het object in de NODE.js console voordat het binnen komt.
+    for(i=0; i< req.body.length; i++)
+    {
+   console.log(util.inspect(req.body[i], false, null));
+    }
+
+    */
+ 
     var klas = req.body[0];
     var vak = req.body[1];
-    var q1 = req.body[2];
-    
+
+      var vragen = [];
+
+  for (var i = 2; i <= 20; ++i) {
+      vragen[i] = req.body[i];
+  }
+
     
  
     
@@ -61,13 +76,17 @@ app.post('/firebase/post', function (req, res, body) {
         var usersRef = ref.child("ID3");
         var klasRef= usersRef.child("lessen");
              klasRef.set({
+              "Klas": req.body[0]}, {
                  
-                                    Geschiedenis: {
-
-                                        }
+                                    "Les": req.body[1]}, {
+                                        "vraag 1": req.body[2],
+                                        "vraag 2": req.body[3],
+                                        "vraag 3": req.body[4]
+                                      });
+                                    
+                                        
                                                 
                         
-                });
     
     
 
