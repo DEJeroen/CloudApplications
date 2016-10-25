@@ -11,12 +11,27 @@
 <p style="font-size: 1em;">{{klas}}</p>
 <h4 class="summaryLes">Gekozen vak:</h4>
 <p style="font-size: 1em;">{{vak}}</p>
- <div style="width: 500px; height: 100px;">
-  <div style="float: left; width: 200px;"><p>Vraag {{q}}: </p><input class="btnKiesLes" ng-model="vraag" type="text" name="vragen"></div>
-  <div style="float: left; width: 200px;"><p>Antwoord {{a}}: </p><input class="btnKiesLes" ng-model="antwoord" type="text" name="antwoorden"></div>
-      <div style="float: left; width: 100px;"><button type="button" class="btn btn-success btnKiesPlus">+</button></div>
-</div>
+            <ul>
+                <li ng-repeat="element in questionelement">
+
+                        <div id={{element.id}}>
+                            Vraag:
+                                <input type="text" ng-model="element.question" placeholder="Vraag" required>
+                       
+                            Antwoord: 
+                                <input type="text" ng-model="element.answer" placeholder="Antwoord" required/>
+                            
+                        <span ng-hide="element.length == 1">
+                            <a href ng-click="questionelement.splice($index, 1)">Verwijder</a>
+                        </span>
+                    </div>
+                    <hr/>
+                </li>
+                <li>
+                    <a href ng-click="newItem($event)">Nieuwe vraag</a>
+                </li>
+            </ul>
 </form>
-    <button ng-click="nextPageQuestions(vraag1, vraag2, vraag3);" type="button" class="btn btn-success btnKiesLes">
+    <button ng-click="nextPageQuestions();" type="button" class="btn btn-success btnKiesLes">
 Volgende
   </button>	

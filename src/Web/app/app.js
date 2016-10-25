@@ -53,9 +53,20 @@ app.controller("createLessonSubjectCtrl", function($scope, $http, $location, sum
 app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, summaryService){
 	   		$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
-   $scope.nextPageQuestions= function(){
+   $scope.nextPageQuestions= function(questionelement){
 		$location.path("/createLessonSummary");
    }
+
+    var counter=0;
+    $scope.questionelement = [ {id:counter, question : '', answer : ''} ];
+
+    $scope.newItem = function($event){
+        counter++;
+        $scope.questionelement.push(  { id:counter, question : '', answer : ''} );
+        $event.preventDefault();
+
+    }
+
 });
 
 app.controller("createLessonSummary", function($scope, $http, $location, summaryService){
