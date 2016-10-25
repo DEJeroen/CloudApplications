@@ -12,8 +12,8 @@
 
 <form style="padding-top: 2em;">
  <p style="font-size: 3em;">Kies eerst u klas...</p>
-  <input class="btnKiesLes" ng-model="groep" type="number">
-  <button ng-click="nextPageKlas(groep);" type="button" class="btn btn-success btnKiesLes">
+  <input class="btnKiesLes" ng-model="groep" type="number" required>
+  <button type="submit" ng-click="nextPageKlas(groep);" class="btn btn-success btnKiesLes">
 Volgende
   </button>
 </form>

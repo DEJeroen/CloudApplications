@@ -38,24 +38,43 @@ app.config(['$routeProvider',
 //Controllers voor lessen maken
 app.controller("createLessonKlasCtrl", function($scope, $http, $location, summaryService){
    $scope.nextPageKlas = function($klas){
+   	if ($klas != null) {
    	summaryService.addKlas($klas);
 		$location.path("/createLessonSubject");
+	}
+
    }
 });
 app.controller("createLessonSubjectCtrl", function($scope, $http, $location, summaryService){
 	$scope.klas = summaryService.getKlas();
    $scope.nextPageSubject = function($vak){
+   	if($vak != null){
    	summaryService.addVak($vak);
 		$location.path("/createLessonQuestions");
+	};
    }
 });
 
 app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, summaryService){
 	   		$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
-   $scope.nextPageQuestions= function($q){
-   	summaryService.addQuestions($q)
-		$location.path("/createLessonSummary");
+
+   $scope.nextPageQuestions= function($q) {
+
+   	for (var i = 0;  i < $q.length; i++) 
+   	{
+
+	   	if($q[i].question != '' && $q[i].answer != '')
+	   	{
+	   		summaryService.addQuestions($q)
+			$location.path("/createLessonSummary");
+		};
+
+	   	if($q[i].question == '' || $q[i].answer == '')
+	   	{
+			alert("Voer alle vragen in en/of verwijder de niet ingevulde vragen.");
+		};
+	};
    }
 
     var counter=1;
