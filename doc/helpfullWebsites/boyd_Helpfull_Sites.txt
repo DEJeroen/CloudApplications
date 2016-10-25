@@ -1,0 +1,8 @@
+Dynamically adding textboxes:
+http://jsfiddle.net/Arashk/JDS2U/12/
+
+Control form
+http://stackoverflow.com/questions/16707743/html5-required-validation-not-working
+
+ServiceInspiration
+http://stackoverflow.com/questions/20181323/passing-data-between-controllers-in-angular-js
