@@ -53,11 +53,12 @@ app.controller("createLessonSubjectCtrl", function($scope, $http, $location, sum
 app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, summaryService){
 	   		$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
-   $scope.nextPageQuestions= function(questionelement){
+   $scope.nextPageQuestions= function($q){
+   	summaryService.addQuestions($q)
 		$location.path("/createLessonSummary");
    }
 
-    var counter=0;
+    var counter=1;
     $scope.questionelement = [ {id:counter, question : '', answer : ''} ];
 
     $scope.newItem = function($event){
@@ -72,9 +73,9 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
 app.controller("createLessonSummary", function($scope, $http, $location, summaryService){
 	$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
-    
-    
-    
+	$scope.vragen= summaryService.getQuestions();
+
+       
     $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
@@ -115,11 +116,14 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 app.service('summaryService', function() {
   var klas;
   var vak;
+  var questions = [];
 
   var addKlas = function(newObj) {
       klas = newObj;  };
   var addVak = function(newObj) {
       vak = newObj;  };
+  var addQuestions = function(newObj) {
+  	questions = newObj; }
 
   var getKlas = function(){
       return klas;
@@ -128,11 +132,17 @@ app.service('summaryService', function() {
       return vak;
   };
 
+  var getQuestions = function(){
+  	return questions;
+  }
+
   return {
     addKlas: addKlas,
     addVak: addVak,
+    addQuestions : addQuestions,
     getKlas: getKlas,
     getVak: getVak,
+    getQuestions: getQuestions
 
   };
 
