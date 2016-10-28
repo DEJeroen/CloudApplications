@@ -1,9 +1,14 @@
 package com.gmail.cloudappap.percipience;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.util.SparseArray;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +25,13 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
+
+import java.io.IOException;
 
 
 /**
@@ -29,6 +41,7 @@ import com.firebase.client.ValueEventListener;
 public class DisplayActivity extends AppCompatActivity {
 
     String currentLesson;
+    SurfaceView cameraPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +51,8 @@ public class DisplayActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
+        createCameraSource();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,7 +61,7 @@ public class DisplayActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-      //  navigationView.setNavigationItemSelectedListener(this);
+        //  navigationView.setNavigationItemSelectedListener(this);
 
 
         Firebase.setAndroidContext(this);
@@ -58,17 +73,108 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 currentLesson = snapshot.getValue().toString();
-                TextView textViewCurrentLesson = (TextView)findViewById(R.id.textViewCurrentLesson);
+                TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
                 textViewCurrentLesson.setText(currentLesson);
 
                 System.out.println(currentLesson);  //prints "Do you have data? You'll love Firebase."
             }
-            @Override public void onCancelled(FirebaseError error) { }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
         });
+
+
+    }
+
+    private void createCameraSource() {
+        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).build();
+        final CameraSource cameraSource = new CameraSource.Builder(this, barcodeDetector)
+                .setAutoFocusEnabled(true)
+                .setRequestedPreviewSize(1600, 1024)
+                .build();
+        cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                try {
+                    if (ActivityCompat.checkSelfPermission(DisplayActivity.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    cameraSource.start(cameraPreview.getHolder());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+               // TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
+               // textViewYes.setText("Changed");
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                cameraSource.stop();
+            }
+        });
+        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+            @Override
+            public void release() {
+
+            }
+
+            @Override
+            public void receiveDetections(Detector.Detections<Barcode> detections) {
+                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
+                if (barcodes.size()>0) {
+                    Intent intent=new Intent();
+                    intent.putExtra("barcode",barcodes.valueAt(0));
+                    setResult(CommonStatusCodes.SUCCESS,intent);
+                  //  finish();
+                }
+
+            }
+        });
+
+    }
+
+    public void scanBarcode (View v) {
+        Intent intent = new Intent(this, DisplayActivity.class);
+        startActivityForResult(intent, 0);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            if (requestCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra("barcode");
+                    TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
+                    textViewYes.setText("Barcode value: " + barcode.displayValue);
+                } else {
+
+                    TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
+                    textViewYes.setText("No barcode detected");
+
+
+                }
+            }
+        }
+
+
 
 
 
     }
+
+
+      //  super.onActivityResult(requestCode,resultCode, data);
 
     @Override
     public void onBackPressed() {
