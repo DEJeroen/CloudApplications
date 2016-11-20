@@ -62,17 +62,16 @@ app.post('/firebase/post', function (req, res, body) {
  
     var klas = req.body[0];
     var vak = req.body[1];
-    var vragen = req.body[2];
+    var vragen =[];
 
-console.log(util.inspect(vragen, false, null));
-    var k = JSON.stringify(klas.klas);
-    var v = JSON.stringify(vak.vak);
-   
-        
+    for(i=2; i<req.body.length; i++){
+      vragen.push(req.body[i]);
+    }
+          
     var ref = db.ref("/");
 
-      ref.child("ID1/klas/" + k + "/vak/" + v).set({
-        vak: v,
+      ref.child("ID_LEERKRACHT/klas/" + klas.klas + "/vak/" + vak.vak).set({
+        vragen: vragen[0]
         });                                                                                                                               
                      
     res.sendStatus(201);   
