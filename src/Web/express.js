@@ -71,7 +71,7 @@ app.post('/firebase/post', function (req, res, body) {
     var ref = db.ref("/");
 
       ref.child("ID_LEERKRACHT/klas/" + klas.klas + "/vak/" + vak.vak).set({
-        vragen: vragen[0]
+        vragen: vragen
         });                                                                                                                               
                      
     res.sendStatus(201);   

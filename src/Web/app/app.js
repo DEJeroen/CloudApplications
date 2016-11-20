@@ -95,7 +95,6 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.vraagAntwoord= summaryService.getQuestions();
 	$scope.vraag =[];
 	$scope.antwoord =[];
-	$scope.vraagnr = [];
 
 	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
@@ -104,13 +103,11 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	{
 $scope.vraag[i] = $scope.vraagAntwoord[i].question;
 $scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
-$scope.vraagnr[i] = $scope.vraagAntwoord[i].id;
 
     
 
                   $scope.data.push(
-                  {vraagnr:$scope.vraagnr[i],
-                  vraag:$scope.vraag[i], 
+                  {vraag:$scope.vraag[i], 
                   antwoord:$scope.antwoord[i]}
                   );
 
