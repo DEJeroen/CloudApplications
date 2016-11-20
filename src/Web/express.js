@@ -51,46 +51,31 @@ app.get("/firebase",function(req,res, body){
     
 app.post('/firebase/post', function (req, res, body) {
 
-    /*
-    Test het object in de NODE.js console voordat het binnen komt.
+    
+    /*Test het object in de NODE.js console voordat het binnen komt.
     for(i=0; i< req.body.length; i++)
     {
    console.log(util.inspect(req.body[i], false, null));
-    }
+    }*/
 
-    */
+    
  
     var klas = req.body[0];
     var vak = req.body[1];
+    var vragen = req.body[2];
 
-      var vragen = [];
+console.log(util.inspect(vragen, false, null));
+    var k = JSON.stringify(klas.klas);
+    var v = JSON.stringify(vak.vak);
+   
+        
+    var ref = db.ref("/");
 
-  for (var i = 2; i <= 20; ++i) {
-      vragen[i] = req.body[i];
-  }
-
-    
- 
-    
-        var ref = db.ref("/");
-        var usersRef = ref.child("ID3");
-        var klasRef= usersRef.child("lessen");
-             klasRef.set({
-              "Klas": req.body[0]}, {
-                 
-                                    "Les": req.body[1]}, {
-                                        "vraag 1": req.body[2],
-                                        "vraag 2": req.body[3],
-                                        "vraag 3": req.body[4]
-                                      });
-                                    
-                                        
-                                                
-                        
-    
-    
-
-    res.send(201);       
+      ref.child("ID1/klas/" + k + "/vak/" + v).set({
+        vak: v,
+        });                                                                                                                               
+                     
+    res.sendStatus(201);   
     
   
 });

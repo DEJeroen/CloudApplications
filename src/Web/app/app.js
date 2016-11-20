@@ -108,9 +108,15 @@ $scope.vraagnr[i] = $scope.vraagAntwoord[i].id;
 
     
 
-                  $scope.data.push($scope.vraagnr[i], $scope.vraag[i], $scope.antwoord[i]);
+                  $scope.data.push(
+                  {vraagnr:$scope.vraagnr[i],
+                  vraag:$scope.vraag[i], 
+                  antwoord:$scope.antwoord[i]}
+                  );
 
               }
+
+              console.log($scope.data);
 
 
         $scope.submit=function(){ 
