@@ -23,10 +23,15 @@ app.config(['$routeProvider',
                 templateUrl: 'view/makingLessons/createLessonSummary.html',
                 controller: 'createLessonSummary',
             })
-              .when('/startLesson', {
-                title: 'startLesson',
-                templateUrl: 'view/startLessons/startLesson.html',
-                controller: 'startLessonCtrl',
+              .when('/chooseClass', {
+                title: 'chooseClass',
+                templateUrl: 'view/startLessons/chooseClass.html',
+                controller: 'startLessonClassCtrl',
+            })
+                            .when('/chooseSubject', {
+                title: 'chooseSubject',
+                templateUrl: 'view/startLessons/chooseSubject.html',
+                controller: 'startLessonSubjectCtrl',
             })
               .when('/viewquestion', {
                 title: 'viewquestion',
@@ -52,6 +57,7 @@ app.controller("createLessonKlasCtrl", function($scope, $http, $location, summar
 });
 app.controller("createLessonSubjectCtrl", function($scope, $http, $location, summaryService){
 	$scope.klas = summaryService.getKlas();
+	console.log($scope.klas);
    $scope.nextPageSubject = function($vak){
    	if($vak != null){
    	summaryService.addVak($vak);
@@ -101,7 +107,7 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.vraag =[];
 	$scope.antwoord =[];
 
-	    $scope.data = [ {klas:$scope.klas},{klasnaam:$scope.klas},
+	    $scope.data = [ {klas:"klas"+$scope.klas},{klasnaam:$scope.klas},
                     {vak:$scope.vak}
                   ];
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
@@ -191,7 +197,7 @@ app.service('summaryService', function() {
 //Eind van controllers voor lessen maken
 
 //Controllers voor starten van de lessen
-app.controller("startLessonCtrl", function($scope, $http, $location, DataService){
+app.controller("startLessonClassCtrl", function($scope, $http, $location, DataService){
 
  
     
@@ -221,7 +227,17 @@ app.controller("startLessonCtrl", function($scope, $http, $location, DataService
    
     getuserclass();
      
-    
+    $scope.next = function(klas){
+    	console.log(klas);
+    	DataService.addKlas(klas);
+    	$location.path("/chooseSubject");
+    }
+
+
+	});
+app.controller("startLessonSubjectCtrl", function($scope, $http, $location, DataService){
+	$scope.klas = DataService.getKlas()
+	$scope.k = $scope.klas[0];
            $scope.startLes = function(dataforservice){ 
                console.log($scope.selectedData);
             var dataforservice = $scope.selectedData;
@@ -230,16 +246,8 @@ app.controller("startLessonCtrl", function($scope, $http, $location, DataService
         DataService.addProduct(dataforservice);
               
                
-        };
-    
-        $scope.$watch("data.SelectedLes",function(){
-             $scope.search = $scope.data.SelectedLes[0];
-            console.log($scope.search);
-            $scope.selectedData=$scope.data.klas[$scope.search];
-             console.log($scope.selectedData);
-        })
-
-	});
+        }; 
+});
 
 app.controller("viewquestionCtrl", function($scope, $http, $location, DataService){
     $scope.data = DataService.getProducts();
@@ -247,31 +255,40 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
     console.log($scope.data);
     
-    $scope.viewdata = $scope.data[0].vak;
-   
-
-
-
-
-
-    
+    $scope.viewdata = $scope.data[0].vak;   
 });
 
 app.service('DataService', function() {
-var productList = [];
+  var klas;
+  var vak;
+  var questions = [];
 
-  var addProduct = function(newObj) {
-      productList.push(newObj);
+  var addKlas = function(newObj) {
+      klas = newObj;  };
+  var addVak = function(newObj) {
+      vak = newObj;  };
+  var addQuestions = function(newObj) {
+  	questions = newObj; }
+
+  var getKlas = function(){
+      return klas;
+  };
+    var getVak = function(){
+      return vak;
   };
 
-  var getProducts = function(){
-      return productList;
-  };
+  var getQuestions = function(){
+  	return questions;
+  }
 
   return {
-    addProduct: addProduct,
-    getProducts: getProducts
+    addKlas: addKlas,
+    addVak: addVak,
+    addQuestions : addQuestions,
+    getKlas: getKlas,
+    getVak: getVak,
+    getQuestions: getQuestions
+
   };
-    
 });
 //Eind van controllers voor les geven

@@ -1,0 +1,18 @@
+<ul class="nav nav-pills navLesson">
+  <li role="presentation">
+
+  <a href="#createLesson">Maak les</a>
+
+  </li>
+  <li class="active" role="presentation"><a href="#chooseClass">Begin les</a></li>
+  <li role="presentation"><a href="#">Overzicht resultaten</a></li>
+</ul>
+<h4 class="summaryLes">Gekozen klas:</h4>
+<p style="font-size: 1em;">{{k}}</p>
+<div class="form-group">
+<label for="vaklabel">Vak:</label>    
+<select multiple class="form-control" ng-model="data.SelectedVak">
+  <option ng-repeat="option in selectedData" value="{{option.vaknaam.vak}}" >{{option.vaknaam.vak}}</option>
+  
+</select>
+</div>

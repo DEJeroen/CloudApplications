@@ -39,14 +39,28 @@ app.get("/", function(req,res){
 // Get request for  all data
 app.get("/firebase",function(req,res, body){
     
-        var ref = db.ref("/");
+        var ref = db.ref("testvragen/Lessen/");
         ref.once("value", function(snapshot) {
         res.json(snapshot.val());
+
+        
+   //console.log(snapshot.val());
         });
   
 });
     
+app.get("/firebase/StartLes",function(req,res, body){
+        var ref = db.ref("ID_LEERKRACHT");
+        ref.once("value", function(snapshot) {
+        res.json(snapshot.val());
+            
+            req.body= snapshot.val()           
+            
+        });
     
+        
+    
+});   
     
     
 app.post('/firebase/post', function (req, res, body) {
@@ -58,8 +72,6 @@ app.post('/firebase/post', function (req, res, body) {
    console.log(util.inspect(req.body[i], false, null));
     }*/
 
-    
- 
     var klas = req.body[0];
     //var klasnaam = req.body[1];
     var vak = req.body[2];
@@ -88,22 +100,6 @@ app.post('/firebase/post', function (req, res, body) {
     res.sendStatus(201);   
     
   
-});
-
-app.get("/firebase/StartLes",function(req,res, body){
-    
-        var ref = db.ref("ID_LEERKRACHT");
-        ref.once("value", function(snapshot) {
-        res.json(snapshot.val());
-            
-            req.body= snapshot.val()
-            
-            console.log(req.body);
-            
-        });
-    
-        
-    
 });
 
 
