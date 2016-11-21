@@ -28,7 +28,12 @@ app.config(['$routeProvider',
                 templateUrl: 'view/startLessons/startLesson.html',
                 controller: 'startLessonCtrl',
             })
-                        .otherwise({
+              .when('/viewquestion', {
+                title: 'viewquestion',
+                templateUrl: 'view/startLessons/viewquestion.html',
+                controller: 'viewquestionCtrl',
+            })
+                                .otherwise({
                 redirectTo: '/createLessonKlas'
             });
     }]);
@@ -96,7 +101,7 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.vraag =[];
 	$scope.antwoord =[];
 
-	    $scope.data = [ {klas:$scope.klas},
+	    $scope.data = [ {klas:$scope.klas},{klasnaam:$scope.klas},
                     {vak:$scope.vak}
                   ];
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
@@ -185,10 +190,88 @@ app.service('summaryService', function() {
 });
 //Eind van controllers voor lessen maken
 
+//Controllers voor starten van de lessen
+app.controller("startLessonCtrl", function($scope, $http, $location, DataService){
 
-app.controller("startLessonCtrl", function($scope, $http, $location){
-	$scope.startLes = function(){
-		console.log("LOL");
-	}
+ 
+    
+    
+    var getuserclass=function(){ 
+            $http.get("http://localhost:3000/firebase/StartLes")
+            .success(function(UserData){	
+              
+
+            
+                
+               console.log("successfully retrieved user date");
+               console.log(UserData);
+                console.log(UserData.klas);
+               $scope.data = UserData;
+ 
+
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+	
+        
+        }
+    
+   
+    getuserclass();
+     
+    
+           $scope.startLes = function(dataforservice){ 
+               console.log($scope.selectedData);
+            var dataforservice = $scope.selectedData;
+               $location.path("/viewquestion");
+               
+        DataService.addProduct(dataforservice);
+              
+               
+        };
+    
+        $scope.$watch("data.SelectedLes",function(){
+             $scope.search = $scope.data.SelectedLes[0];
+            console.log($scope.search);
+            $scope.selectedData=$scope.data.klas[$scope.search];
+             console.log($scope.selectedData);
+        })
 
 	});
+
+app.controller("viewquestionCtrl", function($scope, $http, $location, DataService){
+    $scope.data = DataService.getProducts();
+    
+
+    console.log($scope.data);
+    
+    $scope.viewdata = $scope.data[0].vak;
+   
+
+
+
+
+
+    
+});
+
+app.service('DataService', function() {
+var productList = [];
+
+  var addProduct = function(newObj) {
+      productList.push(newObj);
+  };
+
+  var getProducts = function(){
+      return productList;
+  };
+
+  return {
+    addProduct: addProduct,
+    getProducts: getProducts
+  };
+    
+});
+//Eind van controllers voor les geven

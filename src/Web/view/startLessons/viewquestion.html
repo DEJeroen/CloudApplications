@@ -1,0 +1,23 @@
+<ul class="nav nav-pills navLesson">
+  <li role="presentation" class="active">
+
+  <a href="#createLesson">Maak les</a>
+
+  </li>
+  <li class="active" role="presentation"><a href="#viewquestion">Begin les</a></li>
+  <li role="presentation"><a href="#">Overzicht resultaten</a></li>
+</ul>
+
+<div class="container">
+  <h2>{{viewdata.vaknaam.vak}}</h2>
+  <div class="panel panel-default">
+      <label>Vraag</label>
+    <div class="panel-body">{{viewdata.wiskunde.vragen[1].vraag}}</div>
+      <label>Antwoord</label>
+      <div class="panel-body">{{viewdata.wiskunde.vragen[1].antwoord}}</div>
+  </div>
+</div>
+      
+
+
+<button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">volgende vraag</button>

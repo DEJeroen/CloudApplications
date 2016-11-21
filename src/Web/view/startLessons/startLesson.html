@@ -8,4 +8,19 @@
   <li role="presentation"><a href="#">Overzicht resultaten</a></li>
 </ul>
 
+
+<div class="selectLesAndQuestions"></div>      
+<label>Klas:</label>     
+<select ng-model="data.SelectedLes" multiple>
+    <option value="">Gelieve de klas te kiezen</option>
+  <option ng-repeat="option in data.klas" value="{{option.klasnaam.klas}}" >{{option.klasnaam.klas}}</option>
+  
+</select>
+<label>vak:</label>    
+<select ng-model="data.SelectedVak" multiple>
+    <option value="">Gelieve de vak te kiezen</option>
+  <option ng-repeat="option in selectedData" value="{{option.vaknaam.vak}}" >{{option.vaknaam.vak}}</option>
+  
+</select>
+</div>  
 <button ng-click="startLes();" type="button" class="btn btn-success btnStartLes">Start de les</button>
