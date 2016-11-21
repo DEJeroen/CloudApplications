@@ -1,8 +1,12 @@
 package com.gmail.cloudappap.percipience;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +28,7 @@ import android.widget.Toast;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Transaction;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.CameraSource;
@@ -50,6 +55,8 @@ public class DisplayActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
+        textViewYes.setText("Begin:");
 
         cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
         createCameraSource();
@@ -68,7 +75,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
         Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
-        System.out.println("hey");
+
         myFirebaseRef.child("ID1/Lessen/GeselecteerdeLes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -81,6 +88,7 @@ public class DisplayActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(FirebaseError error) {
+                System.out.println("firebase error");
             }
         });
 
@@ -134,10 +142,22 @@ public class DisplayActivity extends AppCompatActivity {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size()>0) {
-                    Intent intent=new Intent();
-                    intent.putExtra("barcode",barcodes.valueAt(0));
-                    setResult(CommonStatusCodes.SUCCESS,intent);
-                  //  finish();
+
+                    System.out.println("Detected barcode");
+                    System.out.println(barcodes.valueAt(0));
+                    Barcode test = barcodes.valueAt(0);
+                    System.out.println(test.displayValue);
+
+                    Message msgObj = handler.obtainMessage();
+                    Bundle b = new Bundle();
+                    b.putString("message", test.displayValue);
+                    msgObj.setData(b);
+                    handler.sendMessage(msgObj);
+
+
+
+
+                    //  finish();
                 }
 
             }
@@ -145,33 +165,20 @@ public class DisplayActivity extends AppCompatActivity {
 
     }
 
+
+
     public void scanBarcode (View v) {
         Intent intent = new Intent(this, DisplayActivity.class);
         startActivityForResult(intent, 0);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
-            if (requestCode == CommonStatusCodes.SUCCESS) {
-                if (data != null) {
-                    Barcode barcode = data.getParcelableExtra("barcode");
-                    TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
-                    textViewYes.setText("Barcode value: " + barcode.displayValue);
-                } else {
-
-                    TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
-                    textViewYes.setText("No barcode detected");
-
-
-                }
-            }
-        }
 
 
 
 
 
-    }
+
+
 
 
       //  super.onActivityResult(requestCode,resultCode, data);
@@ -231,4 +238,31 @@ public class DisplayActivity extends AppCompatActivity {
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+    private final Handler handler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            String barRead = msg.getData().getString("message");
+
+            if ((null != barRead)) {
+
+                // ALERT MESSAGE
+
+                   TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
+                   textViewYes.setText("Barcode value: " + barRead);
+            }
+            else
+            {
+
+                // ALERT MESSAGE
+                Toast.makeText(
+                        getBaseContext(),
+                        "Recieved empty message when reading barcode",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }
+
