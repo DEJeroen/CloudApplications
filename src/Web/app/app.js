@@ -201,17 +201,9 @@ app.controller("startLessonClassCtrl", function($scope, $http, $location, DataSe
 
  
     
-    
-    var getuserclass=function(){ 
             $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){	
               
-
-            
-                
-               console.log("successfully retrieved user date");
-               console.log(UserData);
-                console.log(UserData.klas);
                $scope.data = UserData;
  
 
@@ -221,11 +213,6 @@ app.controller("startLessonClassCtrl", function($scope, $http, $location, DataSe
                 console.log(UserData)
             });
 	
-        
-        }
-    
-   
-    getuserclass();
      
     $scope.next = function(klas){
     	console.log(klas);
@@ -236,8 +223,23 @@ app.controller("startLessonClassCtrl", function($scope, $http, $location, DataSe
 
 	});
 app.controller("startLessonSubjectCtrl", function($scope, $http, $location, DataService){
-	$scope.klas = DataService.getKlas()
+	$scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
+
+	            $http.get("http://localhost:3000/firebase/StartLes")
+            .success(function(UserData){	
+              
+               $scope.data = UserData;
+ console.log(UserData.klas.$scope.k);
+
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+
+
+
            $scope.startLes = function(dataforservice){ 
                console.log($scope.selectedData);
             var dataforservice = $scope.selectedData;
