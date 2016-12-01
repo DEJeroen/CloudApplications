@@ -12,9 +12,9 @@
 <div class="form-group">      
 <label for="klaslabel">Klas:</label>     
 <select multiple class="form-control formClass" ng-model="data.SelectedLes">
-  <option ng-repeat="option in data.klas">{{option.klasnaam.klas}}</option>
+  <option ng-repeat="x in dataklassen">{{x}}</option>
 </select>
 </div>
 
-<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Kies vak</button>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Kies klas</button>
 

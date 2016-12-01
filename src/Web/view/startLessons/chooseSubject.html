@@ -12,7 +12,7 @@
 <div class="form-group">
 <label for="vaklabel">Vak:</label>    
 <select multiple class="form-control formClass" ng-model="data.SelectedVak">
-  <option ng-repeat="option in selectedData" value="{{option.vaknaam.vak}}" >{{option.vaknaam.vak}}</option>
+  <option ng-repeat="x in datavakken">{{x}}</option>
   
 </select>
 </div>

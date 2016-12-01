@@ -73,8 +73,7 @@ app.post('/firebase/post', function (req, res, body) {
     }*/
 
     var klas = req.body[0];
-    //var klasnaam = req.body[1];
-    var vak = req.body[2];
+    var vak = req.body[1];
     var vragen =[];
 
     for(i=2; i<req.body.length; i++){
@@ -85,12 +84,12 @@ app.post('/firebase/post', function (req, res, body) {
     
 
     
-    ref.child("ID_LEERKRACHT/klas/" + klas.klas).set({
+   /* ref.child("ID_LEERKRACHT/klas/" + klas.klas).set({
         klasnaam:klas
-        });     
-    ref.child("ID_LEERKRACHT/klas/" + klas.klas + "/vak" ).set({
+        });    */ 
+   /* ref.child("ID_LEERKRACHT/klas/" + klas.klas + "/vak" ).set({
         vaknaam:vak
-        });
+        });*/
 
       ref.child("ID_LEERKRACHT/klas/" + klas.klas +"/vak/" + vak.vak).set({
         vragen: vragen

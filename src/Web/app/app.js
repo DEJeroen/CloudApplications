@@ -3,17 +3,17 @@ var app = angular.module("myapp",['ngRoute', 'ngAnimate']);
 app.config(['$routeProvider',
   function ($routeProvider) {
         $routeProvider
-            .when('/createLessonKlas', {
+              .when('/createLessonKlas', {
                 title: 'createLessonKlas',
                 templateUrl: 'view/makingLessons/createLessonKlas.html',
                 controller: 'createLessonKlasCtrl',
             })
-                        .when('/createLessonSubject', {
+              .when('/createLessonSubject', {
                 title: 'createLessonSubject',
                 templateUrl: 'view/makingLessons/createLessonSubject.html',
                 controller: 'createLessonSubjectCtrl',
             })
-                       .when('/createLessonQuestions', {
+              .when('/createLessonQuestions', {
                 title: 'createLessonQuestions',
                 templateUrl: 'view/makingLessons/createLessonQuestions.html',
                 controller: 'createLessonQuestionsCtrl',
@@ -28,7 +28,7 @@ app.config(['$routeProvider',
                 templateUrl: 'view/startLessons/chooseClass.html',
                 controller: 'startLessonClassCtrl',
             })
-                            .when('/chooseSubject', {
+              .when('/chooseSubject', {
                 title: 'chooseSubject',
                 templateUrl: 'view/startLessons/chooseSubject.html',
                 controller: 'startLessonSubjectCtrl',
@@ -112,7 +112,7 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.vraag =[];
 	$scope.antwoord =[];
 
-	    $scope.data = [ {klas:"klas"+$scope.klas},{klasnaam:$scope.klas},
+	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
@@ -204,19 +204,41 @@ app.service('summaryService', function() {
 //Controllers voor starten van de lessen
 app.controller("startLessonClassCtrl", function($scope, $http, $location, DataService){
 
- 
-    
-            $http.get("http://localhost:3000/firebase/StartLes")
+ $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){	
-              
-               $scope.data = UserData;
- 
-
+            
+                
+            
+           
+             var data= [];  
+               console.log("successfully retrieved user date");
+               console.log(UserData.klas);
+               DataService.adduserData(UserData);
+              // var size = Object.keys(UserData.klas).length;
+              //        console.log(size);
+                
+              for (var prop in UserData.klas) {
+                        console.log(prop);
+                   //   console.log(UserData.klas[prop].vak.vaknaam)
+        //console.log("Value:" + UserData.klas[prop].klasnaam.klas);
+                      data.push(prop);
+                  console.log(data);
+                 };
+                
+                $scope.dataklassen = data;
+                
+             
+            
+                
+             
             })
             .error(function(UserData){
                 console.error("error in retrieving");
                 console.log(UserData)
             });
+	
+        
+        
 	
      
     $scope.next = function(klas){
@@ -230,51 +252,64 @@ app.controller("startLessonClassCtrl", function($scope, $http, $location, DataSe
 app.controller("startLessonSubjectCtrl", function($scope, $http, $location, DataService){
 	$scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
-
-	            $http.get("http://localhost:3000/firebase/StartLes")
-            .success(function(UserData){	
-              
-               $scope.data = UserData;
- console.log(UserData.klas.$scope.k);
-
-            })
-            .error(function(UserData){
-                console.error("error in retrieving");
-                console.log(UserData)
-            });
-
-
-
-           $scope.startLes = function(dataforservice){ 
-               console.log($scope.selectedData);
-            var dataforservice = $scope.selectedData;
-               $location.path("/viewquestion");
-               
-        DataService.addProduct(dataforservice);
-              
-               
-        }; 
+    
+    var klasnummer = $scope.klas;
+    var data= [];
+    var vaknaam= "geschiedenis"
+    UserData = DataService.getUserData();
+    
+    
+    for (var prop in UserData.klas[klasnummer].vak) {
+                        console.log(prop);
+                   //   console.log(UserData.klas[prop].vak.vaknaam)
+        //console.log("Value:" + UserData.klas[prop].klasnaam.klas);
+                      data.push(prop);
+                  console.log(data);
+                 };
+                
+                $scope.datavakken = data;
+    
+        console.log(data);
+    
+    console.log(UserData.klas[klasnummer].vak[vaknaam]);
+    
+    
+    $scope.next = function(vak){
+    	console.log(vak);
+    	DataService.addVak(vak);
+    	$location.path("/viewquestion");
+    }
 });
 
 app.controller("viewquestionCtrl", function($scope, $http, $location, DataService){
-    
+    $scope.klas = DataService.getKlas();
+	$scope.k = $scope.klas[0];
+    $scope.vak = DataService.getKlas();
+    $scope.v = $scope.vak[0];
 
-    console.log($scope.data);
     
-    $scope.viewdata = $scope.data[0].vak;   
+     
 });
 
 app.service('DataService', function() {
+  var userData;
   var klas;
   var vak;
   var questions = [];
 
+ var adduserData = function(newObj) {
+     userData = newObj;  };
+    
   var addKlas = function(newObj) {
       klas = newObj;  };
   var addVak = function(newObj) {
       vak = newObj;  };
   var addQuestions = function(newObj) {
   	questions = newObj; }
+  
+  var getUserData = function(){
+      return userData;
+  };
 
   var getKlas = function(){
       return klas;
@@ -288,12 +323,16 @@ app.service('DataService', function() {
   }
 
   return {
+    adduserData: adduserData,
     addKlas: addKlas,
     addVak: addVak,
     addQuestions : addQuestions,
+      
+    getUserData:getUserData,
     getKlas: getKlas,
     getVak: getVak,
     getQuestions: getQuestions
+    
 
   };
 });
