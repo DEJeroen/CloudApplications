@@ -337,35 +337,50 @@ app.service('DataService', function() {
   };
 });
 //Eind van controllers voor les geven
+
+//Controller voor graphs
 app.controller("graphTestCtrl", function($scope, $http, $location){
+var ja;
+var nee;
+
+
+	$scope.getData = function(){
+			
+	            $http.get("http://localhost:3000/testGraph")
+            .success(function(UserData){	
+              
+var data= [];  
+              console.log(UserData.klas[$scope.klasnaam]);
+              console.log(UserData.klas[$scope.klasnaam].vak[$scope.vaknaam]);
+ja=UserData.klas[$scope.klasnaam].vak[$scope.vaknaam].vragen[1].kindJa;
+nee=UserData.klas[$scope.klasnaam].vak[$scope.vaknaam].vragen[1].kindNee;
+
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["Ja", "Nee"],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 4, 5, 2, 3],
+            data: [ja, nee],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(54, 162, 235, 0.2)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(54, 162, 235, 1)'
             ],
             borderWidth: 1
         }]
     },
     options: {
+    	responsive: true,
+    	title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
         scales: {
             yAxes: [{
                 ticks: {
@@ -375,4 +390,12 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+};
 });
+
+//Einde controller graphs

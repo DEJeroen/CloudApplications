@@ -61,6 +61,19 @@ app.get("/firebase/StartLes",function(req,res, body){
         
     
 });   
+
+app.get("/testGraph",function(req,res, body){
+        var ref = db.ref("ID_LEERKRACHT/klas/7/nederlands/vragen/");
+        ref.once("value", function(snapshot) {
+        res.json(snapshot.val());
+            
+            req.body= snapshot.val()           
+            
+        });
+    
+        
+    
+});   
     
     
 app.post('/firebase/post', function (req, res, body) {

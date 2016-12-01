@@ -1,1 +1,15 @@
-<canvas id="myChart" width="100" height="100"></canvas>
+<ul class="nav nav-pills navLesson">
+  <li role="presentation">
+
+  <a href="#createLesson">Maak les</a>
+
+  </li>
+  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
+  <li class="active" role="presentation"><a href="#viewGraph">Overzicht resultaten</a></li>
+</ul>
+<input type="text" ng-model="vaknaam">
+<input type="number" ng-model="klasnaam">
+<button type="submit"
+ class="btn btn-success btnKiesLes" ng-click="getData();">Get</button>
+
+<canvas id="myChart" style="width: 100px; height: 100px;"></canvas>
