@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Percipience</string>
 
-    <string name="hello">Hello World!</string>
-    <string name="title">Hello Notification!</string>
+    <string name="hello">Hello I am Percipience!</string>
+    <string name="title">Percipience Notification!</string>
     <string name="notification_posted">Notification posted</string>
 </resources>

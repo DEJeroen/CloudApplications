@@ -46,7 +46,10 @@ import java.io.IOException;
 public class DisplayActivity extends AppCompatActivity {
 
     String currentLesson;
+    String currentKlas;
+    String currentVraag;
     SurfaceView cameraPreview;
+    String currentAwnsers = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +79,15 @@ public class DisplayActivity extends AppCompatActivity {
 
         Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
-        myFirebaseRef.child("ID1/Lessen/GeselecteerdeLes").addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.child("ID1/Lessen/GeselecteerdeKlas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                currentLesson = snapshot.getValue().toString();
-                TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
-                textViewCurrentLesson.setText(currentLesson);
+                currentKlas = snapshot.getValue().toString();
+                //TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
+                //textViewCurrentLesson.setText(currentLesson);
 
-                System.out.println(currentLesson);  //prints "Do you have data? You'll love Firebase."
+                System.out.println(currentKlas);
+                currentAwnsers = "";
             }
 
             @Override
@@ -92,6 +96,39 @@ public class DisplayActivity extends AppCompatActivity {
             }
         });
 
+        myFirebaseRef.child("ID1/Lessen/GeselecteerdeLes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                currentLesson = snapshot.getValue().toString();
+                TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
+                textViewCurrentLesson.setText(currentLesson);
+
+                System.out.println(currentLesson);
+                currentAwnsers = "";
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+                System.out.println("firebase error");
+            }
+        });
+
+        myFirebaseRef.child("ID1/Lessen/GeselecteerdeVraag").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                currentVraag = snapshot.getValue().toString();
+                //TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
+                //textViewCurrentLesson.setText(currentLesson);
+
+                System.out.println(currentVraag);
+                currentAwnsers = "";
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+                System.out.println("firebase error");
+            }
+        });
 
     }
 
@@ -141,24 +178,40 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                if (barcodes.size()>0) {
+              //  if (barcodes.size()>0) {
 
-                    System.out.println("Detected barcode");
-                    System.out.println(barcodes.valueAt(0));
-                    Barcode test = barcodes.valueAt(0);
-                    System.out.println(test.displayValue);
+                    for(int i = 0; i < barcodes.size(); i++) {
+                        Barcode test = barcodes.valueAt(i);
+                        if (currentAwnsers.contains(test.displayValue)) {
 
-                    Message msgObj = handler.obtainMessage();
-                    Bundle b = new Bundle();
-                    b.putString("message", test.displayValue);
-                    msgObj.setData(b);
-                    handler.sendMessage(msgObj);
+                        //    System.out.println("ignoring old value..");
+
+                        }
+                        else {
+
+                            currentAwnsers = currentAwnsers + test.displayValue;
+                            Message msgObj = handler.obtainMessage();
+                            Bundle b = new Bundle();
+                            b.putString("message", currentAwnsers);
+                            msgObj.setData(b);
+                            handler.sendMessage(msgObj);
+
+                            System.out.println(currentAwnsers);
+
+
+                        }
+
+
+                    }
+
+
+
 
 
 
 
                     //  finish();
-                }
+
 
             }
         });
