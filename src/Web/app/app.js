@@ -469,11 +469,6 @@ app.controller("graphSubjectCtrl", function($scope, $http, $location, DataServic
 
 app.controller("viewGraphCtrl", function($scope, $http, $location, DataService){
 
-	                $scope.next = function(klas){
-    	console.log(klas);
-    	DataService.addKlas(klas);
-    	$location.path("/chooseSubjectGraph");
-    }
 var ja;
 var nee;
 
@@ -481,22 +476,46 @@ var nee;
 	$scope.klas = $scope.k[0];
 $scope.vak= DataService.getVak();
 
+
+console.log($scope.vak)
+
 			
 	            $http.get("http://localhost:3000/firebase/Graph")
             .success(function(UserData){	
               
 var data= [];  
+var vragen =[];
  DataService.adduserData(UserData);
                 
               for (var prop in UserData.klas) {
                       data.push(prop);
                  };
+
+                 for (var prop in UserData.klas[$scope.klas].vak[$scope.vak].vragen) {
+                 	console.log(prop);
+                      vragen.push(prop);
+                 };
                 
                 $scope.dataklassen = data;
+                $scope.datavragen = vragen;
                 
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
 
-ja=UserData.klas[$scope.klas].vak[$scope.vak].vragen[1].kindJa;
-nee=UserData.klas[$scope.klas].vak[$scope.vak].vragen[1].kindNee;
+
+
+	                $scope.next = function(klas){
+    	console.log(klas);
+    	DataService.addKlas(klas);
+    	$location.path("/chooseSubjectGraph");
+    }
+
+    $scope.view = function(vraag){
+ja=UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].kindJa;
+nee=UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].kindNee;
 
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
@@ -533,11 +552,7 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-            })
-            .error(function(UserData){
-                console.error("error in retrieving");
-                console.log(UserData)
-            });
+    }
 });
 
 //Einde controller graphs

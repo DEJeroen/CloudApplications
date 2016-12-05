@@ -8,6 +8,16 @@
   <li class="active" role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
 </ul>
 
+<div class="form-group">      
+<label for="klaslabel">Kies vraag</label>     
+<select multiple class="form-control formClass" ng-model="data.SelectedVraag">
+  <option ng-repeat="x in datavragen">{{x}}</option>
+</select>
+</div>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="view(data.SelectedVraag);">Next</button>
+
+<canvas id="myChart" style="width: 100px; height: 100px;"></canvas>
+
 <h4 class="summaryLes">Andere les terugkijken?</h4>
 <div class="form-group">      
 <label for="klaslabel">Klas:</label>     
@@ -17,5 +27,3 @@
 </div>
 
 <button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Next</button>
-
-<canvas id="myChart" style="width: 100px; height: 100px;"></canvas>
