@@ -304,7 +304,8 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     var vaknaam = $scope.vak;
     var vraagnummer = 1;
     var data= [];
-    
+    var laatstevraag;
+      
      var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
                      console.log(size);
     
@@ -319,6 +320,9 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                 
                 $scope.datavakken = data;
     */
+    
+     laatstevraag = size - 1;
+    
           	for(var i =0; i< size; i++)
 	           {
 
@@ -329,25 +333,36 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
               }
      
-    console.log(data);
+        console.log(data);
     
         $scope.vraag = data[0].vraag;
         $scope.antwoord = data[0].antwoord;
+        $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
+    
     
     
     $scope.nextquestion = function(){
         console.log(vraagnummer);
         
-        if (vraagnummer == size){
+        if (vraagnummer == laatstevraag){
             
             console.log("einde van de rit");
+            
+            $scope.welkevraag = "Naar resultaten";
+            
+            
         }
         else{
         $scope.vraag = data[vraagnummer].vraag;
         $scope.antwoord = data[vraagnummer].antwoord;
-        
+            
+       
+                
         vraagnummer = vraagnummer + 1;
         
+            
+        $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
+            
         }
     };
     
