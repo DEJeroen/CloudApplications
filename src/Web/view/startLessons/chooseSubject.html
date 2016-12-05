@@ -11,10 +11,10 @@
 <p style="font-size: 1em;">{{k}}</p>
 <div class="form-group">
 <label for="vaklabel">Vak:</label>    
-<select multiple class="form-control formClass" ng-model="data.SelectedVak">
+<select multiple class="form-control formClass" ng-model="SelectedVak">
   <option ng-repeat="x in datavakken">{{x}}</option>
   
 </select>
 </div>
 
-<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedVak);">Kies vak</button>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(SelectedVak);">Kies vak</button>

@@ -127,6 +127,7 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
+    
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
 	{
 $scope.vraag[i] = $scope.vraagAntwoord[i].question;
@@ -267,7 +268,7 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
     
     var klasnummer = $scope.klas;
     var data= [];
-    var vaknaam= "geschiedenis"
+   // var vaknaam= "geschiedenis"
     UserData = DataService.getUserData();
     
     
@@ -281,9 +282,8 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
                 
                 $scope.datavakken = data;
     
-        console.log(data);
-    
-    console.log(UserData.klas[klasnummer].vak[vaknaam]);
+          
+  //  console.log(UserData.klas[klasnummer].vak[vaknaam]);
     
     
     $scope.next = function(vak){
@@ -296,11 +296,67 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
 app.controller("viewquestionCtrl", function($scope, $http, $location, DataService){
     $scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
-    $scope.vak = DataService.getKlas();
+    $scope.vak = DataService.getVak();
     $scope.v = $scope.vak[0];
-
+    UserData = DataService.getUserData();
     
+    var klasnummer = $scope.klas;
+    var vaknaam = $scope.vak;
+    var vraagnummer = 1;
+    var data= [];
+    
+     var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
+                     console.log(size);
+    
+    
+  /* for (var prop in UserData.klas[klasnummer].vak[vaknaam].vragen) {
+                        console.log(prop);
+                   //   console.log(UserData.klas[prop].vak.vaknaam)
+        //console.log("Value:" + UserData.klas[prop].klasnaam.klas);
+                      data.push(prop);
+                  console.log(data);
+                 };
+                
+                $scope.datavakken = data;
+    */
+          	for(var i =0; i< size; i++)
+	           {
+
+                  data.push(
+                  {vraag:UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
+                  antwoord:UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord}
+                  );
+
+              }
      
+    console.log(data);
+    
+        $scope.vraag = data[0].vraag;
+        $scope.antwoord = data[0].antwoord;
+    
+    
+    $scope.nextquestion = function(){
+        console.log(vraagnummer);
+        
+        if (vraagnummer == size){
+            
+            console.log("einde van de rit");
+        }
+        else{
+        $scope.vraag = data[vraagnummer].vraag;
+        $scope.antwoord = data[vraagnummer].antwoord;
+        
+        vraagnummer = vraagnummer + 1;
+        
+        }
+    };
+    
+    
+    
+        
+    
+    
+    
 });
 
 app.service('DataService', function() {
