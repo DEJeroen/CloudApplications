@@ -38,10 +38,22 @@ app.config(['$routeProvider',
                 templateUrl: 'view/startLessons/viewquestion.html',
                 controller: 'viewquestionCtrl',
             })
+            .when('/chooseClassGraph', {
+                title: 'chooseClassGraph',
+                templateUrl: 'view/makingGraph/chooseClassGraph.html',
+                controller: 'graphClassCtrl',
+            })
+
+            .when('/chooseSubjectGraph', {
+                title: 'chooseSubjectGraph',
+                templateUrl: 'view/makingGraph/chooseSubjectGraph.html',
+                controller: 'graphSubjectCtrl',
+            })
+
             .when('/viewGraph', {
                 title: 'viewGraph',
-                templateUrl: 'view/makingGraph/graphTest.html',
-                controller: 'graphTestCtrl',
+                templateUrl: 'view/makingGraph/viewGraph.html',
+                controller: 'viewGraphCtrl',
             })
                                 .otherwise({
                 redirectTo: '/createLessonKlas'
@@ -339,21 +351,96 @@ app.service('DataService', function() {
 //Eind van controllers voor les geven
 
 //Controller voor graphs
-app.controller("graphTestCtrl", function($scope, $http, $location){
+app.controller("graphClassCtrl", function($scope, $http, $location, DataService){
+
+ $http.get("http://localhost:3000/firebase/Graph")
+            .success(function(UserData){	
+            
+                
+            
+           
+             var data= [];  
+               DataService.adduserData(UserData);
+                
+              for (var prop in UserData.klas) {
+                      data.push(prop);
+                 };
+                
+                $scope.dataklassen = data;
+                
+             
+            
+                
+             
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+
+                $scope.next = function(klas){
+    	DataService.addKlas(klas);
+    	$location.path("/chooseSubjectGraph");
+    }
+
+});
+
+app.controller("graphSubjectCtrl", function($scope, $http, $location, DataService){
+
+	$scope.k = DataService.getKlas();
+	$scope.klas = $scope.k[0];
+    
+    var klasnummer = $scope.klas;
+    var data= [];
+    UserData = DataService.getUserData();
+    
+    
+    for (var prop in UserData.klas[klasnummer].vak) {
+                      data.push(prop);
+                 };
+                
+                $scope.datavakken = data;
+    
+    
+    $scope.next = function(vak){
+    	DataService.addVak(vak);
+    	$location.path("/viewGraph");
+    }
+
+
+	
+	});
+
+app.controller("viewGraphCtrl", function($scope, $http, $location, DataService){
+
+	                $scope.next = function(klas){
+    	console.log(klas);
+    	DataService.addKlas(klas);
+    	$location.path("/chooseSubjectGraph");
+    }
 var ja;
 var nee;
 
+	$scope.k = DataService.getKlas();
+	$scope.klas = $scope.k[0];
+$scope.vak= DataService.getVak();
 
-	$scope.getData = function(){
 			
-	            $http.get("http://localhost:3000/testGraph")
+	            $http.get("http://localhost:3000/firebase/Graph")
             .success(function(UserData){	
               
 var data= [];  
-              console.log(UserData.klas[$scope.klasnaam]);
-              console.log(UserData.klas[$scope.klasnaam].vak[$scope.vaknaam]);
-ja=UserData.klas[$scope.klasnaam].vak[$scope.vaknaam].vragen[1].kindJa;
-nee=UserData.klas[$scope.klasnaam].vak[$scope.vaknaam].vragen[1].kindNee;
+ DataService.adduserData(UserData);
+                
+              for (var prop in UserData.klas) {
+                      data.push(prop);
+                 };
+                
+                $scope.dataklassen = data;
+                
+
+ja=UserData.klas[$scope.klas].vak[$scope.vak].vragen[1].kindJa;
+nee=UserData.klas[$scope.klas].vak[$scope.vak].vragen[1].kindNee;
 
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
@@ -395,7 +482,6 @@ var myChart = new Chart(ctx, {
                 console.error("error in retrieving");
                 console.log(UserData)
             });
-};
 });
 
 //Einde controller graphs

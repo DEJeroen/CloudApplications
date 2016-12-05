@@ -1,0 +1,21 @@
+<ul class="nav nav-pills navLesson">
+  <li role="presentation">
+
+  <a href="#createLesson">Maak les</a>
+
+  </li>
+  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
+  <li class="active" role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
+</ul>
+
+<h4 class="summaryLes">Andere les terugkijken?</h4>
+<div class="form-group">      
+<label for="klaslabel">Klas:</label>     
+<select multiple class="form-control formClass" ng-model="data.SelectedLes">
+  <option ng-repeat="x in dataklassen">{{x}}</option>
+</select>
+</div>
+
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Next</button>
+
+<canvas id="myChart" style="width: 100px; height: 100px;"></canvas>

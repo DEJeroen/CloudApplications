@@ -62,7 +62,7 @@ app.get("/firebase/StartLes",function(req,res, body){
     
 });   
 
-app.get("/testGraph",function(req,res, body){
+app.get("/firebase/Graph",function(req,res, body){
         var ref = db.ref("ID_LEERKRACHT");
         ref.once("value", function(snapshot) {
         res.json(snapshot.val());
