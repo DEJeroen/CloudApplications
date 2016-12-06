@@ -293,7 +293,7 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
     }
 });
 
-app.controller("viewquestionCtrl", function($scope, $http, $location, DataService){
+app.controller("viewquestionCtrl", function($scope, $http, $location, DataService, $interval){
     $scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
     $scope.vak = DataService.getVak();
@@ -328,10 +328,13 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
                   data.push(
                   {vraag:UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
-                  antwoord:UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord}
+                  antwoord:UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
+                  kindJa:UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindJa,
+                  kindNee:UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindNee}
                   );
 
               }
+<<<<<<< Updated upstream
      
         console.log(data);
     
@@ -341,6 +344,18 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     
     
     
+=======
+      var ja;
+    var nee;   
+    console.log(data);
+        $scope.vraag = data[0].vraag;
+        $scope.antwoord = data[0].antwoord;
+            ja=data[vraagnummer].kindJa;
+		nee=data[vraagnummer].kindNee;
+				console.log(ja, nee, $scope.vraag);
+
+
+>>>>>>> Stashed changes
     $scope.nextquestion = function(){
         console.log(vraagnummer);
         
@@ -359,18 +374,78 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
        
                 
         vraagnummer = vraagnummer + 1;
+<<<<<<< Updated upstream
         
             
         $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
             
+=======
+        ja=data[vraagnummer].kindJa;
+		nee=data[vraagnummer].kindNee;
+   
+>>>>>>> Stashed changes
         }
     };
-    
-    
-    
-        
-    
-    
+    var dataJa;
+    var dataNee;
+function makeGraph() {
+
+$http.get("http://localhost:3000/firebase/StartLes")
+            .success(function(UserData){	
+            
+                
+            
+           
+             dataJa= UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer].kindJa;
+             dataNee =UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer].kindNee;  
+             console.log(dataJa, dataNee);
+
+                
+             console.log(dataJa, dataNee, ja, nee);
+            
+                	var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Ja", "Nee"],
+        datasets: [{
+            label: '# of Votes',
+            data: [dataJa, dataNee],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+    	responsive: true,
+    	title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});  
+             
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+    }                 
+    $interval(makeGraph, 3000);
     
 });
 
