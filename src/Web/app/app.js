@@ -321,7 +321,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                 $scope.datavakken = data;
     */
     
-     laatstevraag = size;
+     laatstevraag = size-1;
     
           	for(var i =0; i< size; i++)
 	           {
@@ -335,7 +335,6 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
               }
      
-        console.log(data);
     
         $scope.vraag = data[0].vraag;
         $scope.antwoord = data[0].antwoord;
@@ -344,21 +343,22 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     
     
 
-        $scope.vraag = data[0].vraag;
-        $scope.antwoord = data[0].antwoord;
+            $scope.vraag = data[0].vraag;
+            $scope.antwoord = data[0].antwoord;
             ja=data[0].kindJa;
-		nee=data[0].kindNee;
+		        nee=data[0].kindNee;
+            makeGraph();
 
 
 
     $scope.nextquestion = function(){
-        console.log(vraagnummer);
         
         if (vraagnummer == laatstevraag){
-            
+            $interval.cancel(interval);
             console.log("einde van de rit");
             
             $scope.welkevraag = "Naar resultaten";
+            //$location.path("/viewGraph");
             
             
         }
@@ -375,10 +375,61 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             
         ja=data[vraagnummer].kindJa;
 		nee=data[vraagnummer].kindNee;
-   
+   makeGraph();
         }
     };
 
+//Om de grafiek te refreshen.
+var interval = $interval(function() {
+$http.get("http://localhost:3000/firebase/StartLes")
+            .success(function(UserData){  
+      ja =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindJa;
+      nee = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindNee;   
+            
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Ja", "Nee"],
+        datasets: [{
+            label: '# of Votes',
+            data: [ja, nee],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});  
+             
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+}, 5000);
+
+//Om de initiele grafiek te tekenen.
 function makeGraph() {
 
 $http.get("http://localhost:3000/firebase/StartLes")
@@ -428,7 +479,6 @@ var myChart = new Chart(ctx, {
                 console.log(UserData)
             });
     }                 
-    $interval(makeGraph, 3000);
     
 });
 

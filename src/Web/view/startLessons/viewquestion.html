@@ -4,7 +4,7 @@
   <a href="#createLesson">Maak les</a>
 
   </li>
-  <li class="active" role="presentation"><a href="#viewquestion">Begin les</a></li>
+  <li class="active" role="presentation"><a href="#chooseClass">Begin les</a></li>
   <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
 </ul>
 
@@ -17,8 +17,8 @@
       <div class="panel-body">{{antwoord}}</div>
   </div>
 </div>
- <button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">volgende vraag</button>     
+<button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">{{welkevraag}}</button>  
 <canvas id="myChart" style="width: 100px; height: 100px;"></canvas>
 
 
-<button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">{{welkevraag}}</button>
+
