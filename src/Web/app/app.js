@@ -305,10 +305,10 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     var vraagnummer = 1;
     var data= [];
     var laatstevraag;
+    var ja;
+    var nee;   
       
      var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
-                     console.log(size);
-    
     
   /* for (var prop in UserData.klas[klasnummer].vak[vaknaam].vragen) {
                         console.log(prop);
@@ -321,16 +321,16 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                 $scope.datavakken = data;
     */
     
-     laatstevraag = size - 1;
+     laatstevraag = size;
     
           	for(var i =0; i< size; i++)
 	           {
 
                   data.push(
-                  {vraag:UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
-                  antwoord:UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
-                  kindJa:UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindJa,
-                  kindNee:UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindNee}
+                  {vraag: UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
+                  antwoord: UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
+                  kindJa: UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindJa,
+                  kindNee: UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindNee}
                   );
 
               }
@@ -343,14 +343,11 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     
     
     
-      var ja;
-    var nee;   
-    console.log(data);
+
         $scope.vraag = data[0].vraag;
         $scope.antwoord = data[0].antwoord;
-            ja=data[vraagnummer].kindJa;
-		nee=data[vraagnummer].kindNee;
-				console.log(ja, nee, $scope.vraag);
+            ja=data[0].kindJa;
+		nee=data[0].kindNee;
 
 
 
@@ -381,31 +378,22 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
    
         }
     };
-    var dataJa;
-    var dataNee;
+
 function makeGraph() {
 
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){	
+      ja =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindJa;
+      nee = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindNee;   
             
-                
-            
-           
-             dataJa= UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer].kindJa;
-             dataNee =UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer].kindNee;  
-             console.log(dataJa, dataNee);
-
-                
-             console.log(dataJa, dataNee, ja, nee);
-            
-                	var ctx = document.getElementById("myChart");
+var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["Ja", "Nee"],
         datasets: [{
             label: '# of Votes',
-            data: [dataJa, dataNee],
+            data: [ja, nee],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)'
