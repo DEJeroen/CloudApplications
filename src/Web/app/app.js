@@ -334,7 +334,6 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                   );
 
               }
-<<<<<<< Updated upstream
      
         console.log(data);
     
@@ -344,7 +343,6 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     
     
     
-=======
       var ja;
     var nee;   
     console.log(data);
@@ -355,7 +353,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 				console.log(ja, nee, $scope.vraag);
 
 
->>>>>>> Stashed changes
+
     $scope.nextquestion = function(){
         console.log(vraagnummer);
         
@@ -374,16 +372,13 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
        
                 
         vraagnummer = vraagnummer + 1;
-<<<<<<< Updated upstream
         
             
         $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
             
-=======
         ja=data[vraagnummer].kindJa;
 		nee=data[vraagnummer].kindNee;
    
->>>>>>> Stashed changes
         }
     };
     var dataJa;
