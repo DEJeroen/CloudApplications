@@ -4,20 +4,21 @@
   <a href="#createLesson">Maak les</a>
 
   </li>
-  <li class="active" role="presentation"><a href="#chooseClass">Begin les</a></li>
+  <li class="active" role="presentation"><a href="#viewquestion">Begin les</a></li>
   <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
 </ul>
 
 <div class="container">
-  <h2>{{viewdata.vaknaam.vak}}</h2>
+  <h2>{{v}}</h2>
   <div class="panel panel-default">
       <label>Vraag</label>
     <div class="panel-body">{{vraag}}</div>
       <label>Antwoord</label>
       <div class="panel-body">{{antwoord}}</div>
   </div>
+  <button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">{{welkevraag}}</button>
 </div>
-<button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">{{welkevraag}}</button>  
+
 <canvas id="myChart" style="width: 100px; height: 100px;"></canvas>
 
 

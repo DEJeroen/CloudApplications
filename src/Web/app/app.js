@@ -150,7 +150,8 @@ $scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
             .success(function(data){	
               
                console.log("posted successfully");
-                //console.log($scope.data);
+               alert("U vragen zijn opgeslagen");
+               $location.path("/createLessonKlas");
 
             })
             .error(function(data){
@@ -161,18 +162,6 @@ $scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
         
         }
 
-    
-   /* $scope.submit=function(){
-		$http.get("http://localhost:3000/firebase")
-		.success(function(allejsondata){	
-			console.log(allejsondata);
-            })
-            .error(function(err){
-
-            });
-	
-        
-        }*/
 
     
 	});
@@ -298,6 +287,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 	$scope.k = $scope.klas[0];
     $scope.vak = DataService.getVak();
     $scope.v = $scope.vak[0];
+    $scope.q = 0;
     UserData = DataService.getUserData();
     
     var klasnummer = $scope.klas;
@@ -339,7 +329,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         $scope.vraag = data[0].vraag;
         $scope.antwoord = data[0].antwoord;
         $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
-    
+        
     
     
 
@@ -353,29 +343,45 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
     $scope.nextquestion = function(){
         
+        if ($scope.welkevraag == "Naar resultaten"){
+            $scope.q = "null";
+            $scope.k = "null";
+            $scope.v = "null";
+            $location.path("/viewGraph");
+        }
+        
         if (vraagnummer == laatstevraag){
             $interval.cancel(interval);
             console.log("einde van de rit");
-            
+            $scope.vraag = data[vraagnummer].vraag;
+            $scope.antwoord = data[vraagnummer].antwoord;
+
+            $scope.q = vraagnummer;
+
+            vraagnummer = vraagnummer + 1;
+        
+             
             $scope.welkevraag = "Naar resultaten";
-            //$location.path("/viewGraph");
-            
+         
             
         }
         else{
-        $scope.vraag = data[vraagnummer].vraag;
-        $scope.antwoord = data[vraagnummer].antwoord;
-            
-       
-                
-        vraagnummer = vraagnummer + 1;
-        
-            
-        $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
-            
-        ja=data[vraagnummer].kindJa;
-		nee=data[vraagnummer].kindNee;
-   makeGraph();
+            $scope.vraag = data[vraagnummer].vraag;
+            $scope.antwoord = data[vraagnummer].antwoord;
+
+            $scope.q = vraagnummer;
+           
+            console.log($scope.q);
+           
+            vraagnummer = vraagnummer + 1;
+           
+      
+
+            $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
+
+            ja=data[vraagnummer].kindJa;
+            nee=data[vraagnummer].kindNee;
+   
         }
     };
 
@@ -479,6 +485,38 @@ var myChart = new Chart(ctx, {
                 console.log(UserData)
             });
     }                 
+    //$interval(makeGraph, 3000);
+    
+    $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+    
+          submitAppsettings=function(){ 
+            $http.post("http://localhost:3000/firebase/post/initStartLes", $scope.appsettings )
+            .success(function(data){	
+              
+               console.log("posted successfully");
+            //console.log($scope.data);
+
+            })
+            .error(function(data){
+                console.error("error in posting");
+                //console.log($scope.data)
+            });
+	
+        
+        }
+    
+    
+    
+   submitAppsettings(); 
+    
+    
+    $scope.$watch('q', function() {
+        $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+        submitAppsettings(); 
+        console.log("ik heb beweging gezien ");
+    });
+        
+        
     
 });
 

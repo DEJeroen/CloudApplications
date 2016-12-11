@@ -115,6 +115,36 @@ app.post('/firebase/post', function (req, res, body) {
 });
 
 
+app.post('/firebase/post/initStartLes', function (req, res, body) {
+
+    
+
+    var klas = req.body[0];
+    var vak = req.body[1];
+    var vraag =req.body[2];
+
+      
+    var ref = db.ref("/");
+    
+
+    
+ 
+      ref.child("Appsettings").set({
+        currentklas: klas,
+        currentvak: vak,
+        currentvraag: vraag
+        });   
+    
+    console.log(req.body);
+    console.log(vraag);
+
+                     
+    res.sendStatus(201);   
+    
+  
+});
+
+
 /*app.post('/firebase/post/user', function (req, res, body) {
     
        var ref = db.ref("/");
@@ -157,20 +187,6 @@ app.post('/firebase/post', function (req, res, body) {
 */
 
 
-app.put('/firebase/put', function (req, res, body) {
-    
-    
-        var ref = db.ref("/");
-        var usersRef = ref.child("ID3");
-        var hopperRef = usersRef.child("alanisawesome");
-    
-            hopperRef.update({
-              "nickname": req.body.Name
-            });
-
-     res.send(201);       
-
-});
 
 
 app.delete('/firebase/delete', function (req, res, body) {
