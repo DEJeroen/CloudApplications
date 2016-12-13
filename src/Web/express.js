@@ -129,7 +129,7 @@ app.post('/firebase/post/initStartLes', function (req, res, body) {
 
     
  
-      ref.child("Appsettings").set({
+      ref.child("ID_LEERKRACHT/Appsettings").set({
         currentklas: klas,
         currentvak: vak,
         currentvraag: vraag
