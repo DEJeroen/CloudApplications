@@ -338,6 +338,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             ja=data[0].kindJa;
 		        nee=data[0].kindNee;
             makeGraph();
+            console.log(ja);
 
 
 
