@@ -130,9 +130,10 @@ app.post('/firebase/post/initStartLes', function (req, res, body) {
     
  
       ref.child("ID_LEERKRACHT/Appsettings").set({
-        currentklas: klas,
-        currentvak: vak,
-        currentvraag: vraag
+        androidOnline: "0",
+        currentKlas: klas,
+        currentVak: vak,
+        currentVraag: vraag
         });   
     
     console.log(req.body);

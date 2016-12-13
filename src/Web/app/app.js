@@ -486,7 +486,7 @@ var myChart = new Chart(ctx, {
                 console.log(UserData)
             });
     }                 
-    //$interval(makeGraph, 3000);
+    
     
     $scope.appsettings = [$scope.k,$scope.v,$scope.q];
     
