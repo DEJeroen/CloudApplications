@@ -40,16 +40,18 @@ import java.io.IOException;
 
 
 /**
- * Created by jeroen on 10/22/16.
+ * Created by jeroen.
  */
 
 public class DisplayActivity extends AppCompatActivity {
 
-    String currentLesson;
+    String currentVak;
     String currentKlas;
     String currentVraag;
     SurfaceView cameraPreview;
     String currentAwnsers = "";
+    int yesVal = 0;
+    int noVal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,6 @@ public class DisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
-        textViewYes.setText("Begin:");
 
         cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
         createCameraSource();
@@ -79,15 +78,17 @@ public class DisplayActivity extends AppCompatActivity {
 
         Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
-        myFirebaseRef.child("ID1/Lessen/GeselecteerdeKlas").addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentKlas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 currentKlas = snapshot.getValue().toString();
-                //TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
-                //textViewCurrentLesson.setText(currentLesson);
+                //TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
+                //textViewCurrentVak.setText(currentVak);
 
-                System.out.println(currentKlas);
+                System.out.println("klas: " + currentKlas);
                 currentAwnsers = "";
+                yesVal = 0;
+                noVal = 0;
             }
 
             @Override
@@ -96,15 +97,17 @@ public class DisplayActivity extends AppCompatActivity {
             }
         });
 
-        myFirebaseRef.child("ID1/Lessen/GeselecteerdeLes").addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentVak").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                currentLesson = snapshot.getValue().toString();
-                TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
-                textViewCurrentLesson.setText(currentLesson);
+                currentVak = snapshot.getValue().toString();
+                TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
+                textViewCurrentVak.setText(currentVak);
 
-                System.out.println(currentLesson);
+                System.out.println("vak: " + currentVak);
                 currentAwnsers = "";
+                yesVal = 0;
+                noVal = 0;
             }
 
             @Override
@@ -113,15 +116,39 @@ public class DisplayActivity extends AppCompatActivity {
             }
         });
 
-        myFirebaseRef.child("ID1/Lessen/GeselecteerdeVraag").addValueEventListener(new ValueEventListener() {
+
+        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/androidOnline").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                currentVak = snapshot.getValue().toString();
+                TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
+                textViewCurrentVak.setText(currentVak);
+
+                System.out.println("I'm not offline!");
+                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("androidOnline").setValue("yes");
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+                System.out.println("firebase error");
+            }
+        });
+
+        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentVraag").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 currentVraag = snapshot.getValue().toString();
-                //TextView textViewCurrentLesson = (TextView) findViewById(R.id.textViewCurrentLesson);
-                //textViewCurrentLesson.setText(currentLesson);
+                //TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
+                //textViewCurrentVak.setText(currentVak);
 
-                System.out.println(currentVraag);
+                System.out.println("vraag: " + currentVraag);
                 currentAwnsers = "";
+                yesVal = 0;
+                noVal = 0;
             }
 
             @Override
@@ -129,6 +156,9 @@ public class DisplayActivity extends AppCompatActivity {
                 System.out.println("firebase error");
             }
         });
+
+
+
 
     }
 
@@ -184,19 +214,31 @@ public class DisplayActivity extends AppCompatActivity {
                         Barcode test = barcodes.valueAt(i);
                         if (currentAwnsers.contains(test.displayValue)) {
 
-                        //    System.out.println("ignoring old value..");
+                            System.out.println("ignoring old value..");
 
                         }
                         else {
+                            currentAwnsers += test.displayValue;
+                            System.out.println(test.displayValue);
+                            if (test.displayValue.contains("yes")) {
+                                yesVal ++;
+                                Message msgObj = yesHandler.obtainMessage();
+                                Bundle b = new Bundle();
+                                b.putString("message", Integer.toString(yesVal));
+                                msgObj.setData(b);
+                                yesHandler.sendMessage(msgObj);
+                            }
+                            if (test.displayValue.contains("no")) {
+                                noVal ++;
+                                Message msgObj = noHandler.obtainMessage();
+                                Bundle b = new Bundle();
+                                b.putString("message", Integer.toString(noVal));
+                                msgObj.setData(b);
+                                noHandler.sendMessage(msgObj);
+                            }
 
-                            currentAwnsers = currentAwnsers + test.displayValue;
-                            Message msgObj = handler.obtainMessage();
-                            Bundle b = new Bundle();
-                            b.putString("message", currentAwnsers);
-                            msgObj.setData(b);
-                            handler.sendMessage(msgObj);
 
-                            System.out.println(currentAwnsers);
+
 
 
                         }
@@ -294,7 +336,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-    private final Handler handler = new Handler() {
+    private final Handler yesHandler = new Handler() {
 
         public void handleMessage(Message msg) {
             String barRead = msg.getData().getString("message");
@@ -304,7 +346,38 @@ public class DisplayActivity extends AppCompatActivity {
                 // ALERT MESSAGE
 
                    TextView textViewYes = (TextView) findViewById(R.id.textViewYes);
-                   textViewYes.setText("Barcode value: " + barRead);
+                   textViewYes.setText("Yes: " + barRead);
+                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("kindJa").setValue(barRead);
+
+            }
+            else
+            {
+
+                // ALERT MESSAGE
+                Toast.makeText(
+                        getBaseContext(),
+                        "Recieved empty message when reading barcode",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+    private final Handler noHandler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            String barRead = msg.getData().getString("message");
+
+            if ((null != barRead)) {
+
+                // ALERT MESSAGE
+
+                TextView textViewNo = (TextView) findViewById(R.id.textViewNo);
+                textViewNo.setText("No: " + barRead);
+                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentVak).child("vak").child(currentVak).child("vragen").child(currentVraag).child("kindNee").setValue(barRead);
+
             }
             else
             {

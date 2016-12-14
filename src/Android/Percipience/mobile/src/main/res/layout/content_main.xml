@@ -21,13 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello you"
-        android:id="@+id/textViewCurrentLesson"
+        android:id="@+id/textViewCurrentVak"
         android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
 
     <TextView
-        android:text="Yes: 5"
+        android:text="Yes: 0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="79dp"
@@ -37,7 +37,7 @@
         android:textColor="@color/wallet_holo_blue_light"/>
 
     <TextView
-        android:text="No: 2"
+        android:text="No: 0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewNo"
@@ -47,7 +47,7 @@
         android:textColor="@color/wallet_holo_blue_light"/>
 
     <TextView
-        android:text="Current Lesson:"
+        android:text="Current Vak:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
