@@ -38,10 +38,22 @@ app.config(['$routeProvider',
                 templateUrl: 'view/startLessons/viewquestion.html',
                 controller: 'viewquestionCtrl',
             })
+            .when('/chooseClassGraph', {
+                title: 'chooseClassGraph',
+                templateUrl: 'view/makingGraph/chooseClassGraph.html',
+                controller: 'graphClassCtrl',
+            })
+
+            .when('/chooseSubjectGraph', {
+                title: 'chooseSubjectGraph',
+                templateUrl: 'view/makingGraph/chooseSubjectGraph.html',
+                controller: 'graphSubjectCtrl',
+            })
+
             .when('/viewGraph', {
                 title: 'viewGraph',
-                templateUrl: 'view/makingGraph/graphTest.html',
-                controller: 'graphTestCtrl',
+                templateUrl: 'view/makingGraph/viewGraph.html',
+                controller: 'viewGraphCtrl',
             })
                                 .otherwise({
                 redirectTo: '/createLessonKlas'
@@ -115,6 +127,7 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
+    
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
 	{
 $scope.vraag[i] = $scope.vraagAntwoord[i].question;
@@ -137,7 +150,8 @@ $scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
             .success(function(data){	
               
                console.log("posted successfully");
-                //console.log($scope.data);
+               alert("U vragen zijn opgeslagen");
+               $location.path("/createLessonKlas");
 
             })
             .error(function(data){
@@ -148,18 +162,6 @@ $scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
         
         }
 
-    
-   /* $scope.submit=function(){
-		$http.get("http://localhost:3000/firebase")
-		.success(function(allejsondata){	
-			console.log(allejsondata);
-            })
-            .error(function(err){
-
-            });
-	
-        
-        }*/
 
     
 	});
@@ -255,7 +257,7 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
     
     var klasnummer = $scope.klas;
     var data= [];
-    var vaknaam= "geschiedenis"
+   // var vaknaam= "geschiedenis"
     UserData = DataService.getUserData();
     
     
@@ -269,9 +271,8 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
                 
                 $scope.datavakken = data;
     
-        console.log(data);
-    
-    console.log(UserData.klas[klasnummer].vak[vaknaam]);
+          
+  //  console.log(UserData.klas[klasnummer].vak[vaknaam]);
     
     
     $scope.next = function(vak){
@@ -281,14 +282,243 @@ app.controller("startLessonSubjectCtrl", function($scope, $http, $location, Data
     }
 });
 
-app.controller("viewquestionCtrl", function($scope, $http, $location, DataService){
+app.controller("viewquestionCtrl", function($scope, $http, $location, DataService, $interval){
     $scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
-    $scope.vak = DataService.getKlas();
+    $scope.vak = DataService.getVak();
     $scope.v = $scope.vak[0];
-
+    $scope.q = 0;
+    UserData = DataService.getUserData();
     
+    var klasnummer = $scope.klas;
+    var vaknaam = $scope.vak;
+    var vraagnummer = 1;
+    var data= [];
+    var laatstevraag;
+    var ja;
+    var nee;   
+      
+     var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
+    
+  /* for (var prop in UserData.klas[klasnummer].vak[vaknaam].vragen) {
+                        console.log(prop);
+                   //   console.log(UserData.klas[prop].vak.vaknaam)
+        //console.log("Value:" + UserData.klas[prop].klasnaam.klas);
+                      data.push(prop);
+                  console.log(data);
+                 };
+                
+                $scope.datavakken = data;
+    */
+    
+     laatstevraag = size-1;
+    
+          	for(var i =0; i< size; i++)
+	           {
+
+                  data.push(
+                  {vraag: UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
+                  antwoord: UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
+                  kindJa: UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindJa,
+                  kindNee: UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindNee}
+                  );
+
+              }
      
+    
+        $scope.vraag = data[0].vraag;
+        $scope.antwoord = data[0].antwoord;
+        $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
+        
+    
+    
+
+            $scope.vraag = data[0].vraag;
+            $scope.antwoord = data[0].antwoord;
+            ja=data[0].kindJa;
+		        nee=data[0].kindNee;
+            makeGraph();
+            console.log(ja);
+
+
+
+    $scope.nextquestion = function(){
+        
+        if ($scope.welkevraag == "Naar resultaten"){
+            $scope.q = "null";
+            $scope.k = "null";
+            $scope.v = "null";
+            $location.path("/viewGraph");
+        }
+        
+        if (vraagnummer == laatstevraag){
+            $interval.cancel(interval);
+            console.log("einde van de rit");
+            $scope.vraag = data[vraagnummer].vraag;
+            $scope.antwoord = data[vraagnummer].antwoord;
+
+            $scope.q = vraagnummer;
+
+            vraagnummer = vraagnummer + 1;
+        
+             
+            $scope.welkevraag = "Naar resultaten";
+         
+            
+        }
+        else{
+            $scope.vraag = data[vraagnummer].vraag;
+            $scope.antwoord = data[vraagnummer].antwoord;
+
+            $scope.q = vraagnummer;
+           
+            console.log($scope.q);
+           
+            vraagnummer = vraagnummer + 1;
+           
+      
+
+            $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
+
+            ja=data[vraagnummer].kindJa;
+            nee=data[vraagnummer].kindNee;
+   
+        }
+    };
+
+//Om de grafiek te refreshen.
+var interval = $interval(function() {
+$http.get("http://localhost:3000/firebase/StartLes")
+            .success(function(UserData){  
+      ja =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindJa;
+      nee = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindNee;   
+            
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Ja", "Nee"],
+        datasets: [{
+            label: '# of Votes',
+            data: [ja, nee],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});  
+             
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+}, 5000);
+
+//Om de initiele grafiek te tekenen.
+function makeGraph() {
+
+$http.get("http://localhost:3000/firebase/StartLes")
+            .success(function(UserData){	
+      ja =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindJa;
+      nee = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindNee;   
+            
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Ja", "Nee"],
+        datasets: [{
+            label: '# of Votes',
+            data: [ja, nee],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+    	responsive: true,
+    	title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});  
+             
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+    }                 
+    
+    
+    $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+    
+          submitAppsettings=function(){ 
+            $http.post("http://localhost:3000/firebase/post/initStartLes", $scope.appsettings )
+            .success(function(data){	
+              
+               console.log("posted successfully");
+            //console.log($scope.data);
+
+            })
+            .error(function(data){
+                console.error("error in posting");
+                //console.log($scope.data)
+            });
+	
+        
+        }
+    
+    
+    
+   submitAppsettings(); 
+    
+    
+    $scope.$watch('q', function() {
+        $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+        submitAppsettings(); 
+        console.log("ik heb beweging gezien ");
+    });
+        
+        
+    
 });
 
 app.service('DataService', function() {
@@ -339,21 +569,115 @@ app.service('DataService', function() {
 //Eind van controllers voor les geven
 
 //Controller voor graphs
-app.controller("graphTestCtrl", function($scope, $http, $location){
+app.controller("graphClassCtrl", function($scope, $http, $location, DataService){
+
+ $http.get("http://localhost:3000/firebase/Graph")
+            .success(function(UserData){	
+            
+                
+            
+           
+             var data= [];  
+               DataService.adduserData(UserData);
+                
+              for (var prop in UserData.klas) {
+                      data.push(prop);
+                 };
+                
+                $scope.dataklassen = data;
+                
+             
+            
+                
+             
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+
+                $scope.next = function(klas){
+    	DataService.addKlas(klas);
+    	$location.path("/chooseSubjectGraph");
+    }
+
+});
+
+app.controller("graphSubjectCtrl", function($scope, $http, $location, DataService){
+
+	$scope.k = DataService.getKlas();
+	$scope.klas = $scope.k[0];
+    
+    var klasnummer = $scope.klas;
+    var data= [];
+    UserData = DataService.getUserData();
+    
+    
+    for (var prop in UserData.klas[klasnummer].vak) {
+                      data.push(prop);
+                 };
+                
+                $scope.datavakken = data;
+    
+    
+    $scope.next = function(vak){
+    	DataService.addVak(vak);
+    	$location.path("/viewGraph");
+    }
+
+
+	
+	});
+
+app.controller("viewGraphCtrl", function($scope, $http, $location, DataService){
+
 var ja;
 var nee;
 
+	$scope.k = DataService.getKlas();
+	$scope.klas = $scope.k[0];
+$scope.vak= DataService.getVak();
 
-	$scope.getData = function(){
+
+console.log($scope.vak)
+
 			
-	            $http.get("http://localhost:3000/testGraph")
+	            $http.get("http://localhost:3000/firebase/Graph")
             .success(function(UserData){	
               
 var data= [];  
-              console.log(UserData.klas[$scope.klasnaam]);
-              console.log(UserData.klas[$scope.klasnaam].vak[$scope.vaknaam]);
-ja=UserData.klas[$scope.klasnaam].vak[$scope.vaknaam].vragen[1].kindJa;
-nee=UserData.klas[$scope.klasnaam].vak[$scope.vaknaam].vragen[1].kindNee;
+var vragen =[];
+ DataService.adduserData(UserData);
+                
+              for (var prop in UserData.klas) {
+                      data.push(prop);
+                 };
+
+                 for (var prop in UserData.klas[$scope.klas].vak[$scope.vak].vragen) {
+                 	console.log(prop);
+                      vragen.push(prop);
+                 };
+                
+                $scope.dataklassen = data;
+                $scope.datavragen = vragen;
+                
+            })
+            .error(function(UserData){
+                console.error("error in retrieving");
+                console.log(UserData)
+            });
+
+
+
+	                $scope.next = function(klas){
+    	console.log(klas);
+    	DataService.addKlas(klas);
+    	$location.path("/chooseSubjectGraph");
+    }
+
+    $scope.view = function(vraag){
+ja=UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].kindJa;
+nee=UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].kindNee;
 
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
@@ -390,12 +714,7 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-            })
-            .error(function(UserData){
-                console.error("error in retrieving");
-                console.log(UserData)
-            });
-};
+    }
 });
 
 //Einde controller graphs

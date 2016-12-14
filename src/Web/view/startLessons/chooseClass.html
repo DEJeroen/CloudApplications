@@ -5,16 +5,16 @@
 
   </li>
   <li class="active" role="presentation"><a href="#chooseClass">Begin les</a></li>
-  <li role="presentation"><a href="#viewGraph">Overzicht resultaten</a></li>
+  <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
 </ul>
 
 
 <div class="form-group">      
 <label for="klaslabel">Klas:</label>     
-<select multiple class="form-control formClass" ng-model="data.SelectedLes">
+<select multiple class="form-control formClass" ng-model="SelectedLes">
   <option ng-repeat="x in dataklassen">{{x}}</option>
 </select>
 </div>
 
-<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Kies klas</button>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(SelectedLes);">Kies klas</button>
 

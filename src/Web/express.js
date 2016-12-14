@@ -62,7 +62,7 @@ app.get("/firebase/StartLes",function(req,res, body){
     
 });   
 
-app.get("/testGraph",function(req,res, body){
+app.get("/firebase/Graph",function(req,res, body){
         var ref = db.ref("ID_LEERKRACHT");
         ref.once("value", function(snapshot) {
         res.json(snapshot.val());
@@ -115,6 +115,37 @@ app.post('/firebase/post', function (req, res, body) {
 });
 
 
+app.post('/firebase/post/initStartLes', function (req, res, body) {
+
+    
+
+    var klas = req.body[0];
+    var vak = req.body[1];
+    var vraag =req.body[2];
+
+      
+    var ref = db.ref("/");
+    
+
+    
+ 
+      ref.child("ID_LEERKRACHT/Appsettings").set({
+        androidOnline: "0",
+        currentKlas: klas,
+        currentVak: vak,
+        currentVraag: vraag
+        });   
+    
+    console.log(req.body);
+    console.log(vraag);
+
+                     
+    res.sendStatus(201);   
+    
+  
+});
+
+
 /*app.post('/firebase/post/user', function (req, res, body) {
     
        var ref = db.ref("/");
@@ -157,20 +188,6 @@ app.post('/firebase/post', function (req, res, body) {
 */
 
 
-app.put('/firebase/put', function (req, res, body) {
-    
-    
-        var ref = db.ref("/");
-        var usersRef = ref.child("ID3");
-        var hopperRef = usersRef.child("alanisawesome");
-    
-            hopperRef.update({
-              "nickname": req.body.Name
-            });
-
-     res.send(201);       
-
-});
 
 
 app.delete('/firebase/delete', function (req, res, body) {
