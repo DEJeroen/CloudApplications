@@ -288,9 +288,6 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     $scope.vak = DataService.getVak();
     $scope.v = $scope.vak[0];
     $scope.q = 0;
-    $scope.Chart2;
-    $scope.Chart3;
-    $scope.Chart4;
     UserData = DataService.getUserData();
     
     var klasnummer = $scope.klas;
@@ -410,7 +407,6 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
 var interval = $interval(function() {
   console.log("interval");
-  console.log($scope.Chart2, $scope.Chart3, $scope.Chart4);
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
       a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
