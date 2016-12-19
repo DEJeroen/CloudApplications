@@ -15,16 +15,25 @@
                 <li ng-repeat="element in questionelement">
 
                         <div id={{element.id}}>
-                            Vraag:
-                                <input type="text" ng-model="element.question" placeholder="Vraag" required>
+                           <p>Vraag:</p>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.question" placeholder="Vraag" required>
                        
-                            Antwoord: 
-                                <input type="text" ng-model="element.answer" placeholder="Antwoord" required/>
+                            <p>Antwoord A:</p> 
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerA" placeholder="Antwoord A" required/>
                             
-                        <span ng-hide="element.length == 1">
-                            <a href ng-click="questionelement.splice($index, 1)">Verwijder</a>
-                        </span>
-                    </div>
+                            <p>Antwoord B:</p>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerB" placeholder="Antwoord B" required/>
+                            
+                            <p>Antwoord C:</p>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerC" placeholder="Antwoord C" required/>
+                            
+                            <p>Antwoord D:</p>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerD" placeholder="Antwoord D" required/>
+                            <p></p> <!-- deze p tag niet verwijderen dient om de knop verwijder uit te lijen naar links -->
+                            <span ng-hide="element.length == 1">
+                                <a href ng-click="questionelement.splice($index, 1)">Verwijder</a>
+                            </span>
+                        </div>
                     <hr/>
                 </li>
                 <li>
@@ -32,6 +41,4 @@
                 </li>
             </ul>
 </form>
-    <button ng-click="nextPageQuestions(questionelement);" type="submit" class="btn btn-success btnKiesLes">
-Volgende
-  </button>	
+    <button ng-click="nextPageQuestions(questionelement);" type="submit" class="btn btn-success btnKiesLes">Volgende</button>	
