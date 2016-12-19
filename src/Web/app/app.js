@@ -288,6 +288,9 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     $scope.vak = DataService.getVak();
     $scope.v = $scope.vak[0];
     $scope.q = 0;
+    $scope.Chart2;
+    $scope.Chart3;
+    $scope.Chart4;
     UserData = DataService.getUserData();
     
     var klasnummer = $scope.klas;
@@ -407,6 +410,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
 var interval = $interval(function() {
   console.log("interval");
+  console.log($scope.Chart2, $scope.Chart3, $scope.Chart4);
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
       a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
@@ -415,9 +419,12 @@ $http.get("http://localhost:3000/firebase/StartLes")
       d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatD;
       Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;; 
       console.log(Optie);     
-if(Optie == 2){           
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
+if(Optie == 2){
+$("#Chart3").hide();
+$("#Chart4").hide();   
+$("#Chart2").show();      
+var ctx = document.getElementById("Chart2");
+var Chart2 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["Ja", "Nee"],
@@ -454,9 +461,11 @@ var myChart = new Chart(ctx, {
 }
 
 if(Optie == 3){      
-console.log("optie 3");     
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
+$("#Chart4").hide();   
+$("#Chart2").hide(); 
+$("#Chart3").show(); 
+var ctx = document.getElementById("Chart3");
+var Chart3 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["A", "B", "C"],
@@ -492,9 +501,12 @@ var myChart = new Chart(ctx, {
 });
 }
 
-if(Optie == 4){           
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
+if(Optie == 4){    
+$("#Chart2").hide(); 
+$("#Chart3").hide(); 
+$("#Chart4").show();        
+var ctx = document.getElementById("Chart4");
+var Chart4 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["A", "B", "C", "D"],
@@ -549,9 +561,12 @@ $http.get("http://localhost:3000/firebase/StartLes")
       Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;
 console.log(Optie);
 if(Optie == 2)
-{        
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
+{ 
+$("#Chart3").hide();
+$("#Chart4").hide(); 
+$("#Chart2").show();     
+var ctx = document.getElementById("Chart2");
+var Chart2 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["A", "B"],
@@ -589,8 +604,11 @@ var myChart = new Chart(ctx, {
 
 if( Optie == 3)
 {        
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
+$("#Chart4").hide(); 
+$("#Chart2").hide();
+$("#Chart3").show();  
+var ctx = document.getElementById("Chart3");
+var Chart3 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["A", "B", "C"],
@@ -627,8 +645,11 @@ var myChart = new Chart(ctx, {
 }
 
 if( Optie == 4)
-{        
-var ctx = document.getElementById("myChart");
+{ 
+$("#Chart2").hide();
+$("#Chart3").hide();
+$("#Chart4").show();          
+var ctx = document.getElementById("Chart4");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
