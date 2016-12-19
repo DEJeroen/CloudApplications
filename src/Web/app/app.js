@@ -295,8 +295,11 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     var vraagnummer = 1;
     var data= [];
     var laatstevraag;
-    var ja;
-    var nee;   
+    var a;
+    var b;  
+    var c;
+    var d; 
+    var Optie;
       
      var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
     
@@ -319,8 +322,11 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                   data.push(
                   {vraag: UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
                   antwoord: UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
-                  kindJa: UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindJa,
-                  kindNee: UserData.klas[klasnummer].vak[vaknaam].vragen[i].kindNee}
+                  A: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatA,
+                  B: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatB,
+                  C: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatC,
+                  D: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatD,
+                  Optie: UserData.klas[klasnummer].vak[vaknaam].vragen[i].optie}
                   );
 
               }
@@ -335,23 +341,30 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
             $scope.vraag = data[0].vraag;
             $scope.antwoord = data[0].antwoord;
-            ja=data[0].kindJa;
-		        nee=data[0].kindNee;
+            a=data[0].resultaatA;
+		        b=data[0].resultaatB;
+            c=data[0].resultaatC;
+            d=data[0].resultaatD;
+            Optie=data[0].optie;
             makeGraph();
-            console.log(ja);
+            console.log(a,b,c,d);
+            console.log(Optie);
 
 
 
     $scope.nextquestion = function(){
         
-        if ($scope.welkevraag == "Naar resultaten"){
+        if ($scope.welkevraag == "Naar resultaten")
+        {
             $scope.q = "null";
             $scope.k = "null";
             $scope.v = "null";
+            $interval.cancel(interval);
             $location.path("/viewGraph");
         }
         
-        if (vraagnummer == laatstevraag){
+        if (vraagnummer == laatstevraag)
+        {
             $interval.cancel(interval);
             console.log("einde van de rit");
             $scope.vraag = data[vraagnummer].vraag;
@@ -366,7 +379,9 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
          
             
         }
-        else{
+        
+        else
+        {
             $scope.vraag = data[vraagnummer].vraag;
             $scope.antwoord = data[vraagnummer].antwoord;
 
@@ -380,19 +395,27 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
             $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
 
-            ja=data[vraagnummer].kindJa;
-            nee=data[vraagnummer].kindNee;
+            a=data[vraagnummer].resultaatA;
+            b=data[vraagnummer].resultaatB;
+            c=data[vraagnummer].resultaatC;
+            d=data[vraagnummer].resultaatD;
    
         }
     };
 
 //Om de grafiek te refreshen.
+
 var interval = $interval(function() {
+  console.log("interval");
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
-      ja =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindJa;
-      nee = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindNee;   
-            
+      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
+      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatB;
+      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatC;
+      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatD;
+      Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;; 
+      console.log(Optie);     
+if(Optie == 2){           
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -427,7 +450,85 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});  
+});
+}
+
+if(Optie == 3){      
+console.log("optie 3");     
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["A", "B", "C"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a, b,c],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+
+if(Optie == 4){           
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["A", "B", "C", "D"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a, b, c, d],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}  
              
             })
             .error(function(UserData){
@@ -441,17 +542,22 @@ function makeGraph() {
 
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){	
-      ja =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindJa;
-      nee = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].kindNee;   
-            
+      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
+      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatB;
+      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatC;
+      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatD;
+      Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;
+console.log(Optie);
+if(Optie == 2)
+{        
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Ja", "Nee"],
+        labels: ["A", "B"],
         datasets: [{
             label: '# of Votes',
-            data: [ja, nee],
+            data: [a, b],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)'
@@ -478,7 +584,86 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});  
+}); 
+} 
+
+if( Optie == 3)
+{        
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["A", "B", "C"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a, b, c],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+}); 
+}
+
+if( Optie == 4)
+{        
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["A", "B", "C", "D"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a, b, c, d],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Lesoverzicht',
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+}); 
+}  
              
             })
             .error(function(UserData){
