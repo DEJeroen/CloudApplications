@@ -78,31 +78,39 @@ public class DisplayActivity extends AppCompatActivity {
 
         Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
-        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentKlas").addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.child("ID_LEERKRACHT/Appsettings").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                currentKlas = snapshot.getValue().toString();
-                //TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
-                //textViewCurrentVak.setText(currentVak);
+                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+                myFirebaseRef.child("ID_LEERKRACHT/Appsettings/androidOnline").setValue("yes");
 
-                System.out.println("klas: " + currentKlas);
-                currentAwnsers = "";
-                yesVal = 0;
-                noVal = 0;
-            }
+                currentKlas = snapshot.child("currentKlas").getValue().toString();
 
-            @Override
-            public void onCancelled(FirebaseError error) {
-                System.out.println("firebase error");
-            }
-        });
 
-        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentVak").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                currentVak = snapshot.getValue().toString();
-                TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
-                textViewCurrentVak.setText(currentVak);
+                currentVak = snapshot.child("currentVak").getValue().toString();
+
+                currentVraag = snapshot.child("currentVraag").getValue().toString();
+
+                if (currentKlas == "null" || currentVak == "null" || currentVraag == "null" ) {
+                    TextView textViewCurrentKlas = (TextView) findViewById(R.id.textViewCurrentKlas);
+                    textViewCurrentKlas.setText("Start de les om te beginnen met scannen");
+                    TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
+                    textViewCurrentVak.setText("");
+                    TextView textViewCurrentVraag = (TextView) findViewById(R.id.textViewCurrentVraag);
+                    textViewCurrentVraag.setText("");
+                }
+                else {
+                    TextView textViewCurrentKlas = (TextView) findViewById(R.id.textViewCurrentKlas);
+                    textViewCurrentKlas.setText(currentKlas);
+                    TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
+                    textViewCurrentVak.setText(currentVak);
+                    TextView textViewCurrentVraag = (TextView) findViewById(R.id.textViewCurrentVraag);
+                    textViewCurrentVraag.setText(currentVraag);
+                }
+
+
+
+
 
                 System.out.println("vak: " + currentVak);
                 currentAwnsers = "";
@@ -117,45 +125,6 @@ public class DisplayActivity extends AppCompatActivity {
         });
 
 
-        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/androidOnline").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                currentVak = snapshot.getValue().toString();
-                TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
-                textViewCurrentVak.setText(currentVak);
-
-                System.out.println("I'm not offline!");
-                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
-
-                myFirebaseRef.child("ID_LEERKRACHT").child("androidOnline").setValue("yes");
-
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-                System.out.println("firebase error");
-            }
-        });
-
-        myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentVraag").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                currentVraag = snapshot.getValue().toString();
-                //TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
-                //textViewCurrentVak.setText(currentVak);
-
-                System.out.println("vraag: " + currentVraag);
-                currentAwnsers = "";
-                yesVal = 0;
-                noVal = 0;
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-                System.out.println("firebase error");
-            }
-        });
 
 
 
@@ -210,7 +179,9 @@ public class DisplayActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
               //  if (barcodes.size()>0) {
 
+
                     for(int i = 0; i < barcodes.size(); i++) {
+                        System.out.println("detected bar");
                         Barcode test = barcodes.valueAt(i);
                         if (currentAwnsers.contains(test.displayValue)) {
 
@@ -220,7 +191,7 @@ public class DisplayActivity extends AppCompatActivity {
                         else {
                             currentAwnsers += test.displayValue;
                             System.out.println(test.displayValue);
-                            if (test.displayValue.contains("yes")) {
+                            if (test.displayValue.contains("A")) {
                                 yesVal ++;
                                 Message msgObj = yesHandler.obtainMessage();
                                 Bundle b = new Bundle();
@@ -228,7 +199,7 @@ public class DisplayActivity extends AppCompatActivity {
                                 msgObj.setData(b);
                                 yesHandler.sendMessage(msgObj);
                             }
-                            if (test.displayValue.contains("no")) {
+                            if (test.displayValue.contains("B")) {
                                 noVal ++;
                                 Message msgObj = noHandler.obtainMessage();
                                 Bundle b = new Bundle();
@@ -349,7 +320,7 @@ public class DisplayActivity extends AppCompatActivity {
                    textViewYes.setText("Yes: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
-                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("kindJa").setValue(barRead);
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatA").setValue(barRead);
 
             }
             else
@@ -376,7 +347,7 @@ public class DisplayActivity extends AppCompatActivity {
                 textViewNo.setText("No: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
-                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentVak).child("vak").child(currentVak).child("vragen").child(currentVraag).child("kindNee").setValue(barRead);
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatB").setValue(barRead);
 
             }
             else

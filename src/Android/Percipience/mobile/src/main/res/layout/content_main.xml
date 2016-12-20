@@ -17,14 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/cameraPreview"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello you"
-        android:id="@+id/textViewCurrentVak"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
 
     <TextView
         android:text="Yes: 0"
@@ -47,29 +39,34 @@
         android:textColor="@color/wallet_holo_blue_light"/>
 
     <TextView
+        android:text="Current Klas:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewCurrentKlas"
+        android:layout_marginStart="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/wallet_holo_blue_light"/>
+
+    <TextView
         android:text="Current Vak:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/textViewCurrentVak"
         android:layout_marginStart="48dp"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView3"
+        android:layout_toRightOf="@+id/textViewCurrentKlas"
+        android:textColor="@color/wallet_holo_blue_light"/>
+    <TextView
+        android:text="Current Vraag:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewCurrentVraag"
+        android:layout_marginStart="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textViewCurrentVak"
         android:textColor="@color/wallet_holo_blue_light"/>
 
-    <Button
-        android:text="Send Result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_alignParentEnd="true" />
 
-    <Button
-        android:text="Automatic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
