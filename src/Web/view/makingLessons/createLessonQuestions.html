@@ -12,17 +12,17 @@
                                 <input type="text" class="vragenEnAntwoord" ng-model="element.question" placeholder="Vraag" required>
                        
                             <p>Antwoord A:</p> 
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerA" placeholder="Antwoord A" required/>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer1" placeholder="Antwoord A" required/>
                             
                             <p>Antwoord B:</p>
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerB" placeholder="Antwoord B" required/>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer2" placeholder="Antwoord B" required/>
                             
                             <p>Antwoord C:</p>
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerC" placeholder="Antwoord C" required/>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer3" placeholder="Antwoord C" required/>
                             
                             <p>Antwoord D:</p>
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerD" placeholder="Antwoord D" required/>
-                            <p></p> <!-- deze p tag niet verwijderen dient om de knop verwijder uit te lijen naar links -->
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer4" placeholder="Antwoord D" required/>
+                            <p></p> <!-- deze p tag niet verwijderen dient om de knop verwijder uit te lijnen naar links -->
                             <span ng-hide="element.length == 1">
                                 <a href ng-click="questionelement.splice($index, 1)">Verwijder</a>
                             </span>

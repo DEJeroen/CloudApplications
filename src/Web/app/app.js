@@ -93,25 +93,25 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
    	for (var i = 0;  i < $q.length; i++) 
    	{
 
-	   	if($q[i].question != '' && $q[i].answer != '')
+	   	if($q[i].question != '' && $q[i].answerA != '' && $q[i].answerB != '' || $q[i].answerC != '' || $q[i].answerD != '')
 	   	{
 	   		summaryService.addQuestions($q)
 			$location.path("/createLessonSummary");
 		};
 
-	   	if($q[i].question == '' || $q[i].answer == '')
+	   /*	if($q[i].question == '' || $q[i].answerA == '')
 	   	{
 			alert("Voer alle vragen in en/of verwijder de niet ingevulde vragen.");
-		};
+		};*/
 	};
    }
 
     var counter=1;
-    $scope.questionelement = [ {id:counter, question : '', answer : ''} ];
+    $scope.questionelement = [ {id:counter, question : '', answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} ];
 
     $scope.newItem = function($event){
         counter++;
-        $scope.questionelement.push(  { id:counter, question : '', answer : ''} );
+        $scope.questionelement.push(  { id:counter, question : '', answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} );
         $event.preventDefault();
 
     }
@@ -124,28 +124,35 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.vraagAntwoord= summaryService.getQuestions();
 	$scope.vraag =[];
 	$scope.antwoord =[];
-
+    $scope.vraag = $scope.vraagAntwoord[0].question;
+    $scope.antwoordA = $scope.vraagAntwoord[0].answer1;
+    $scope.antwoordB = $scope.vraagAntwoord[0].answer2;
+    $scope.antwoordC = $scope.vraagAntwoord[0].answer3;
+    $scope.antwoordD = $scope.vraagAntwoord[0].answer4;
+    
 	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
     
+    console.log($scope.vraagAntwoord);
+    
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
 	{
-$scope.vraag[i] = $scope.vraagAntwoord[i].question;
-$scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
-
-    
+        $scope.vraag = $scope.vraagAntwoord[i].question;
+        $scope.antwoordA = $scope.vraagAntwoord[i].answer1;
+        $scope.antwoordB = $scope.vraagAntwoord[i].answer2;
+        $scope.antwoordC = $scope.vraagAntwoord[i].answer3;
+        $scope.antwoordD = $scope.vraagAntwoord[i].answer4;
 
                   $scope.data.push(
-                  {vraag:$scope.vraag[i], 
-                  antwoord:$scope.antwoord[i]}
+                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB , C:$scope.antwoordC, D:$scope.antwoordD}
                   );
 
               }
 
               console.log($scope.data);
 
-
+    
         $scope.submit=function(){ 
             $http.post("http://localhost:3000/firebase/post", $scope.data )
             .success(function(data){	
