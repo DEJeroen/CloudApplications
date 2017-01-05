@@ -357,6 +357,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             $scope.q = "null";
             $scope.k = "null";
             $scope.v = "null";
+            $scope.vak = "null";
             $interval.cancel(interval);
             $location.path("/viewGraph");
         }
@@ -689,7 +690,7 @@ var myChart = new Chart(ctx, {
     
     
     $scope.appsettings = [$scope.k,$scope.v,$scope.q];
-    
+    console.log($scope.v);
           submitAppsettings=function(){ 
             $http.post("http://localhost:3000/firebase/post/initStartLes", $scope.appsettings )
             .success(function(data){	
@@ -712,7 +713,7 @@ var myChart = new Chart(ctx, {
     
     
     $scope.$watch('q', function() {
-        $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+        $scope.appsettings = [$scope.k,$scope.vak,$scope.q];
         submitAppsettings(); 
         console.log("ik heb beweging gezien ");
     });
