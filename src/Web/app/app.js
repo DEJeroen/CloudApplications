@@ -122,13 +122,7 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
 	$scope.vraagAntwoord= summaryService.getQuestions();
-	$scope.vraag =[];
-	$scope.antwoord =[];
-    $scope.vraag = $scope.vraagAntwoord[0].question;
-    $scope.antwoordA = $scope.vraagAntwoord[0].answer1;
-    $scope.antwoordB = $scope.vraagAntwoord[0].answer2;
-    $scope.antwoordC = $scope.vraagAntwoord[0].answer3;
-    $scope.antwoordD = $scope.vraagAntwoord[0].answer4;
+	 
     
 	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}

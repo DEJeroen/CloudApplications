@@ -300,7 +300,7 @@ text-align: center;
 
 .vragenEnAntwoord{
     margin-bottom: 1%;
-    width: 40%;
+    width: 100%;
 }
 .fontChoiceH2{ color: #ffffff; font-family: 'Raleway', sans-serif; font-size: 54px; font-weight: 300; line-height: 58px; margin: 0 0 58px; text-align: center;}
 .fontChoiceH3{color: #ffffff; font-family: 'Raleway',sans-serif; font-size: 30px; font-weight: 800; line-height: 36px; margin: 0 0 24px; text-align: center; }
