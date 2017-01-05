@@ -1,12 +1,5 @@
-<ul class="nav nav-pills navLesson">
-  <li role="presentation" class="active"><a href="#createLesson">Maak les</a></li>
-  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
-  <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
-</ul>
-
-<form style="padding-top: 2em;">
- <p style="font-size: 3em;">Wijs nu u vragen toe</p>
-
+<h2 class="fontChoiceH2">Vraagkeuze</h2>
+<form style="padding-top: 2em; position: absolute; margin-left: 20em;">
  <h4 class="summaryLes">Gekozen klas:</h4>
 <p style="font-size: 1em;">{{klas}}</p>
 <h4 class="summaryLes">Gekozen vak:</h4>
@@ -40,5 +33,6 @@
                     <a href ng-click="newItem($event)">Nieuwe vraag</a>
                 </li>
             </ul>
+                <button ng-click="nextPageQuestions(questionelement);" type="submit" class="btn btn-success btnKiesLes">Volgende</button>
 </form>
-    <button ng-click="nextPageQuestions(questionelement);" type="submit" class="btn btn-success btnKiesLes">Volgende</button>	
+	

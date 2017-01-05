@@ -1,17 +1,5 @@
-<ul class="nav nav-pills navLesson">
-  <li role="presentation" class="active">
-
-  <a href="#createLesson">Maak les</a>
-
-  </li>
-  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
-  <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
-</ul>
-
-<p  style="padding-top: 2em; font-size: 1.5em;">Op deze pagina kunt u de lessen voorbereiden. We zullen hierbij beginnen met de klas te kiezen, vervolgens het vak en daarna de vragen. Na afloop zult een overzicht krijgen met u ingevulde resultaten.</p>
-
-<form style="padding-top: 2em;">
- <p style="font-size: 3em;">Kies eerst u klas...</p>
+<h2 class="fontChoiceH2">Klaskeuze</h2>
+<form style="padding-top: 2em; position: absolute; margin-left: 20em;">
   <input class="btnKiesLes" ng-model="groep" type="text" required>
   <button type="submit" ng-click="nextPageKlas(groep);" class="btn btn-success btnKiesLes">
 Volgende

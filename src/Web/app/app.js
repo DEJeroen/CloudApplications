@@ -1,3 +1,4 @@
+
 var app = angular.module("myapp",['ngRoute', 'ngAnimate']);
 
 app.config(['$routeProvider',
@@ -205,12 +206,12 @@ app.service('summaryService', function() {
 
 //Controllers voor starten van de lessen
 app.controller("startLessonClassCtrl", function($scope, $http, $location, DataService){
-
+         
  $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){	
             
                 
-            
+              
            
              var data= [];  
                console.log("successfully retrieved user date");
@@ -227,19 +228,16 @@ app.controller("startLessonClassCtrl", function($scope, $http, $location, DataSe
                   console.log(data);
                  };
                 
-                $scope.dataklassen = data;
-                
-             
+                $scope.dataklassen = data;   
             
-                
-             
+                         
             })
             .error(function(UserData){
                 console.error("error in retrieving");
                 console.log(UserData)
             });
-	
-        
+
+                  
         
 	
      
