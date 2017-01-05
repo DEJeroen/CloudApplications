@@ -99,10 +99,10 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
 			$location.path("/createLessonSummary");
 		};
 
-	   /*	if($q[i].question == '' || $q[i].answerA == '')
+	   	if($q[i].question == '' || $q[i].answerA == '' || $q[i].answerB == '')
 	   	{
-			alert("Voer alle vragen in en/of verwijder de niet ingevulde vragen.");
-		};*/
+			alert("Gelieve een vraag en 2 antwoorden in te vullen.");
+		};
 	};
    }
 
@@ -137,12 +137,38 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
         $scope.antwoordB = $scope.vraagAntwoord[i].answer2;
         $scope.antwoordC = $scope.vraagAntwoord[i].answer3;
         $scope.antwoordD = $scope.vraagAntwoord[i].answer4;
-
-                  $scope.data.push(
-                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB , C:$scope.antwoordC, D:$scope.antwoordD}
+        
+        
+        
+       
+        
+        if($scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC == "" && $scope.antwoordD == ""){
+            
+            $scope.data.push(
+                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB, optie: 2}
                   );
 
               }
+        
+         if($scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD == ""){
+            
+            $scope.data.push(
+                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB, C:$scope.antwoordC, optie: 3}
+                  );
+
+              }
+        
+         if($scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD != ""){
+            
+              $scope.data.push(
+                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB , C:$scope.antwoordC, D:$scope.antwoordD, optie: 4}
+                  );
+
+              }
+        };
+        
+        
+                 
 
               console.log($scope.data);
 
