@@ -284,8 +284,8 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     $scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
     $scope.vak = DataService.getVak();
-    $scope.v = $scope.vak[0];
     $scope.q = 0;
+    $scope.currentAnswers =0;
     UserData = DataService.getUserData();
     
     var klasnummer = $scope.klas;
@@ -358,6 +358,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             $scope.k = "null";
             $scope.v = "null";
             $scope.vak = "null";
+            $scope.currentAnswers = "null";
             $interval.cancel(interval);
             $location.path("/viewGraph");
         }
@@ -689,7 +690,7 @@ var myChart = new Chart(ctx, {
     }                 
     
     
-    $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+    $scope.appsettings = [$scope.k,$scope.vak,$scope.q, $scope.currentAnswers];
     console.log($scope.v);
           submitAppsettings=function(){ 
             $http.post("http://localhost:3000/firebase/post/initStartLes", $scope.appsettings )
@@ -713,7 +714,7 @@ var myChart = new Chart(ctx, {
     
     
     $scope.$watch('q', function() {
-        $scope.appsettings = [$scope.k,$scope.vak,$scope.q];
+        $scope.appsettings = [$scope.k,$scope.vak,$scope.q, $scope.currentAnswers];
         submitAppsettings(); 
         console.log("ik heb beweging gezien ");
     });
