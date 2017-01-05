@@ -89,17 +89,18 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
 	$scope.vak = summaryService.getVak();
 
    $scope.nextPageQuestions= function($q) {
-
+       console.log($q);
    	for (var i = 0;  i < $q.length; i++) 
    	{
 
-	   	if($q[i].question != '' && $q[i].answerA != '' && $q[i].answerB != '' || $q[i].answerC != '' || $q[i].answerD != '')
+	   	if($q[i].question != "" && $q[i].correctAntwoord != "" && $q[i].answerA != "" && $q[i].answerB != "")
 	   	{
 	   		summaryService.addQuestions($q)
 			$location.path("/createLessonSummary");
-		};
-
-	   	if($q[i].question == '' || $q[i].answerA == '' || $q[i].answerB == '')
+		}
+        
+        
+	   	if($q[i].question == "" || $q[i].correctAntwoord == "" || $q[i].answerA == "" || $q[i].answerB == "")
 	   	{
 			alert("Gelieve een vraag en 2 antwoorden in te vullen.");
 		};
@@ -107,11 +108,11 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
    }
 
     var counter=1;
-    $scope.questionelement = [ {id:counter, question : '', answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} ];
+    $scope.questionelement = [ {id:counter, question : '', correctAntwoord : '' , answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} ];
 
     $scope.newItem = function($event){
         counter++;
-        $scope.questionelement.push(  { id:counter, question : '', answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} );
+        $scope.questionelement.push(  { id:counter, question : '', correctAntwoord : '' , answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} );
         $event.preventDefault();
 
     }
@@ -133,35 +134,35 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
 	{
         $scope.vraag = $scope.vraagAntwoord[i].question;
+        $scope.correctAntwoord= $scope.vraagAntwoord[i].correctAntwoord;
         $scope.antwoordA = $scope.vraagAntwoord[i].answer1;
         $scope.antwoordB = $scope.vraagAntwoord[i].answer2;
         $scope.antwoordC = $scope.vraagAntwoord[i].answer3;
         $scope.antwoordD = $scope.vraagAntwoord[i].answer4;
         
         
+    
         
-       
-        
-        if($scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC == "" && $scope.antwoordD == ""){
+        if($scope.correctAntwoord !== "" && $scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC == "" && $scope.antwoordD == ""){
             
             $scope.data.push(
-                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB, optie: 2}
+                  {vraag:$scope.vraag, antwoord: $scope.correctAntwoord , A:$scope.antwoordA, B:$scope.antwoordB, optie: 2}
                   );
 
               }
         
-         if($scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD == ""){
+         if($scope.correctAntwoord !== "" && $scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD == ""){
             
             $scope.data.push(
-                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB, C:$scope.antwoordC, optie: 3}
+                  {vraag:$scope.vraag, antwoord: $scope.correctAntwoord , A:$scope.antwoordA, B:$scope.antwoordB, C:$scope.antwoordC, optie: 3}
                   );
 
               }
         
-         if($scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD != ""){
+         if($scope.correctAntwoord !== "" && $scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD != ""){
             
               $scope.data.push(
-                  {vraag:$scope.vraag, A:$scope.antwoordA, B:$scope.antwoordB , C:$scope.antwoordC, D:$scope.antwoordD, optie: 4}
+                  {vraag:$scope.vraag, antwoord: $scope.correctAntwoord , A:$scope.antwoordA, B:$scope.antwoordB , C:$scope.antwoordC, D:$scope.antwoordD, optie: 4}
                   );
 
               }
