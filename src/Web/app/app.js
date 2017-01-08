@@ -326,6 +326,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     var c;
     var d; 
     var Optie;
+    var counter =0;
     $scope.vraagnummer = vraagnummer;
     $scope.showItem = false;
 
@@ -407,7 +408,6 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             $scope.b=data[vraagnummer].B;
             $scope.c=data[vraagnummer].C;
             $scope.d=data[vraagnummer].D;
-            $interval.cancel(interval);
             console.log("einde van de rit");
             $scope.vraag = data[vraagnummer].vraag;
             $scope.antwoord = data[vraagnummer].antwoord;
@@ -459,13 +459,12 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 //Om de grafiek te refreshen.
 
 var interval = $interval(function() {
-  console.log("interval");
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
-      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].A;
-      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].B;
-      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].C;
-      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].D;
+      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
+      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatB;
+      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatC;
+      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatD;
       Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;
                                   $scope.a=data[vraagnummer-1].A;
             $scope.b=data[vraagnummer-1].B;
@@ -480,17 +479,17 @@ var ctx = document.getElementById("Chart2");
 var Chart2 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Ja", "Nee"],
+        labels: ["A", "B"],
         datasets: [{
             label: '# of Votes',
             data: [ja, nee],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
             ],
             borderWidth: 1
         }]
@@ -526,12 +525,14 @@ var Chart3 = new Chart(ctx, {
             label: '# of Votes',
             data: [a, b,c],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
             ],
             borderWidth: 1
         }]
@@ -567,12 +568,16 @@ var Chart4 = new Chart(ctx, {
             label: '# of Votes',
             data: [a, b, c, d],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+                'rgb(102, 51, 0)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+                'rgb(102, 51, 0)'
             ],
             borderWidth: 1
         }]
@@ -600,7 +605,7 @@ var Chart4 = new Chart(ctx, {
                 console.error("error in retrieving");
                 console.log(UserData)
             });
-}, 5000);
+}, 10000, 4);
 
 //Om de initiele grafiek te tekenen.
 function makeGraph() {
@@ -627,12 +632,12 @@ var Chart2 = new Chart(ctx, {
             label: '# of Votes',
             data: [a, b],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)'
             ],
             borderWidth: 1
         }]
@@ -669,12 +674,14 @@ var Chart3 = new Chart(ctx, {
             label: '# of Votes',
             data: [a, b, c],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
             ],
             borderWidth: 1
         }]
@@ -711,12 +718,17 @@ var myChart = new Chart(ctx, {
             label: '# of Votes',
             data: [a, b, c, d],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+                'rgb(102, 51, 0)'
+
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+                'rgb(102, 51, 0)'
             ],
             borderWidth: 1
         }]
@@ -773,7 +785,7 @@ var myChart = new Chart(ctx, {
     $scope.$watch('q', function() {
         $scope.appsettings = [$scope.k,$scope.vak,$scope.q, $scope.currentAnswers];
         submitAppsettings(); 
-        console.log("ik heb beweging gezien ");
+        console.log("ik heb beweging gezien");
     });
         
         
@@ -942,17 +954,17 @@ var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Ja", "Nee"],
+        labels: ["A", "B"],
         datasets: [{
             label: '# of Votes',
             data: [ja, nee],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)'
             ],
             borderWidth: 1
         }]

@@ -1,10 +1,10 @@
 body{
 	padding-top: 51px;
 	  font-family: "Open Sans";
-    background-color: #c0c1c4;
+    background-color: #6495ED;
   }
 .bgcontainer{
-  background-color: #c0c1c4;
+  background-color: #6495ED;
 }
 /* ng-cloak */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng.ng-cloak {
@@ -293,9 +293,8 @@ text-align: center;
   width: 75%;
 }
 
-#myChart{
-  width: 25%;
-  height: 30%;
+.ChartColor{
+background-color: #8db0f2;
 }
 
 .vragenEnAntwoord{
