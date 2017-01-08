@@ -1,12 +1,9 @@
-<h2 class="fontChoiceH2">Vakkeuze</h2>
-<h3 class="fontChoiceH3">Gekozen klas: {{k}}</h3>
-
-<h3 class="fontChoiceH3">Vak:</h3>
-
-<div style="text-align: center; position: absolute; margin-left: 28em;">       
+<h1 class="fontChoiceH2">Les starten</h1>
+<div style="text-align: center;">
+<h2 class="fontChoiceH3" style="text-decoration: underline;">Vakkeuze</h2>
+<h3 class="fontChoiceH4">Gekozen klas: {{k}}</h3>       
 <select ng-model="SelectedVak">
   <option ng-repeat="x in datavakken">{{x}}</option>
 </select>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(SelectedVak);">Kies klas</button>
 </div>
-
-<button style="margin-left: 26em; margin-top: 4em;" type="submit" class="btn btn-success btnKiesLes" ng-click="next(SelectedVak);">Kies klas</button>

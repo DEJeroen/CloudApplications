@@ -1,11 +1,12 @@
-<h2 class="fontChoiceH2">Klaskeuze</h2>
-<h3 class="fontChoiceH3" for="klaslabel">Klas:</h3>  
+<h1 class="fontChoiceH2">Resultaten terugkijken</h1>
 
-<div style="text-align: center; position: absolute; margin-left: 28em;">       
+<div style="text-align: center;">
+<h2 class="fontChoiceH3" style="text-decoration: underline;">Klaskeuze</h2>       
 <select ng-model="data.SelectedLes">
   <option ng-repeat="x in dataklassen">{{x}}</option>
 </select>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Kies klas</button>
 </div>
 
-<button style="margin-left: 26em; margin-top: 4em;" type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Kies klas</button>
+
 

@@ -1,6 +1,8 @@
-
+<h1 class="fontChoiceH2">Resultaten terugkijken</h1>
+<h3 class="fontChoiceH4">Gekozen klas: {{klas}}</h3>  
+<h3 class="fontChoiceH4">Gekozen vak: {{vak}}</h3>  
 <div class="form-group">      
-<label for="klaslabel">Kies vraag</label>     
+<label class="fontChoiceH3" style="text-decoration: underline;" for="klaslabel">Kies vraag</label>     
 <select multiple class="form-control formClass" ng-model="data.SelectedVraag">
   <option ng-repeat="x in datavragen">{{x}}</option>
 </select>
@@ -9,9 +11,9 @@
 
 <canvas style="width: 25px; height: 25px;" id="myChart"></canvas>
 
-<h4 class="summaryLes">Andere les terugkijken?</h4>
-<div class="form-group">      
-<label for="klaslabel">Klas:</label>     
+<div style="margin-top: 4em;" class="form-group"> 
+<label class="fontChoiceH3" style="text-decoration: underline;">Andere les terugkijken?</label>     
+<p style="font-weight: bold; font-size: 1em;">Klas:</p>     
 <select multiple class="form-control formClass" ng-model="data.SelectedLes">
   <option ng-repeat="x in dataklassen">{{x}}</option>
 </select>
