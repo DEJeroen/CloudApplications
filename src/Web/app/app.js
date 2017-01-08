@@ -1,3 +1,4 @@
+
 var app = angular.module("myapp",['ngRoute', 'ngAnimate']);
 
 app.config(['$routeProvider',
@@ -88,29 +89,30 @@ app.controller("createLessonQuestionsCtrl", function($scope, $http, $location, s
 	$scope.vak = summaryService.getVak();
 
    $scope.nextPageQuestions= function($q) {
-
+       console.log($q);
    	for (var i = 0;  i < $q.length; i++) 
    	{
 
-	   	if($q[i].question != '' && $q[i].answer != '')
+	   	if($q[i].question != "" && $q[i].correctAntwoord != "" && $q[i].answerA != "" && $q[i].answerB != "")
 	   	{
 	   		summaryService.addQuestions($q)
 			$location.path("/createLessonSummary");
-		};
-
-	   	if($q[i].question == '' || $q[i].answer == '')
+		}
+        
+        
+	   	if($q[i].question == "" || $q[i].correctAntwoord == "" || $q[i].answerA == "" || $q[i].answerB == "")
 	   	{
-			alert("Voer alle vragen in en/of verwijder de niet ingevulde vragen.");
+			alert("Gelieve een vraag en 2 antwoorden in te vullen.");
 		};
 	};
    }
 
     var counter=1;
-    $scope.questionelement = [ {id:counter, question : '', answer : ''} ];
+    $scope.questionelement = [ {id:counter, question : '', correctAntwoord : '' , answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} ];
 
     $scope.newItem = function($event){
         counter++;
-        $scope.questionelement.push(  { id:counter, question : '', answer : ''} );
+        $scope.questionelement.push(  { id:counter, question : '', correctAntwoord : '' , answer1 : '' , answer2 : '' , answer3 : '' , answer4 : ''} );
         $event.preventDefault();
 
     }
@@ -121,30 +123,57 @@ app.controller("createLessonSummary", function($scope, $http, $location, summary
 	$scope.klas = summaryService.getKlas();
 	$scope.vak = summaryService.getVak();
 	$scope.vraagAntwoord= summaryService.getQuestions();
-	$scope.vraag =[];
-	$scope.antwoord =[];
-
+	 
+    
 	    $scope.data = [ {klas:$scope.klas},
                     {vak:$scope.vak}
                   ];
     
+    console.log($scope.vraagAntwoord);
+    
 	for(var i =0; i< $scope.vraagAntwoord.length; i++)
 	{
-$scope.vraag[i] = $scope.vraagAntwoord[i].question;
-$scope.antwoord[i] = $scope.vraagAntwoord[i].answer;
-
+        $scope.vraag = $scope.vraagAntwoord[i].question;
+        $scope.correctAntwoord= $scope.vraagAntwoord[i].correctAntwoord;
+        $scope.antwoordA = $scope.vraagAntwoord[i].answer1;
+        $scope.antwoordB = $scope.vraagAntwoord[i].answer2;
+        $scope.antwoordC = $scope.vraagAntwoord[i].answer3;
+        $scope.antwoordD = $scope.vraagAntwoord[i].answer4;
+        
+        
     
-
-                  $scope.data.push(
-                  {vraag:$scope.vraag[i], 
-                  antwoord:$scope.antwoord[i]}
+        
+        if($scope.correctAntwoord !== "" && $scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC == "" && $scope.antwoordD == ""){
+            
+            $scope.data.push(
+                  {vraag:$scope.vraag, antwoord: $scope.correctAntwoord , A:$scope.antwoordA, B:$scope.antwoordB, optie: 2}
                   );
 
               }
+        
+         if($scope.correctAntwoord !== "" && $scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD == ""){
+            
+            $scope.data.push(
+                  {vraag:$scope.vraag, antwoord: $scope.correctAntwoord , A:$scope.antwoordA, B:$scope.antwoordB, C:$scope.antwoordC, optie: 3}
+                  );
+
+              }
+        
+         if($scope.correctAntwoord !== "" && $scope.antwoordA != "" && $scope.antwoordB!= "" && $scope.antwoordC != "" && $scope.antwoordD != ""){
+            
+              $scope.data.push(
+                  {vraag:$scope.vraag, antwoord: $scope.correctAntwoord , A:$scope.antwoordA, B:$scope.antwoordB , C:$scope.antwoordC, D:$scope.antwoordD, optie: 4}
+                  );
+
+              }
+        };
+        
+        
+                 
 
               console.log($scope.data);
 
-
+    
         $scope.submit=function(){ 
             $http.post("http://localhost:3000/firebase/post", $scope.data )
             .success(function(data){	
@@ -205,12 +234,12 @@ app.service('summaryService', function() {
 
 //Controllers voor starten van de lessen
 app.controller("startLessonClassCtrl", function($scope, $http, $location, DataService){
-
+         
  $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){	
             
                 
-            
+              
            
              var data= [];  
                console.log("successfully retrieved user date");
@@ -227,19 +256,16 @@ app.controller("startLessonClassCtrl", function($scope, $http, $location, DataSe
                   console.log(data);
                  };
                 
-                $scope.dataklassen = data;
-                
-             
+                $scope.dataklassen = data;   
             
-                
-             
+                         
             })
             .error(function(UserData){
                 console.error("error in retrieving");
                 console.log(UserData)
             });
-	
-        
+
+                  
         
 	
      
@@ -286,8 +312,8 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     $scope.klas = DataService.getKlas();
 	$scope.k = $scope.klas[0];
     $scope.vak = DataService.getVak();
-    $scope.v = $scope.vak[0];
     $scope.q = 0;
+    $scope.currentAnswers =0;
     UserData = DataService.getUserData();
     
     var klasnummer = $scope.klas;
@@ -300,7 +326,12 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     var c;
     var d; 
     var Optie;
-      
+    $scope.vraagnummer = vraagnummer;
+    $scope.showItem = false;
+
+      $scope.showAnswer= function(showItem){
+    $scope.showItem = showItem;
+};
      var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
     
   /* for (var prop in UserData.klas[klasnummer].vak[vaknaam].vragen) {
@@ -322,10 +353,10 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                   data.push(
                   {vraag: UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
                   antwoord: UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
-                  A: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatA,
-                  B: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatB,
-                  C: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatC,
-                  D: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatD,
+                  A: UserData.klas[klasnummer].vak[vaknaam].vragen[i].A,
+                  B: UserData.klas[klasnummer].vak[vaknaam].vragen[i].B,
+                  C: UserData.klas[klasnummer].vak[vaknaam].vragen[i].C,
+                  D: UserData.klas[klasnummer].vak[vaknaam].vragen[i].D,
                   Optie: UserData.klas[klasnummer].vak[vaknaam].vragen[i].optie}
                   );
 
@@ -341,30 +372,41 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
             $scope.vraag = data[0].vraag;
             $scope.antwoord = data[0].antwoord;
-            a=data[0].resultaatA;
-		        b=data[0].resultaatB;
-            c=data[0].resultaatC;
-            d=data[0].resultaatD;
+            a=data[0].A;
+		        b=data[0].B;
+            c=data[0].C;
+            d=data[0].D;
+                        $scope.a=data[0].A;
+            $scope.b=data[0].B;
+            $scope.c=data[0].C;
+            $scope.d=data[0].D;
             Optie=data[0].optie;
+            $scope.O = Optie;
             makeGraph();
-            console.log(a,b,c,d);
-            console.log(Optie);
+            console.log($scope.antwoord);
 
 
 
     $scope.nextquestion = function(){
-        
+        $scope.showItem = false;
         if ($scope.welkevraag == "Naar resultaten")
         {
             $scope.q = "null";
             $scope.k = "null";
             $scope.v = "null";
+            $scope.vak = "null";
+            $scope.currentAnswers = "null";
             $interval.cancel(interval);
             $location.path("/viewGraph");
         }
         
         if (vraagnummer == laatstevraag)
-        {
+        {     
+          
+            $scope.a=data[vraagnummer].A;
+            $scope.b=data[vraagnummer].B;
+            $scope.c=data[vraagnummer].C;
+            $scope.d=data[vraagnummer].D;
             $interval.cancel(interval);
             console.log("einde van de rit");
             $scope.vraag = data[vraagnummer].vraag;
@@ -373,7 +415,9 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             $scope.q = vraagnummer;
 
             vraagnummer = vraagnummer + 1;
-        
+            $scope.vraagnummer = vraagnummer;
+
+            console.log($scope.a, $scope.b, $scope.c, $scope.d);
              
             $scope.welkevraag = "Naar resultaten";
          
@@ -382,6 +426,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         
         else
         {
+          
             $scope.vraag = data[vraagnummer].vraag;
             $scope.antwoord = data[vraagnummer].antwoord;
 
@@ -390,15 +435,23 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             console.log($scope.q);
            
             vraagnummer = vraagnummer + 1;
+            $scope.vraagnummer = vraagnummer;
            
       
 
             $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
 
-            a=data[vraagnummer].resultaatA;
-            b=data[vraagnummer].resultaatB;
-            c=data[vraagnummer].resultaatC;
-            d=data[vraagnummer].resultaatD;
+            a=data[vraagnummer].A;
+            b=data[vraagnummer].B;
+            c=data[vraagnummer].C;
+            d=data[vraagnummer].D;
+            $scope.a=data[vraagnummer].A;
+            $scope.b=data[vraagnummer].B;
+            $scope.c=data[vraagnummer].C;
+            $scope.d=data[vraagnummer].D;
+            $scope.Optie = data[vraagnummer].optie;
+
+            console.log($scope.a, $scope.b, $scope.c, $scope.d);
    
         }
     };
@@ -409,11 +462,15 @@ var interval = $interval(function() {
   console.log("interval");
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
-      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
-      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatB;
-      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatC;
-      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatD;
-      Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;; 
+      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].A;
+      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].B;
+      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].C;
+      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].D;
+      Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;
+                                  $scope.a=data[vraagnummer-1].A;
+            $scope.b=data[vraagnummer-1].B;
+            $scope.c=data[vraagnummer-1].C;
+            $scope.d=data[vraagnummer-1].D;
       console.log(Optie);     
 if(Optie == 2){
 $("#Chart3").hide();
@@ -690,8 +747,8 @@ var myChart = new Chart(ctx, {
     }                 
     
     
-    $scope.appsettings = [$scope.k,$scope.v,$scope.q];
-    
+    $scope.appsettings = [$scope.k,$scope.vak,$scope.q, $scope.currentAnswers];
+    console.log($scope.v);
           submitAppsettings=function(){ 
             $http.post("http://localhost:3000/firebase/post/initStartLes", $scope.appsettings )
             .success(function(data){	
@@ -714,7 +771,7 @@ var myChart = new Chart(ctx, {
     
     
     $scope.$watch('q', function() {
-        $scope.appsettings = [$scope.k,$scope.v,$scope.q];
+        $scope.appsettings = [$scope.k,$scope.vak,$scope.q, $scope.currentAnswers];
         submitAppsettings(); 
         console.log("ik heb beweging gezien ");
     });

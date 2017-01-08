@@ -1,9 +1,11 @@
 body{
 	padding-top: 51px;
 	  font-family: "Open Sans";
-    background-image: url("../css/images/bg.jpg");
+    background-color: #c0c1c4;
+  }
+.bgcontainer{
+  background-color: #c0c1c4;
 }
-
 /* ng-cloak */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng.ng-cloak {
     display: none;
@@ -298,6 +300,9 @@ text-align: center;
 
 .vragenEnAntwoord{
     margin-bottom: 1%;
-    width: 40%;
+    width: 100%;
 }
+.fontChoiceH2{ color: #000000; font-family: 'Raleway', sans-serif; font-size: 54px; font-weight: 300; line-height: 58px; text-align: center;}
+.fontChoiceH3{color: #000000; font-family: 'Raleway',sans-serif; font-size: 30px; font-weight: 800; line-height: 36px; text-align: center; }
+.fontChoiceH4{color: #000000; font-family: 'Raleway',sans-serif; font-size: 21px; font-weight: 800; text-align: center; }
 

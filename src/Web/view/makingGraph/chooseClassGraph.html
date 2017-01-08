@@ -1,19 +1,12 @@
-<ul class="nav nav-pills navLesson">
-  <li role="presentation">
+<h1 class="fontChoiceH2">Resultaten terugkijken</h1>
 
-  <a href="#createLesson">Maak les</a>
-
-  </li>
-  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
-  <li class="active" role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
-</ul>
-
-<div class="form-group">      
-<label for="klaslabel">Klas:</label>     
-<select multiple class="form-control formClass" ng-model="data.SelectedLes">
+<div style="text-align: center;">
+<h2 class="fontChoiceH3" style="text-decoration: underline;">Klaskeuze</h2>       
+<select ng-model="data.SelectedLes">
   <option ng-repeat="x in dataklassen">{{x}}</option>
 </select>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Kies klas</button>
 </div>
 
-<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Next</button>
+
 

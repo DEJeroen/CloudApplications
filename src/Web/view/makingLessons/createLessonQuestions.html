@@ -1,12 +1,6 @@
-<ul class="nav nav-pills navLesson">
-  <li role="presentation" class="active"><a href="#createLesson">Maak les</a></li>
-  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
-  <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
-</ul>
-
-<form style="padding-top: 2em;">
- <p style="font-size: 3em;">Wijs nu u vragen toe</p>
-
+<h1 class="fontChoiceH2">Les maken</h1>
+<h2 class="fontChoiceH3" style="text-decoration: underline;">Vraagkeuze</h2>
+<form style="padding-top: 2em; position: absolute; margin-left: 28em;">
  <h4 class="summaryLes">Gekozen klas:</h4>
 <p style="font-size: 1em;">{{klas}}</p>
 <h4 class="summaryLes">Gekozen vak:</h4>
@@ -18,18 +12,21 @@
                            <p>Vraag:</p>
                                 <input type="text" class="vragenEnAntwoord" ng-model="element.question" placeholder="Vraag" required>
                        
+                            <p>Correct Antwoord:</p>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.correctAntwoord" placeholder="Correct Antwoord" required>
+                            
                             <p>Antwoord A:</p> 
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerA" placeholder="Antwoord A" required/>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer1" placeholder="Antwoord A" required/>
                             
                             <p>Antwoord B:</p>
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerB" placeholder="Antwoord B" required/>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer2" placeholder="Antwoord B" required/>
                             
                             <p>Antwoord C:</p>
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerC" placeholder="Antwoord C" required/>
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer3" placeholder="Antwoord C" required/>
                             
                             <p>Antwoord D:</p>
-                                <input type="text" class="vragenEnAntwoord" ng-model="element.answerD" placeholder="Antwoord D" required/>
-                            <p></p> <!-- deze p tag niet verwijderen dient om de knop verwijder uit te lijen naar links -->
+                                <input type="text" class="vragenEnAntwoord" ng-model="element.answer4" placeholder="Antwoord D" required/>
+                            <p></p> <!-- deze p tag niet verwijderen dient om de knop verwijder uit te lijnen naar links -->
                             <span ng-hide="element.length == 1">
                                 <a href ng-click="questionelement.splice($index, 1)">Verwijder</a>
                             </span>
@@ -40,5 +37,6 @@
                     <a href ng-click="newItem($event)">Nieuwe vraag</a>
                 </li>
             </ul>
+                <button ng-click="nextPageQuestions(questionelement);" type="submit" class="btn btn-success btnKiesLes">Volgende</button>
 </form>
-    <button ng-click="nextPageQuestions(questionelement);" type="submit" class="btn btn-success btnKiesLes">Volgende</button>	
+	

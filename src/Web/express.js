@@ -122,6 +122,7 @@ app.post('/firebase/post/initStartLes', function (req, res, body) {
     var klas = req.body[0];
     var vak = req.body[1];
     var vraag =req.body[2];
+    var antwoord = req.body[3];
 
       
     var ref = db.ref("/");
@@ -133,7 +134,8 @@ app.post('/firebase/post/initStartLes', function (req, res, body) {
         androidOnline: "0",
         currentKlas: klas,
         currentVak: vak,
-        currentVraag: vraag
+        currentVraag: vraag,
+        currentAnswers: antwoord
         });   
     
     console.log(req.body);

@@ -1,15 +1,6 @@
-<ul class="nav nav-pills navLesson">
-  <li role="presentation" class="active">
-
-  <a href="#createLesson">Maak les</a>
-
-  </li>
-  <li role="presentation"><a href="#chooseClass">Begin les</a></li>
-  <li role="presentation"><a href="#chooseClassGraph">Overzicht resultaten</a></li>
-</ul>
-
-<form style="padding-top: 2em;">
- <p style="font-size: 3em;">Overzicht</p>
+<h1 class="fontChoiceH2">Les maken</h1>
+<form style="padding-top: 2em; text-align: center;">
+<h2 class="fontChoiceH3" style="text-decoration: underline;">Overzicht</h2>
  <h4 class="summaryLes">Gekozen klas:</h4>
 <p style="font-size: 1em;">{{klas}}</p>
 <h4 class="summaryLes">Gekozen vak:</h4>
@@ -20,10 +11,17 @@
 <h4 class="summaryLes">Vraag {{q.id}}:</h4>
 <p style="font-size: 1em;">{{q.question}}</p>
 
-<h4 class="summaryLes">Antwoord {{q.id}}:</h4>
-<p style="font-size: 1em;">{{q.answer}}</p>
+<h4 class="summaryLes">Correct Antwoord {{q.id}}:</h4>
+<p style="font-size: 1em;">{{q.correctAntwoord}}</p>
 
+<h4 class="summaryLes">Antwoorden {{q.id}}:</h4>
+<p style="font-size: 1em;">{{q.answer}}</p>
+    <p>{{q.answer1}}</p>
+    <p>{{q.answer2}}</p>
+    <p>{{q.answer3}}</p>
+    <p>{{q.answer4}}</p>
 </div>
+<button ng-click="submit()" type="button" class="btn btn-success btnKiesLes">Verzenden</button>
 </form>
 
-<button ng-click="submit()" type="button" class="btn btn-success btnKiesLes">Verzenden</button>
+
