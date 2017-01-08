@@ -326,7 +326,12 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
     var c;
     var d; 
     var Optie;
-      
+    $scope.vraagnummer = vraagnummer;
+    $scope.showItem = false;
+
+      $scope.showAnswer= function(showItem){
+    $scope.showItem = showItem;
+};
      var size = Object.keys(UserData.klas[klasnummer].vak[vaknaam].vragen).length;
     
   /* for (var prop in UserData.klas[klasnummer].vak[vaknaam].vragen) {
@@ -378,13 +383,12 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             Optie=data[0].optie;
             $scope.O = Optie;
             makeGraph();
-            console.log(a,b,c,d);
-            console.log(Optie);
+            console.log($scope.antwoord);
 
 
 
     $scope.nextquestion = function(){
-        
+        $scope.showItem = false;
         if ($scope.welkevraag == "Naar resultaten")
         {
             $scope.q = "null";
@@ -397,7 +401,9 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         }
         
         if (vraagnummer == laatstevraag)
-        {                            $scope.a=data[vraagnummer].A;
+        {     
+          $scope.vraagnummer = vraagnummer;
+            $scope.a=data[vraagnummer].A;
             $scope.b=data[vraagnummer].B;
             $scope.c=data[vraagnummer].C;
             $scope.d=data[vraagnummer].D;
@@ -419,6 +425,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         
         else
         {
+          $scope.vraagnummer = vraagnummer;
             $scope.vraag = data[vraagnummer].vraag;
             $scope.antwoord = data[vraagnummer].antwoord;
 

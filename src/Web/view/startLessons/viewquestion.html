@@ -1,20 +1,18 @@
 <h2 class="fontChoiceH2">Les {{vak}} gestart</h2>
 <div class="container" >
   <div class="panel panel-default">
-  <div class="bgcontainer">
-      <label>Vraag</label>
+  <div class="bgcontainer fontChoiceH4">
+      <label>Vraag {{vraagnummer}}</label>
     <div class="panel-body">{{vraag}}</div>
-      <label>Antwoordmogelijkheden</label>
-      <p>A:</p>
-      <div class="panel-body">{{a}}</div>
-      <p>B:</p>
-      <div class="panel-body">{{b}}</div>
-      <p>C:</p>
-      <div class="panel-body">{{c}}</div>
-      <p>D:</p>
-      <div class="panel-body">{{d}}</div>
+      <div class="panel-body">A: {{a}}</div>
+      <div class="panel-body">B: {{b}}</div>
+      <div class="panel-body">C: {{c}}</div>
+      <div class="panel-body">D: {{d}}</div>
 
-      <button  type="button" class="btn btn-success">Show antwoord</button>
+      <button ng-hide="showItem" type="button" ng-click="showAnswer(true)" class="btn btn-success">Show antwoord</button>
+      <div class="fontChoiceH4" ng-show="showItem"> 
+      <div class="panel-body">Antwoord: {{antwoord}}</div>
+      </div>
       </div>
   </div>
   <button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">{{welkevraag}}</button>
