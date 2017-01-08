@@ -402,7 +402,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         
         if (vraagnummer == laatstevraag)
         {     
-          $scope.vraagnummer = vraagnummer;
+          
             $scope.a=data[vraagnummer].A;
             $scope.b=data[vraagnummer].B;
             $scope.c=data[vraagnummer].C;
@@ -415,6 +415,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             $scope.q = vraagnummer;
 
             vraagnummer = vraagnummer + 1;
+            $scope.vraagnummer = vraagnummer;
 
             console.log($scope.a, $scope.b, $scope.c, $scope.d);
              
@@ -425,7 +426,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         
         else
         {
-          $scope.vraagnummer = vraagnummer;
+          
             $scope.vraag = data[vraagnummer].vraag;
             $scope.antwoord = data[vraagnummer].antwoord;
 
@@ -434,6 +435,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             console.log($scope.q);
            
             vraagnummer = vraagnummer + 1;
+            $scope.vraagnummer = vraagnummer;
            
       
 
