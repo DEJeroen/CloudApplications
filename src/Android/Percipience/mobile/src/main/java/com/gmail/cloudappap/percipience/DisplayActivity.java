@@ -119,12 +119,6 @@ public class DisplayActivity extends AppCompatActivity {
                 }
 
 
-
-
-
-                System.out.println("vak: " + currentVak);
-                yesVal = 0;
-                noVal = 0;
             }
 
             @Override
@@ -199,47 +193,57 @@ public class DisplayActivity extends AppCompatActivity {
                         }
                         else {
                            // currentAwnsers += test.displayValue;
-                            System.out.println("current: " + currentAwnsers);
-                            System.out.println("display: " + test.displayValue);
-                            String tussenVar =  currentAwnsers + test.displayValue;
+                    //        System.out.println("current: " + currentAwnsers);
+                      //      System.out.println("display: " + test.displayValue);
+                            if (test.displayValue.length() == 2) {
+                            if (currentAwnsers.contains( "null")) {
+                                currentAwnsers = test.displayValue;
+                            }
+                            else {
+                                currentAwnsers += test.displayValue;
+                            }
                             Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
-                            myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentAnswers").setValue(tussenVar);
+                            myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentAnswers").setValue(currentAwnsers);
                             System.out.println(test.displayValue);
-                            if (test.displayValue.contains("A")) {
-                                yesVal ++;
-                                Message msgObj = AHandler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString("message", Integer.toString(yesVal));
-                                msgObj.setData(b);
-                                AHandler.sendMessage(msgObj);
-                            }
-                            if (test.displayValue.contains("B")) {
-                                noVal ++;
-                                Message msgObj = BHandler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString("message", Integer.toString(noVal));
-                                msgObj.setData(b);
-                                BHandler.sendMessage(msgObj);
-                            }
 
-                            if (test.displayValue.contains("C")) {
-                                CVal ++;
-                                Message msgObj = BHandler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString("message", Integer.toString(CVal));
-                                msgObj.setData(b);
-                                CHandler.sendMessage(msgObj);
-                            }
+                                if (test.displayValue.contains("A")) {
+                                    yesVal++;
+                                    System.out.println("contains A: " + yesVal);
 
-                            if (test.displayValue.contains("D")) {
-                                DVal ++;
-                                Message msgObj = BHandler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString("message", Integer.toString(DVal));
-                                msgObj.setData(b);
-                                DHandler.sendMessage(msgObj);
-                            }
+                                    Message msgObj = AHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(yesVal));
+                                    msgObj.setData(b);
+                                    AHandler.sendMessage(msgObj);
+                                }
+                                if (test.displayValue.contains("B")) {
+                                    noVal++;
+                                    Message msgObj = BHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(noVal));
+                                    msgObj.setData(b);
+                                    BHandler.sendMessage(msgObj);
+                                }
 
+                                if (test.displayValue.contains("C")) {
+                                    CVal++;
+                                    Message msgObj = BHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(CVal));
+                                    msgObj.setData(b);
+                                    CHandler.sendMessage(msgObj);
+                                }
+
+                                if (test.displayValue.contains("D")) {
+                                    DVal++;
+                                    Message msgObj = BHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(DVal));
+                                    msgObj.setData(b);
+                                    DHandler.sendMessage(msgObj);
+                                }
+
+                            }
 
 
 
