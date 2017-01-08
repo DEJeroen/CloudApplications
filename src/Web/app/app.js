@@ -348,10 +348,10 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
                   data.push(
                   {vraag: UserData.klas[klasnummer].vak[vaknaam].vragen[i].vraag, 
                   antwoord: UserData.klas[klasnummer].vak[vaknaam].vragen[i].antwoord,
-                  A: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatA,
-                  B: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatB,
-                  C: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatC,
-                  D: UserData.klas[klasnummer].vak[vaknaam].vragen[i].resultaatD,
+                  A: UserData.klas[klasnummer].vak[vaknaam].vragen[i].A,
+                  B: UserData.klas[klasnummer].vak[vaknaam].vragen[i].B,
+                  C: UserData.klas[klasnummer].vak[vaknaam].vragen[i].C,
+                  D: UserData.klas[klasnummer].vak[vaknaam].vragen[i].D,
                   Optie: UserData.klas[klasnummer].vak[vaknaam].vragen[i].optie}
                   );
 
@@ -367,11 +367,16 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
             $scope.vraag = data[0].vraag;
             $scope.antwoord = data[0].antwoord;
-            a=data[0].resultaatA;
-		        b=data[0].resultaatB;
-            c=data[0].resultaatC;
-            d=data[0].resultaatD;
+            a=data[0].A;
+		        b=data[0].B;
+            c=data[0].C;
+            d=data[0].D;
+                        $scope.a=data[0].A;
+            $scope.b=data[0].B;
+            $scope.c=data[0].C;
+            $scope.d=data[0].D;
             Optie=data[0].optie;
+            $scope.O = Optie;
             makeGraph();
             console.log(a,b,c,d);
             console.log(Optie);
@@ -392,7 +397,10 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
         }
         
         if (vraagnummer == laatstevraag)
-        {
+        {                            $scope.a=data[vraagnummer].A;
+            $scope.b=data[vraagnummer].B;
+            $scope.c=data[vraagnummer].C;
+            $scope.d=data[vraagnummer].D;
             $interval.cancel(interval);
             console.log("einde van de rit");
             $scope.vraag = data[vraagnummer].vraag;
@@ -401,7 +409,8 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
             $scope.q = vraagnummer;
 
             vraagnummer = vraagnummer + 1;
-        
+
+            console.log($scope.a, $scope.b, $scope.c, $scope.d);
              
             $scope.welkevraag = "Naar resultaten";
          
@@ -423,10 +432,17 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 
             $scope.welkevraag = "Naar vraag " + (vraagnummer + 1);
 
-            a=data[vraagnummer].resultaatA;
-            b=data[vraagnummer].resultaatB;
-            c=data[vraagnummer].resultaatC;
-            d=data[vraagnummer].resultaatD;
+            a=data[vraagnummer].A;
+            b=data[vraagnummer].B;
+            c=data[vraagnummer].C;
+            d=data[vraagnummer].D;
+            $scope.a=data[vraagnummer].A;
+            $scope.b=data[vraagnummer].B;
+            $scope.c=data[vraagnummer].C;
+            $scope.d=data[vraagnummer].D;
+            $scope.Optie = data[vraagnummer].optie;
+
+            console.log($scope.a, $scope.b, $scope.c, $scope.d);
    
         }
     };
@@ -437,11 +453,15 @@ var interval = $interval(function() {
   console.log("interval");
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
-      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
-      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatB;
-      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatC;
-      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatD;
-      Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;; 
+      a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].A;
+      b = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].B;
+      c = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].C;
+      d = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].D;
+      Optie = UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].optie;
+                                  $scope.a=data[vraagnummer-1].A;
+            $scope.b=data[vraagnummer-1].B;
+            $scope.c=data[vraagnummer-1].C;
+            $scope.d=data[vraagnummer-1].D;
       console.log(Optie);     
 if(Optie == 2){
 $("#Chart3").hide();

@@ -4,8 +4,17 @@
   <div class="bgcontainer">
       <label>Vraag</label>
     <div class="panel-body">{{vraag}}</div>
-      <label>Antwoord</label>
-      <div class="panel-body">{{antwoord}}</div>
+      <label>Antwoordmogelijkheden</label>
+      <p>A:</p>
+      <div class="panel-body">{{a}}</div>
+      <p>B:</p>
+      <div class="panel-body">{{b}}</div>
+      <p>C:</p>
+      <div class="panel-body">{{c}}</div>
+      <p>D:</p>
+      <div class="panel-body">{{d}}</div>
+
+      <button  type="button" class="btn btn-success">Show antwoord</button>
       </div>
   </div>
   <button ng-click="nextquestion();" type="button" class="btn btn-success btnNextquestion">{{welkevraag}}</button>
