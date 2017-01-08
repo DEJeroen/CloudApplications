@@ -52,7 +52,8 @@ public class DisplayActivity extends AppCompatActivity {
     String currentAwnsers = "";
     int yesVal = 0;
     int noVal = 0;
-
+    int CVal = 0;
+    int DVal = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +92,16 @@ public class DisplayActivity extends AppCompatActivity {
 
                 currentVraag = snapshot.child("currentVraag").getValue().toString();
 
-                if (currentKlas == "null" || currentVak == "null" || currentVraag == "null" ) {
+                currentAwnsers =  snapshot.child("currentAnswers").getValue().toString();
+
+
+                System.out.println(currentKlas);
+                System.out.println(currentVak);
+                System.out.println(currentVraag);
+
+
+
+                if (currentKlas == "null" || currentVak == "null" || currentVraag == "null") {
                     TextView textViewCurrentKlas = (TextView) findViewById(R.id.textViewCurrentKlas);
                     textViewCurrentKlas.setText("Start de les om te beginnen met scannen");
                     TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
@@ -109,13 +119,6 @@ public class DisplayActivity extends AppCompatActivity {
                 }
 
 
-
-
-
-                System.out.println("vak: " + currentVak);
-                currentAwnsers = "";
-                yesVal = 0;
-                noVal = 0;
             }
 
             @Override
@@ -189,25 +192,58 @@ public class DisplayActivity extends AppCompatActivity {
 
                         }
                         else {
-                            currentAwnsers += test.displayValue;
+                           // currentAwnsers += test.displayValue;
+                    //        System.out.println("current: " + currentAwnsers);
+                      //      System.out.println("display: " + test.displayValue);
+                            if (test.displayValue.length() == 2) {
+                            if (currentAwnsers.contains( "null")) {
+                                currentAwnsers = test.displayValue;
+                            }
+                            else {
+                                currentAwnsers += test.displayValue;
+                            }
+                            Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+                            myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentAnswers").setValue(currentAwnsers);
                             System.out.println(test.displayValue);
-                            if (test.displayValue.contains("A")) {
-                                yesVal ++;
-                                Message msgObj = yesHandler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString("message", Integer.toString(yesVal));
-                                msgObj.setData(b);
-                                yesHandler.sendMessage(msgObj);
-                            }
-                            if (test.displayValue.contains("B")) {
-                                noVal ++;
-                                Message msgObj = noHandler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString("message", Integer.toString(noVal));
-                                msgObj.setData(b);
-                                noHandler.sendMessage(msgObj);
-                            }
 
+                                if (test.displayValue.contains("A")) {
+                                    yesVal++;
+                                    System.out.println("contains A: " + yesVal);
+
+                                    Message msgObj = AHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(yesVal));
+                                    msgObj.setData(b);
+                                    AHandler.sendMessage(msgObj);
+                                }
+                                if (test.displayValue.contains("B")) {
+                                    noVal++;
+                                    Message msgObj = BHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(noVal));
+                                    msgObj.setData(b);
+                                    BHandler.sendMessage(msgObj);
+                                }
+
+                                if (test.displayValue.contains("C")) {
+                                    CVal++;
+                                    Message msgObj = BHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(CVal));
+                                    msgObj.setData(b);
+                                    CHandler.sendMessage(msgObj);
+                                }
+
+                                if (test.displayValue.contains("D")) {
+                                    DVal++;
+                                    Message msgObj = BHandler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString("message", Integer.toString(DVal));
+                                    msgObj.setData(b);
+                                    DHandler.sendMessage(msgObj);
+                                }
+
+                            }
 
 
 
@@ -307,7 +343,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-    private final Handler yesHandler = new Handler() {
+    private final Handler AHandler = new Handler() {
 
         public void handleMessage(Message msg) {
             String barRead = msg.getData().getString("message");
@@ -334,7 +370,7 @@ public class DisplayActivity extends AppCompatActivity {
             }
         }
     };
-    private final Handler noHandler = new Handler() {
+    private final Handler BHandler = new Handler() {
 
         public void handleMessage(Message msg) {
             String barRead = msg.getData().getString("message");
@@ -361,5 +397,62 @@ public class DisplayActivity extends AppCompatActivity {
             }
         }
     };
+
+    private final Handler CHandler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            String barRead = msg.getData().getString("message");
+
+            if ((null != barRead)) {
+
+                // ALERT MESSAGE
+
+              //  TextView textViewNo = (TextView) findViewById(R.id.textViewNo);
+             //   textViewNo.setText("No: " + barRead);
+                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatC").setValue(barRead);
+
+            }
+            else
+            {
+
+                // ALERT MESSAGE
+                Toast.makeText(
+                        getBaseContext(),
+                        "Recieved empty message when reading barcode",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+    private final Handler DHandler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            String barRead = msg.getData().getString("message");
+
+            if ((null != barRead)) {
+
+                // ALERT MESSAGE
+
+               // TextView textViewNo = (TextView) findViewById(R.id.textViewNo);
+             //   textViewNo.setText("No: " + barRead);
+                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
+
+            }
+            else
+            {
+
+                // ALERT MESSAGE
+                Toast.makeText(
+                        getBaseContext(),
+                        "Recieved empty message when reading barcode",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
 }
 
