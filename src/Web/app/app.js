@@ -459,6 +459,7 @@ app.controller("viewquestionCtrl", function($scope, $http, $location, DataServic
 //Om de grafiek te refreshen.
 
 var interval = $interval(function() {
+  console.log(counter++);
 $http.get("http://localhost:3000/firebase/StartLes")
             .success(function(UserData){  
       a =    UserData.klas[klasnummer].vak[vaknaam].vragen[vraagnummer-1].resultaatA;
@@ -482,7 +483,7 @@ var Chart2 = new Chart(ctx, {
         labels: ["A", "B"],
         datasets: [{
             label: '# of Votes',
-            data: [ja, nee],
+            data: [a,b],
             backgroundColor: [
                 'rgb(153, 0, 0)',
                 'rgb(0, 0, 153)',
@@ -498,7 +499,7 @@ var Chart2 = new Chart(ctx, {
       responsive: true,
       title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -541,7 +542,7 @@ var Chart3 = new Chart(ctx, {
       responsive: true,
       title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -586,7 +587,7 @@ var Chart4 = new Chart(ctx, {
       responsive: true,
       title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -646,7 +647,7 @@ var Chart2 = new Chart(ctx, {
     	responsive: true,
     	title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -690,7 +691,7 @@ var Chart3 = new Chart(ctx, {
       responsive: true,
       title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -737,7 +738,7 @@ var myChart = new Chart(ctx, {
       responsive: true,
       title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -947,17 +948,29 @@ var vragen =[];
     }
 
     $scope.view = function(vraag){
-ja=UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].kindJa;
-nee=UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].kindNee;
-
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
+      a =    UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].resultaatA;
+      b = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].resultaatB;
+      c = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].resultaatC;
+      d = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].resultaatD;
+      $scope.A =    UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].A;
+      $scope.B = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].B;
+      $scope.C = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].C;
+      $scope.D = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].D;
+      $scope.vraag = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].vraag;
+      Optie = UserData.klas[$scope.klas].vak[$scope.vak].vragen[vraag].optie;
+if(Optie == 2)
+{ 
+$("#Chart3").hide();
+$("#Chart4").hide(); 
+$("#Chart2").show();     
+var ctx = document.getElementById("Chart2");
+var Chart2 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["A", "B"],
         datasets: [{
             label: '# of Votes',
-            data: [ja, nee],
+            data: [a, b],
             backgroundColor: [
                 'rgb(153, 0, 0)',
                 'rgb(0, 0, 153)'
@@ -970,10 +983,10 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
-    	responsive: true,
-    	title: {
+      responsive: true,
+      title: {
             display: true,
-            text: 'Lesoverzicht',
+            text: $scope.vak,
             fontSize: 40
         }, 
         scales: {
@@ -984,8 +997,103 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});
+}); 
+} 
+
+if( Optie == 3)
+{        
+$("#Chart4").hide(); 
+$("#Chart2").hide();
+$("#Chart3").show();  
+var ctx = document.getElementById("Chart3");
+var Chart3 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["A", "B", "C"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a, b, c],
+            backgroundColor: [
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)'
+            ],
+            borderColor: [
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: $scope.vak,
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
     }
+}); 
+}
+
+if( Optie == 4)
+{ 
+$("#Chart2").hide();
+$("#Chart3").hide();
+$("#Chart4").show();          
+var ctx = document.getElementById("Chart4");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["A", "B", "C", "D"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a, b, c, d],
+            backgroundColor: [
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+                'rgb(102, 51, 0)'
+
+            ],
+            borderColor: [
+                'rgb(153, 0, 0)',
+                'rgb(0, 0, 153)',
+                'rgb(0, 51, 0)',
+                'rgb(102, 51, 0)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: $scope.vak,
+            fontSize: 40
+        }, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+  });
+}
+
+    
+};
+
 });
 
 //Einde controller graphs
