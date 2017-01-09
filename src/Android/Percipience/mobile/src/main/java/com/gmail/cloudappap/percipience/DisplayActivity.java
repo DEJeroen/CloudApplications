@@ -101,7 +101,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-                if (currentKlas == "null" || currentVak == "null" || currentVraag == "null") {
+                if (currentKlas == "0" || currentVak == "0" || currentVraag == "0") {
                     TextView textViewCurrentKlas = (TextView) findViewById(R.id.textViewCurrentKlas);
                     textViewCurrentKlas.setText("Start de les om te beginnen met scannen");
                     TextView textViewCurrentVak = (TextView) findViewById(R.id.textViewCurrentVak);
@@ -117,8 +117,6 @@ public class DisplayActivity extends AppCompatActivity {
                     TextView textViewCurrentVraag = (TextView) findViewById(R.id.textViewCurrentVraag);
                     textViewCurrentVraag.setText(currentVraag);
                 }
-
-
             }
 
             @Override
@@ -196,7 +194,7 @@ public class DisplayActivity extends AppCompatActivity {
                     //        System.out.println("current: " + currentAwnsers);
                       //      System.out.println("display: " + test.displayValue);
                             if (test.displayValue.length() == 2) {
-                            if (currentAwnsers.contains( "null")) {
+                            if (currentAwnsers.contains( "0")) {
                                 currentAwnsers = test.displayValue;
                             }
                             else {
@@ -407,8 +405,8 @@ public class DisplayActivity extends AppCompatActivity {
 
                 // ALERT MESSAGE
 
-              //  TextView textViewNo = (TextView) findViewById(R.id.textViewNo);
-             //   textViewNo.setText("No: " + barRead);
+                TextView textViewC = (TextView) findViewById(R.id.textViewC);
+               textViewC.setText("C: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
                 myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatC").setValue(barRead);
@@ -434,8 +432,8 @@ public class DisplayActivity extends AppCompatActivity {
 
                 // ALERT MESSAGE
 
-               // TextView textViewNo = (TextView) findViewById(R.id.textViewNo);
-             //   textViewNo.setText("No: " + barRead);
+                TextView textViewD = (TextView) findViewById(R.id.textViewD);
+                textViewD.setText("D: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
                 myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
