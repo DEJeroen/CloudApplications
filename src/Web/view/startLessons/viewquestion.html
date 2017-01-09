@@ -2,14 +2,14 @@
 <div class="container" >
   <div class="panel panel-default">
   <div class="bgcontainer fontChoiceH4">
-      <label>Vraag {{vraagnummer}}</label>
+      <label>Vraag: {{vraagnummer}}</label>
     <div class="panel-body">{{vraag}}</div>
       <div class="panel-body">A: {{a}}</div>
       <div class="panel-body">B: {{b}}</div>
       <div class="panel-body">C: {{c}}</div>
       <div class="panel-body">D: {{d}}</div>
 
-      <button ng-hide="showItem" type="button" ng-click="showAnswer(true)" class="btn btn-success">Show antwoord</button>
+      <button ng-hide="showItem" type="button" ng-click="showAnswer(true)" class="btn btn-success">Antwoord weergeven</button>
       <div class="fontChoiceH4" ng-show="showItem"> 
       <div class="panel-body">Antwoord: {{antwoord}}</div>
       </div>

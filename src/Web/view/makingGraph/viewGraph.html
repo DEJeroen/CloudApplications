@@ -1,15 +1,27 @@
 <h1 class="fontChoiceH2">Resultaten terugkijken</h1>
 <h3 class="fontChoiceH4">Gekozen klas: {{klas}}</h3>  
-<h3 class="fontChoiceH4">Gekozen vak: {{vak}}</h3>  
-<div class="form-group">      
+<h3 class="fontChoiceH4">Gekozen vak: {{vak}}</h3>
+<h3 class="fontChoiceH4">Gekozen vraag: {{vraag}}</h3>
 <label class="fontChoiceH3" style="text-decoration: underline;" for="klaslabel">Kies vraag</label>     
+<div class="form-group">      
+<div style="float: left; width: 50%">  
 <select multiple class="form-control formClass" ng-model="data.SelectedVraag">
   <option ng-repeat="x in datavragen">{{x}}</option>
 </select>
 </div>
-<button type="submit" class="btn btn-success btnKiesLes" ng-click="view(data.SelectedVraag);">Next</button>
 
-<canvas style="width: 25px; height: 25px;" id="myChart"></canvas>
+<div class="fontChoiceH4" style="float: right; width: 50%">
+	<p>A: {{A}}</p>
+	<p>B: {{B}}</p>
+	<p>C: {{C}}</p>
+	<p>D: {{D}}</p>
+</div>
+</div>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="view(data.SelectedVraag);">Volgende</button>
+
+<canvas style="width: 25%; height: 25%;" id="Chart2"></canvas>
+<canvas style="width: 25%; height: 25%;" id="Chart3"></canvas>
+<canvas style="width: 25%; height: 25%; color:#FFFFFF;" id="Chart4"></canvas>
 
 <div style="margin-top: 4em;" class="form-group"> 
 <label class="fontChoiceH3" style="text-decoration: underline;">Andere les terugkijken?</label>     
@@ -19,4 +31,4 @@
 </select>
 </div>
 
-<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Next</button>
+<button type="submit" class="btn btn-success btnKiesLes" ng-click="next(data.SelectedLes);">Volgende</button>
