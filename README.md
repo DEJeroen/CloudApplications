@@ -8,7 +8,7 @@ Configuration to run web app:
  - Navigeer naar de directory waarin je 'Percipience' hebt gecloned en ga naar het mapje src/Web
  - Geef het commando "npm install" in. Hierdoor installeert het alle nodige modules die nodig zijn voor het project
  - Geef het commando "node express.js" in, hierdoor word de server opgestart.
-
+ - Ga via de browser van u keuze naar localhost:3000
 # Table of Contents
 
   * [CloudApplications](#cloudapplications)
@@ -49,17 +49,17 @@ Ten eerste heb je de applicatie zelf, dit wordt native ontwikkeld voor Android. 
 
 Het tweede deel van het project bestaat uit een web platform en databank waar de resultaten naartoe worden verstuurd en men de resultaten kan bekijken. De resultaten kunnen via ons web platform in een grafiek, pie-chart en dergelijke worden gezet voor visuele feedback over wat voor antwoorden er gekozen zijn. De interface zal hierbij tevens simpel zijn, de voorgaande resultaten kunnen per datum en tijd, leerjaar, klas of les worden bekeken. Een combinatie hiervan is tevens ook mogelijk.  
 #### Methodologie project
-Het project wordt uitgevoerd met behulp van de scrum en agile methode. We maken een back-log met alle features die in dit project moeten. Vervolgens worden er per sprint features toegewezen die gemaakt moeten worden tijdens die sprint. Per week dat we samenkomen zullen we een stand-up houden om alles door te nemen. We houden ook wekelijks een bespreking met de klant, dhr. Peeters. Hier stellen we de voortgang van het project voor, wat er behaald is, wat er mis is gegaan en wat er deze week verder op de planning zal staan. Hierdoor zal er dus constant feedback beschikbaar zijn over waaraan gewerkt moet worden. Daarbij zullen er aan het eind van module 1 een presentatie worden gehouden en demoís worden voorzien. Aan het eind van module 2 wordt het eindproduct gepresenteerd en de finale applicatie getoond. Hierbij is telkens ruimte voor vragen en constructieve kritiek van onze product owner en van onze leerkracht. 
+Het project wordt uitgevoerd met behulp van de scrum en agile methode. We maken een back-log met alle features die in dit project moeten. Vervolgens worden er per sprint features toegewezen die gemaakt moeten worden tijdens die sprint. Per week dat we samenkomen zullen we een stand-up houden om alles door te nemen. We houden ook wekelijks een bespreking met de klant, dhr. Peeters. Hier stellen we de voortgang van het project voor, wat er behaald is, wat er mis is gegaan en wat er deze week verder op de planning zal staan. Hierdoor zal er dus constant feedback beschikbaar zijn over waaraan gewerkt moet worden. Daarbij zullen er aan het eind van module 1 een presentatie worden gehouden en demo‚Äôs worden voorzien. Aan het eind van module 2 wordt het eindproduct gepresenteerd en de finale applicatie getoond. Hierbij is telkens ruimte voor vragen en constructieve kritiek van onze product owner en van onze leerkracht. 
 
 https://github.com/DEJeroen/CloudApplications#boards?repos=68715146
 #### Verwachte problemen
-Toen we de projectkeuze hadden gemaakt zijn we direct onderzoek gaan doen naar bestaande technologieÎn die al reeds op de markt zijn. Wat blijkt na het testen van een aantal apps die gefocust zijn rond image recognition, dit werkt niet altijd 100%. De apps hebben het vaak fout als ze een plaatje proberen herkennen, echter gaat dit om apps die de precieze origine van een object van een plaatje proberen te achterhalen. Zoals een bloempot, stoel of auto. We hopen daarom dat figuren herkennen iets gemakkelijker zal verlopen. 
+Toen we de projectkeuze hadden gemaakt zijn we direct onderzoek gaan doen naar bestaande technologie√´n die al reeds op de markt zijn. Wat blijkt na het testen van een aantal apps die gefocust zijn rond image recognition, dit werkt niet altijd 100%. De apps hebben het vaak fout als ze een plaatje proberen herkennen, echter gaat dit om apps die de precieze origine van een object van een plaatje proberen te achterhalen. Zoals een bloempot, stoel of auto. We hopen daarom dat figuren herkennen iets gemakkelijker zal verlopen. 
 #### Verwachte resultaten
 De verwachting is dat we de applicatie simpele figuurtjes kunnen laten herkennen en vervolgens laten doorsturen naar de databank en het web platform Vervolgens komt het resultaat op het scherm te zien in al dan niet een grafiek.
 
 Indien er gekozen wordt om met QR-codes te werken, is de verwachting dat we de QR-codes succesvol kunnen scannen en kunnen doorsturen. 
 #### Optionele features
-Mochten de verwachte resultaten sneller dan verwacht verlopen, kunnen we gaan denken aan complexere figuren leren herkennen. Daarnaast kan er gedacht gaan worden om ook een leerling versie te maken, met voorgeprogrammeerde opdrachten zoals ìZoek of knutsel een object dat een cirkel isî. Op basis van snelheid en duidelijkheid van het object kunnen er bijvoorbeeld punten worden toegekend aan de leering. Op deze manier zal de applicatie breder inzetbaar zijn.
+Mochten de verwachte resultaten sneller dan verwacht verlopen, kunnen we gaan denken aan complexere figuren leren herkennen. Daarnaast kan er gedacht gaan worden om ook een leerling versie te maken, met voorgeprogrammeerde opdrachten zoals ‚ÄúZoek of knutsel een object dat een cirkel is‚Äù. Op basis van snelheid en duidelijkheid van het object kunnen er bijvoorbeeld punten worden toegekend aan de leering. Op deze manier zal de applicatie breder inzetbaar zijn.
 
 ### Technologie
 #### Android
