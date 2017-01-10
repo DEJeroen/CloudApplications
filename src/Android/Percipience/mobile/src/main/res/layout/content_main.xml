@@ -19,24 +19,39 @@
         android:id="@+id/cameraPreview"/>
 
     <TextView
-        android:text="Yes: 0"
+        android:text="A: 0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="79dp"
+        android:layout_marginBottom="125dp"
         android:id="@+id/textViewYes"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/wallet_holo_blue_light"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="No: 0"
+        android:text="B: 0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewNo"
         android:layout_alignTop="@+id/textViewYes"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp"
-        android:textColor="@color/wallet_holo_blue_light"/>
+        android:layout_marginTop="22dp"/>
+    <TextView
+        android:text="C: 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewC"
+        android:layout_alignTop="@+id/textViewNo"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp"/>
+    <TextView
+        android:text="D: 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewD"
+        android:layout_alignTop="@+id/textViewC"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp"/>
+
 
     <TextView
         android:text="Current Klas:"
@@ -45,8 +60,7 @@
         android:id="@+id/textViewCurrentKlas"
         android:layout_marginStart="48dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/wallet_holo_blue_light"/>
+        android:layout_alignParentLeft="true"/>
 
     <TextView
         android:text="Current Vak:"
@@ -55,8 +69,7 @@
         android:id="@+id/textViewCurrentVak"
         android:layout_marginStart="48dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textViewCurrentKlas"
-        android:textColor="@color/wallet_holo_blue_light"/>
+        android:layout_toRightOf="@+id/textViewCurrentKlas"/>
     <TextView
         android:text="Current Vraag:"
         android:layout_width="wrap_content"
@@ -64,8 +77,8 @@
         android:id="@+id/textViewCurrentVraag"
         android:layout_marginStart="48dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textViewCurrentVak"
-        android:textColor="@color/wallet_holo_blue_light"/>
+        android:layout_toRightOf="@+id/textViewCurrentVak"/>
+
 
 
 
