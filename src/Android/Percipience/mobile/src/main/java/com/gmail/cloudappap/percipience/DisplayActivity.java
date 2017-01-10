@@ -186,15 +186,41 @@ public class DisplayActivity extends AppCompatActivity {
                         Barcode test = barcodes.valueAt(i);
                         if (currentAwnsers.contains(test.displayValue)) {
 
+
                             System.out.println("ignoring old value..");
 
                         }
                         else {
+
+                            char groupNumber = test.displayValue.charAt(1);
+                            if (currentAwnsers.contains(String.valueOf(groupNumber))) {
+
+                                System.out.println("Duplicate detected with value: " + Character.getNumericValue(groupNumber ));
+                                //char groupNumber = currentAwnsers.charAt(currentAwnsers.indexOf(currentGroupNumber));
+                                System.out.println("Remove number: " + groupNumber);
+
+                                int groupAnswerPlace = currentAwnsers.indexOf(groupNumber) -1;
+                              //  System.out.println("Remove number at: " + groupAnswerPlace);
+                                char groupAnswer = currentAwnsers.charAt(groupAnswerPlace);
+                                String dupstring = "";
+                                dupstring =String.valueOf(groupAnswer) + String.valueOf(groupNumber);
+                                System.out.println(dupstring + " dup");
+
+
+                                currentAwnsers = currentAwnsers.replace(dupstring, "");
+
+                                Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
+
+                                myFirebaseRef.child("ID_LEERKRACHT/Appsettings/currentAnswers").setValue(currentAwnsers);
+
+
+
+                            }
                            // currentAwnsers += test.displayValue;
                     //        System.out.println("current: " + currentAwnsers);
                       //      System.out.println("display: " + test.displayValue);
                             if (test.displayValue.length() == 2) {
-                            if (currentAwnsers.contains( "0")) {
+                            if (currentAwnsers.contains( "null") ||currentAwnsers.contains( "0") ) {
                                 currentAwnsers = test.displayValue;
                             }
                             else {
@@ -354,7 +380,46 @@ public class DisplayActivity extends AppCompatActivity {
                    textViewYes.setText("Yes: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
+                int counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'A' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
                 myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatA").setValue(barRead);
+
+                 counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'B' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatB").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'C' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatC").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'D' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
+
 
             }
             else
@@ -381,8 +446,45 @@ public class DisplayActivity extends AppCompatActivity {
                 textViewNo.setText("No: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
+                int counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'A' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatA").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'B' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
                 myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatB").setValue(barRead);
 
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'C' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatC").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'D' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
             }
             else
             {
@@ -409,8 +511,45 @@ public class DisplayActivity extends AppCompatActivity {
                textViewC.setText("C: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
+                int counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'A' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatA").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'B' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatB").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'C' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
                 myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatC").setValue(barRead);
 
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'D' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
             }
             else
             {
@@ -436,8 +575,45 @@ public class DisplayActivity extends AppCompatActivity {
                 textViewD.setText("D: " + barRead);
                 Firebase myFirebaseRef = new Firebase("https://percipience-ace91.firebaseio.com/");
 
-                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
+                int counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'A' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
 
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatA").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'B' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatB").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'C' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatC").setValue(barRead);
+
+                counter = 0;
+                for( int i=0; i<currentAwnsers.length(); i++ ) {
+                    if( currentAwnsers.charAt(i) == 'D' ) {
+                        counter++;
+                    }
+                }
+                barRead = String.valueOf(counter);
+
+                myFirebaseRef.child("ID_LEERKRACHT").child("klas").child(currentKlas).child("vak").child(currentVak).child("vragen").child(currentVraag).child("resultaatD").setValue(barRead);
             }
             else
             {
