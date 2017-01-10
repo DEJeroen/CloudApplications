@@ -1,5 +1,14 @@
 # Percipience is an application that can recognize certain symbols from an image
 
+Configuration to run web app:
+
+ - Git clone 'Percipience' in een directory naar keuze
+ - Installeer nodejs
+ - Start node js
+ - Navigeer naar de directory waarin je 'Percipience' hebt gecloned en ga naar het mapje src/Web
+ - Geef het commando "npm install" in. Hierdoor installeert het alle nodige modules die nodig zijn voor het project
+ - Geef het commando "node express.js" in, hierdoor word de server opgestart.
+
 # Table of Contents
 
   * [CloudApplications](#cloudapplications)
