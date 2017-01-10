@@ -9,6 +9,7 @@ Configuration to run web app:
  - Geef het commando "npm install" in. Hierdoor installeert het alle nodige modules die nodig zijn voor het project
  - Geef het commando "node express.js" in, hierdoor word de server opgestart.
  - Ga via de browser van u keuze naar localhost:3000
+ 
 # Table of Contents
 
   * [CloudApplications](#cloudapplications)
